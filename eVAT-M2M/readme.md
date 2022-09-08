@@ -21,5 +21,5 @@ Kérjük figyelembe venni, hogy bár a tárhely publikusan elérhető, a vélem�
 3) Moderálás
 
 A NAV fenntartja a jogot, hogy az általános etikettet vagy jó ízlést sértő hozzászólásokat, kommenteket a tárhelyről kérdés nélkül eltávolítsa.
-![image](https://user-images.githubusercontent.com/58467561/189060799-f11fd7c6-e0c8-4b63-b1d9-529b999519df.png)
+
 
