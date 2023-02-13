@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+# Project: NAV Elektronikus ÁFA rendszer earBase XML séma
+# Author: NAV Informatikai Intézet
+
+# Version: v1.0 2023/02/10
+-->
+<xs:schema xmlns="http://schemas.nav.gov.hu/EAR/1.0/base" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://schemas.nav.gov.hu/NTCA/1.0/common" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/base" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common"/>
+	<xs:simpleType name="BarCodeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Bárkód típus</xs:documentation>
+			<xs:documentation xml:lang="en">Barcode type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="10"/>
+			<xs:pattern value="[0-9]{10}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BevfeldAdditionalAddressType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Bevallás feldolgozó rendszer egyéb címadat típusa</xs:documentation>
+			<xs:documentation xml:lang="en">Declaration processing system additional address type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="24"/>
+			<xs:pattern value=".*[^\s].*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BevfeldCityType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Bevallás feldolgozó rendszer város típusa</xs:documentation>
+			<xs:documentation xml:lang="en">Declaration processing system city type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="50"/>
+			<xs:minLength value="1"/>
+			<xs:pattern value=".*[^\s].*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BevfeldForeignAccountType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Bevallás feldolgozó rendszer külföldi pénzforgalmi számla típusa</xs:documentation>
+			<xs:documentation xml:lang="en">Declaration processing system foreign account type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="32"/>
+			<xs:pattern value=".*[^\s].*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BevfeldPostalCodeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Bevallás feldolgozó rendszer irányítószám típusa</xs:documentation>
+			<xs:documentation xml:lang="en">Declaration processing system postal code type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:length value="4"/>
+			<xs:pattern value="d{4}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BevfeldText40Type">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Bevallás feldolgozó rendszer 40 hosszú karakterlánc típusa</xs:documentation>
+			<xs:documentation xml:lang="en">Declaration processing system string type for 40 length</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="40"/>
+			<xs:pattern value=".*[^\s].*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BevfeldText80Type">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Bevallás feldolgozó rendszer 80 hosszú karakterlánc típusa</xs:documentation>
+			<xs:documentation xml:lang="en">Declaration processing system string type for 80 length</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="80"/>
+			<xs:pattern value=".*[^\s].*"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="BevfeldThreeDigitNumberType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Bevallás feldolgozó rendszer háromjegyű szám típusa</xs:documentation>
+			<xs:documentation xml:lang="en">Declaration processing system 3 digit number type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:minInclusive value="1"/>
+			<xs:maxInclusive value="999"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DeclarationBaseDateType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Alap bevallási dátum típus</xs:documentation>
+			<xs:documentation xml:lang="en">Base declaration date type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date">
+			<xs:minInclusive value="1970-01-01"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DeclarationFrequencyType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Bevallás gyakoriság típus</xs:documentation>
+			<xs:documentation xml:lang="en">Declaration frequency type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ANNUAL">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Éves</xs:documentation>
+					<xs:documentation xml:lang="en">Annual</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="QUARTERLY">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Negyedéves</xs:documentation>
+					<xs:documentation xml:lang="en">Quarterly</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MONTHLY">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Havi</xs:documentation>
+					<xs:documentation xml:lang="en">Monthly</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DeclarationKindType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Bevallás fajtája típus</xs:documentation>
+			<xs:documentation xml:lang="en">Declaration kind tpye</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NONE">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Nem értelmezett</xs:documentation>
+					<xs:documentation xml:lang="en">Undefined</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PREVIOUS_PERIOD">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Megelőző időszakra vonatkozó bevallás</xs:documentation>
+					<xs:documentation xml:lang="en">Declaration for the previous period</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="UNDER_PROCESS">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Eljárás alatti időszakra vonatkozó bevallás</xs:documentation>
+					<xs:documentation xml:lang="en">Declaration for the period under procedure</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CLOSURE">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Eljárást lezáró bevallás</xs:documentation>
+					<xs:documentation xml:lang="en">Declaration for closing a procedure</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DeclarationTypeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Bevallás típusa típus</xs:documentation>
+			<xs:documentation xml:lang="en">Declaration type type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NONE">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Nem értelmezett</xs:documentation>
+					<xs:documentation xml:lang="en">Undefined</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="ELIMINATION">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Felszámolás</xs:documentation>
+					<xs:documentation xml:lang="en">Elimination</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="LIQUIDATION">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Végelszámolás</xs:documentation>
+					<xs:documentation xml:lang="en">Liquidation</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SELF_EMPLOYMENT_END">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Egyéni vállalkozói minőség megszűnése</xs:documentation>
+					<xs:documentation xml:lang="en">Termination of self-employment</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TRANSFORMATION">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Átalakulás</xs:documentation>
+					<xs:documentation xml:lang="en">Transformation</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="TERMINATION">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Megszűnés</xs:documentation>
+					<xs:documentation xml:lang="en">Termination</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="PAUSING">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Szünetelés</xs:documentation>
+					<xs:documentation xml:lang="en">Pausing</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="STATE_POWER_END">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Közhatalom megszűnés</xs:documentation>
+					<xs:documentation xml:lang="en">End of state power</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VAT_GROUP_END">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">ÁFA csoportos alanyiság megszűnése</xs:documentation>
+					<xs:documentation xml:lang="en">Termination of VAT group</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="GROUP_TAXPAYER_END">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Csoportos adóalany megszűnés</xs:documentation>
+					<xs:documentation xml:lang="en">Termination of group taxpayer</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BECAME_VAT_FREE">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Általánosan kötelezettből ÁFA mentesre váltás</xs:documentation>
+					<xs:documentation xml:lang="en">Change from generally obligated to VAT free</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BECAME_VAT_OBLIGED">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">ÁFA mentesből általánosan kötelezettre váltás</xs:documentation>
+					<xs:documentation xml:lang="en">Change from VAT free to generally obligated</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FUSION">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Beolvadás</xs:documentation>
+					<xs:documentation xml:lang="en">Fusion</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="FORCED_CANCELLATION">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Kényszertörlés</xs:documentation>
+					<xs:documentation xml:lang="en">Forced cancellation</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BECAME_TAXPAYER">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">ÁFA körös adózóvá válás</xs:documentation>
+					<xs:documentation xml:lang="en">Becoming a VAT taxpayer</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="OUT_OF_VAT_CLASS">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">ÁFA körön kívüli adózóra válás</xs:documentation>
+					<xs:documentation xml:lang="en">Becoming a taxpayer outside the scope of VAT</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TaxpointDateType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Adózási dátum típus (amely napon az adófizetési kötelezettség és/vagy a levonási jog keletkezett)</xs:documentation>
+			<xs:documentation xml:lang="en">Taxpoint date type (the date on which the tax payment obligation and/or right of deduction arose)</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:date">
+			<xs:minInclusive value="2021-01-01"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="DeclarationInfoType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">A bevallás fejadatai</xs:documentation>
+			<xs:documentation xml:lang="en">Header data of the declaration</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="modificationReference" type="ModificationReferenceType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Módosítás adatai</xs:documentation>
+					<xs:documentation xml:lang="en">Modification reference data</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="taxNumber" type="common:TaxpayerIdType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Adószám</xs:documentation>
+					<xs:documentation xml:lang="en">Tax number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="declarationType" type="DeclarationTypeType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Bevallás típusa</xs:documentation>
+					<xs:documentation xml:lang="en">Declaration type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="declarationKind" type="DeclarationKindType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Bevallás fajtája</xs:documentation>
+					<xs:documentation xml:lang="en">Declaration kind</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="declarationFrequency" type="DeclarationFrequencyType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Bevallási gyakoriság</xs:documentation>
+					<xs:documentation xml:lang="en">Declaration frequency</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="declarationPeriodStart" type="TaxpointDateType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Bevallási időszak kezdete</xs:documentation>
+					<xs:documentation xml:lang="en">Declaration period start</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="declarationPeriodEnd" type="TaxpointDateType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Bevallási időszak vége</xs:documentation>
+					<xs:documentation xml:lang="en">Declaration period end</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="version" type="common:GenericUnsignedIntegerType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">A benyújtott bevallás verziószáma</xs:documentation>
+					<xs:documentation xml:lang="en">Version of the submitted declaration</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ModificationReferenceType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Módosítás adatai</xs:documentation>
+			<xs:documentation xml:lang="en">Modification data</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="declarationReferenceId" type="common:EntityIdType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">A módosítással érintett bevallás feldolgozási azonosítója</xs:documentation>
+					<xs:documentation xml:lang="en">Processing identifier of the declaration on which the modification occurs</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="declarationReferenceIndex" type="common:GenericUnsignedIntegerType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">A módosítás sorrendiségének jelzése</xs:documentation>
+					<xs:documentation xml:lang="en">The unique sequence number referring to the original declaration</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="barCodeReference" type="BarCodeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Hibásnak minősített bevallás vonalkódja</xs:documentation>
+					<xs:documentation xml:lang="en">Barcode of the declaration declared as incorrect</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
