@@ -57,7 +57,7 @@
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:length value="4"/>
-			<xs:pattern value="d{4}"/>
+			<xs:pattern value="\d{4}"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="BevfeldText40Type">

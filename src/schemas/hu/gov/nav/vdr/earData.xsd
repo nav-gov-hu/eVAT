@@ -3,7 +3,7 @@
 # Project: NAV Elektronikus ÁFA rendszer earData XML séma
 # Author: NAV Informatikai Intézet
 
-# Version: v1.0 2023/02/10
+# Version: v1.0 2023/05/15
 -->
 <xs:schema xmlns="http://schemas.nav.gov.hu/EAR/1.0/data" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://schemas.nav.gov.hu/NTCA/1.0/common" xmlns:osabase="http://schemas.nav.gov.hu/OSA/3.0/base" xmlns:earbase="http://schemas.nav.gov.hu/EAR/1.0/base" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/data" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common"/>
@@ -131,6 +131,12 @@
 					<xs:documentation xml:lang="en">Deductible VAT</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
+			<xs:enumeration value="OTHER">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Egyéb</xs:documentation>
+					<xs:documentation xml:lang="en">Other</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="ReturnDecisionType">
@@ -230,6 +236,26 @@
 					<xs:documentation xml:lang="en">Statement on the reason for the self-audit, if the legislation establishing tax liability is unconstitutional or conflicts with a mandatory legal act of the European Union</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="SheetPageCountType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Melléklap oldalainak száma</xs:documentation>
+			<xs:documentation xml:lang="en">Number of pages of a sheet</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:integer">
+			<xs:totalDigits value="3"/>
+			<xs:minInclusive value="1"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VpidType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">VPID szám</xs:documentation>
+			<xs:documentation xml:lang="en">EORI number</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="12"/>
+			<xs:pattern value="[0-9]{12}"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="SourceDocumentTypeType">
@@ -384,7 +410,7 @@
 			<xs:documentation xml:lang="en">Statements</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="returnDecision" type="ReturnDecisionType">
+			<xs:element name="returnDecision" type="ReturnDecisionType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Visszautalási döntés</xs:documentation>
 					<xs:documentation xml:lang="en">Return decision</xs:documentation>
@@ -874,6 +900,18 @@
 					<xs:documentation xml:lang="en">Sheet name</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="sheetPageCount" type="SheetPageCountType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Melléklap oldalainak száma</xs:documentation>
+					<xs:documentation xml:lang="en">Number of pages of a sheet</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="vpid" type="VpidType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">VPID szám</xs:documentation>
+					<xs:documentation xml:lang="en">EORI number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="sheetField" type="SheetFieldType" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Melléklap mezői</xs:documentation>
@@ -1039,7 +1077,7 @@
 					<xs:documentation xml:lang="en">Header data of the declaration</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="declarationStatements" type="DeclarationStatementsType">
+			<xs:element name="declarationStatements" type="DeclarationStatementsType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Bevallási nyilatkozatok</xs:documentation>
 					<xs:documentation xml:lang="en">Declaration statements</xs:documentation>
@@ -1063,7 +1101,7 @@
 					<xs:documentation xml:lang="en">Sheets</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="attachment" type="AttachmentType" minOccurs="0">
+			<xs:element name="attachment" type="AttachmentType" minOccurs="0" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Csatolmányok</xs:documentation>
 					<xs:documentation xml:lang="en">Attachments</xs:documentation>
@@ -1071,10 +1109,15 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:element name="VatDeclarationData" type="VatDeclarationDataType">
+	<xs:element name="VatDeclarationData">
 		<xs:annotation>
 			<xs:documentation xml:lang="hu">XML root element, az ÁFA bevallás adatait leíró típus</xs:documentation>
 			<xs:documentation xml:lang="en">XML root element containing VAT declaration data</xs:documentation>
 		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="VatDeclarationDataType"/>
+			</xs:complexContent>
+		</xs:complexType>
 	</xs:element>
 </xs:schema>

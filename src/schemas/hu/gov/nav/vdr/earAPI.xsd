@@ -3,12 +3,13 @@
 # Project: NAV Elektronikus ÁFA rendszer earAPI XML séma
 # Author: NAV Informatikai Intézet
 
-# Version: v1.0 2023/02/10
+# Version: v1.0 2023/05/15
 -->
-<xs:schema xmlns="http://schemas.nav.gov.hu/EAR/1.0/api" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://schemas.nav.gov.hu/NTCA/1.0/common" xmlns:earbase="http://schemas.nav.gov.hu/EAR/1.0/base" xmlns:eardata="http://schemas.nav.gov.hu/EAR/1.0/data" xmlns:osaapi="http://schemas.nav.gov.hu/OSA/3.0/api" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/api" elementFormDefault="qualified" attributeFormDefault="unqualified">
+<xs:schema xmlns="http://schemas.nav.gov.hu/EAR/1.0/api" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://schemas.nav.gov.hu/NTCA/1.0/common" xmlns:earbase="http://schemas.nav.gov.hu/EAR/1.0/base" xmlns:eardata="http://schemas.nav.gov.hu/EAR/1.0/data" xmlns:osabase="http://schemas.nav.gov.hu/OSA/3.0/base" xmlns:osaapi="http://schemas.nav.gov.hu/OSA/3.0/api" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/api" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common"/>
 	<xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/base"/>
 	<xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/data"/>
+	<xs:import namespace="http://schemas.nav.gov.hu/OSA/3.0/base"/>
 	<xs:import namespace="http://schemas.nav.gov.hu/OSA/3.0/api"/>
 	<xs:simpleType name="DeclarationDirectionType">
 		<xs:annotation>
@@ -166,6 +167,32 @@
 			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="FileStatusType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Feltöltött fájl státusz típus</xs:documentation>
+			<xs:documentation xml:lang="en">Uploaded file status type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="ACTIVE">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Aktív státusz</xs:documentation>
+					<xs:documentation xml:lang="en">Active státusz</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MARKED_FOR_DELETE">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Törlésre jelölve</xs:documentation>
+					<xs:documentation xml:lang="en">Marked for delete</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="BLOCKED">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Blokkolt státusz</xs:documentation>
+					<xs:documentation xml:lang="en">Blocked status</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="QueryResultStatusType">
 		<xs:annotation>
 			<xs:documentation xml:lang="hu">Lekérdezés feldolgozási státusza</xs:documentation>
@@ -268,8 +295,50 @@
 			</xs:element>
 			<xs:element name="returnDualAgentDeclarationsOnly" type="xs:boolean">
 				<xs:annotation>
-					<xs:documentation xml:lang="hu">Szűrés csak azon vámáru határozatokra, amelyben importőr és közvetett vámjogi képviselő is eljárt</xs:documentation>
-					<xs:documentation xml:lang="en">Query only for customs declarations involving both an importer and an indirect customs representative</xs:documentation>
+					<xs:documentation xml:lang="hu">Szűrés csak azon vámáru határozatokra, amelyben importőr és közvetett vámjogi képviselő is szerepel</xs:documentation>
+					<xs:documentation xml:lang="en">Query only for those customs declarations in which both an importer and an indirect customs representative appear</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AdditionalInvoiceTaxCodeQueryParamsType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Számla lekérdezés adókódokkal és ÁFA releváns warnokkal kiegészítő paraméterei</xs:documentation>
+			<xs:documentation xml:lang="en">Additional parameters for taxcoded invoice with VAT-relevant warings query</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="invoiceItemLine" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Számla tételenkénti adókódok igénylésének paramétere</xs:documentation>
+					<xs:documentation xml:lang="en">Parameter for requesting taxcodes per invoice item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AttachmentIdListItemType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Feltöltött melléklet elem id</xs:documentation>
+			<xs:documentation xml:lang="en">Uploaded attachment item id</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="claimCheckId" type="common:EntityIdType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">A melléklet feltöltésekor kapott azonosító</xs:documentation>
+					<xs:documentation xml:lang="en">Identifier received when uploading the attachment</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AttachmentIdListType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Feltöltött melléklet id-k listája</xs:documentation>
+			<xs:documentation xml:lang="en">List of uploaded attachments ids</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="attachmentIdListItem" type="AttachmentIdListItemType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Feltöltött melléklet elem id</xs:documentation>
+					<xs:documentation xml:lang="en">Uploaded attachment item id</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -314,6 +383,12 @@
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Feltöltési azonosító érvényességének vége</xs:documentation>
 					<xs:documentation xml:lang="en">End of validity of upload identifier</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fileStatus" type="FileStatusType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">A feltöltött fájl státusza</xs:documentation>
+					<xs:documentation xml:lang="en">Status of the uploaded file.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -518,7 +593,7 @@
 					<xs:documentation xml:lang="en">Tax number of the importer</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="indirectRepresentativeTaxNumber" type="common:TaxpayerIdType">
+			<xs:element name="indirectRepresentativeTaxNumber" type="common:TaxpayerIdType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Közvetett vámjogi képviselő adószáma</xs:documentation>
 					<xs:documentation xml:lang="en">Tax number of the indirect customs representative</xs:documentation>
@@ -530,7 +605,7 @@
 					<xs:documentation xml:lang="en">Indication of importer's self-taxation</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="indirectRepresentativeSelfTaxationIndicator" type="xs:boolean">
+			<xs:element name="indirectRepresentativeSelfTaxationIndicator" type="xs:boolean" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Közvetett vámjogi képviselő önadózásának jelölése</xs:documentation>
 					<xs:documentation xml:lang="en">Indication of indirect customs representative's self-taxation</xs:documentation>
@@ -550,14 +625,14 @@
 			</xs:element>
 			<xs:element name="totalNetAmount" type="eardata:TaxMonetaryType">
 				<xs:annotation>
-					<xs:documentation xml:lang="hu">Vámáru határozat nettó összértéke</xs:documentation>
-					<xs:documentation xml:lang="en">Net amount of the customs declaration</xs:documentation>
+					<xs:documentation xml:lang="hu">Vámáru adóalap</xs:documentation>
+					<xs:documentation xml:lang="en">Customs tax base</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="totalVatAmount" type="eardata:TaxMonetaryType">
 				<xs:annotation>
-					<xs:documentation xml:lang="hu">Vámáru határozat bruttó összértéke</xs:documentation>
-					<xs:documentation xml:lang="en">Gross amount of the customs declaration</xs:documentation>
+					<xs:documentation xml:lang="hu">Vámáru adóösszeg</xs:documentation>
+					<xs:documentation xml:lang="en">Customs tax amount</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -956,12 +1031,6 @@
 							<xs:documentation xml:lang="en">Processing identifier</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="recipientTaxIdentificationNumber" type="common:TaxIdentificationNumberType">
-						<xs:annotation>
-							<xs:documentation xml:lang="hu">A push üzenetet fogadó elsődleges felhasználó adóazonosító jele</xs:documentation>
-							<xs:documentation xml:lang="en">Tax identification number of the primary user receiving the push message</xs:documentation>
-						</xs:annotation>
-					</xs:element>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -974,24 +1043,6 @@
 		<xs:complexContent>
 			<xs:extension base="common:BasicResponseType">
 				<xs:sequence>
-					<xs:element name="pushNotificationValidFrom" type="common:GenericTimestampType">
-						<xs:annotation>
-							<xs:documentation xml:lang="hu">A push üzenetben lévő jóváhagyási művelet érvényességének kezdete</xs:documentation>
-							<xs:documentation xml:lang="en">Start of validity of the confirmal action in the push message</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="pushNotificationValidTo" type="common:GenericTimestampType">
-						<xs:annotation>
-							<xs:documentation xml:lang="hu">A push üzenetben lévő jóváhagyási művelet érvényességének vége</xs:documentation>
-							<xs:documentation xml:lang="en">End of validity of the confirmal action in the push message</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-					<xs:element name="pushRecipient" type="PushRecipientType">
-						<xs:annotation>
-							<xs:documentation xml:lang="hu">A push üzenet címzettjének adatai</xs:documentation>
-							<xs:documentation xml:lang="en">Details of the recipient of the push message</xs:documentation>
-						</xs:annotation>
-					</xs:element>
 					<xs:element name="contentHash" type="common:CryptoType">
 						<xs:annotation>
 							<xs:documentation xml:lang="hu">A feltöltött állományra számított hash algoritmus neve és értéke</xs:documentation>
@@ -1038,6 +1089,12 @@
 						<xs:annotation>
 							<xs:documentation xml:lang="hu">A feltöltött állomány bevallási sémája</xs:documentation>
 							<xs:documentation xml:lang="en">Declaration schema of the uploaded content</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="attachmentIdList" type="AttachmentIdListType" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation xml:lang="hu">Feltöltött melléklet id-k listája</xs:documentation>
+							<xs:documentation xml:lang="en">List of uploaded attachment ids</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -1153,44 +1210,6 @@
 			<xs:extension base="common:BasicResponseType"/>
 		</xs:complexContent>
 	</xs:complexType>
-	<xs:complexType name="PushRecipientType">
-		<xs:annotation>
-			<xs:documentation xml:lang="hu">A push üzenet címzettjének adatai</xs:documentation>
-			<xs:documentation xml:lang="en">Details of the recipient of the push message</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="taxIdentificationNumber" type="common:TaxIdentificationNumberType">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">A felhasználó adóazonosító jele</xs:documentation>
-					<xs:documentation xml:lang="en">Tax identification number of the user</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="ownName" type="common:SimpleText100NotBlankType">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">A felhasználó neve</xs:documentation>
-					<xs:documentation xml:lang="en">Name of the user</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="birthDate" type="common:GenericDateType">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">A felhasználó születési ideje</xs:documentation>
-					<xs:documentation xml:lang="en">Date of birth of the user</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="birthPlace" type="common:SimpleText50NotBlankType">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">A felhasználó születési helye</xs:documentation>
-					<xs:documentation xml:lang="en">Place of birth of the user</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="userComment" type="common:SimpleText50NotBlankType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">A felhasználóhoz kapcsolódó megjegyzés</xs:documentation>
-					<xs:documentation xml:lang="en">Comment related to the user</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="QueryAttachmentListRequestType">
 		<xs:annotation>
 			<xs:documentation xml:lang="hu">A POST /queryAttachmentList REST operáció kérés típusa</xs:documentation>
@@ -1238,7 +1257,7 @@
 							<xs:documentation xml:lang="en">Importer or indirect customs representative query parameter</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="DeclarationQueryParams" type="DeclarationQueryType">
+					<xs:element name="declarationQueryParams" type="DeclarationQueryType">
 						<xs:annotation>
 							<xs:documentation xml:lang="hu">Vámáru határozatok lekérdezési paraméterei</xs:documentation>
 							<xs:documentation xml:lang="en">Customs declaration query parameters</xs:documentation>
@@ -1268,7 +1287,7 @@
 							<xs:documentation xml:lang="en">The currently queried page count</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="declarationDigest" type="DeclarationDigestType" minOccurs="0">
+					<xs:element name="declarationDigest" type="DeclarationDigestType" minOccurs="0" maxOccurs="unbounded">
 						<xs:annotation>
 							<xs:documentation xml:lang="hu">Vámáru határozat kivonat lekérdezési eredményei</xs:documentation>
 							<xs:documentation xml:lang="en">Customs declaration digest query result</xs:documentation>
@@ -1538,6 +1557,12 @@
 							<xs:documentation xml:lang="en">Invoice number param of the Invoice query</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+					<xs:element name="additionalInvoiceTaxCodeQueryParams" type="AdditionalInvoiceTaxCodeQueryParamsType">
+						<xs:annotation>
+							<xs:documentation xml:lang="hu">Számla lekérdezés adókódokkal és ÁFA releváns warnokkal kiegészítő paraméterei</xs:documentation>
+							<xs:documentation xml:lang="en">Additional parameters for taxcoded invoice with VAT-relevant warings query</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -1767,6 +1792,12 @@
 					<xs:documentation xml:lang="en">Tax position of the item</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="lineNumber" type="osabase:LineNumberType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">A tétel sorszáma</xs:documentation>
+					<xs:documentation xml:lang="en">Sequential number of the item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="TaxCodesType">
@@ -1785,6 +1816,12 @@
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Tranzakció kód</xs:documentation>
 					<xs:documentation xml:lang="en">Transaction code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mandatorySubpage" type="eardata:SheetNameType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Kötelező melléklap</xs:documentation>
+					<xs:documentation xml:lang="en">Mandatory subpage</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="payableTaxCode" type="xs:boolean">
@@ -1823,12 +1860,6 @@
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">A feltöltött állomány bevallási sémája</xs:documentation>
 					<xs:documentation xml:lang="en">Declaration schema of the uploaded content</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="VatDeclarationData" type="xs:base64Binary">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">A feltöltött ÁFA bevallás adatai BASE64 kódolt formában</xs:documentation>
-					<xs:documentation xml:lang="en">Uploaded VAT declaration data in BASE64 encoded form</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="originalRequestVersion" type="common:AtomicStringType15">
