@@ -130,7 +130,7 @@
 	<xs:simpleType name="DeclarationKindType">
 		<xs:annotation>
 			<xs:documentation xml:lang="hu">Bevallás fajtája típus</xs:documentation>
-			<xs:documentation xml:lang="en">Declaration kind tpye</xs:documentation>
+			<xs:documentation xml:lang="en">Declaration kind type</xs:documentation>
 		</xs:annotation>
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="NONE">

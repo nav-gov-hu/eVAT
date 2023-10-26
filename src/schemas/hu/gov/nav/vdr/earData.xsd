@@ -3,7 +3,7 @@
 # Project: NAV Elektronikus ÁFA rendszer earData XML séma
 # Author: NAV Informatikai Intézet
 
-# Version: v1.0 2023/05/15
+# Version: v1.0 2023/06/02
 -->
 <xs:schema xmlns="http://schemas.nav.gov.hu/EAR/1.0/data" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://schemas.nav.gov.hu/NTCA/1.0/common" xmlns:osabase="http://schemas.nav.gov.hu/OSA/3.0/base" xmlns:earbase="http://schemas.nav.gov.hu/EAR/1.0/base" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/data" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common"/>
@@ -442,16 +442,16 @@
 			<xs:documentation xml:lang="en">Summary data of the declaration</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="sumPayableTax" type="TaxMonetaryType">
+			<xs:element name="sumResidualTax" type="TaxMonetaryType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation xml:lang="hu">Befizetendő adó összege</xs:documentation>
-					<xs:documentation xml:lang="en">Amount of payable tax</xs:documentation>
+					<xs:documentation xml:lang="hu">Előző időszakról beszámítható csökkentő tétel összege</xs:documentation>
+					<xs:documentation xml:lang="en">Amount of deduction from previous period</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="sumDeductibleTax" type="TaxMonetaryType">
+			<xs:element name="lapsedResidualTaxIndicator" type="xs:boolean" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation xml:lang="hu">Visszaigényelhető adó összege</xs:documentation>
-					<xs:documentation xml:lang="en">Amount of deductible tax</xs:documentation>
+					<xs:documentation xml:lang="hu">Előző időszakról beszámítható csökkentő tétel összege elévült követelést tartalmaz</xs:documentation>
+					<xs:documentation xml:lang="en">Amount of deduction from previous period includes lapsed receivables</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="sumAccountedTax" type="TaxMonetaryType">
@@ -460,19 +460,19 @@
 					<xs:documentation xml:lang="en">The difference between the total amount of payable tax stated in the relevant period and the prepaid deductible tax</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="sumResidualTax" type="TaxMonetaryType">
+			<xs:element name="sumPayableTax" type="TaxMonetaryType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation xml:lang="hu">Előző időszakról beszámítható csökkentő tétel összege</xs:documentation>
-					<xs:documentation xml:lang="en">Amount of deduction from previous period</xs:documentation>
+					<xs:documentation xml:lang="hu">Befizetendő adó összege</xs:documentation>
+					<xs:documentation xml:lang="en">Amount of payable tax</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="lapsedResidualTaxIndicator" type="xs:boolean">
+			<xs:element name="sumDeductibleTax" type="TaxMonetaryType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation xml:lang="hu">Előző időszakról beszámítható csökkentő tétel összege elévült követelést tartalmaz</xs:documentation>
-					<xs:documentation xml:lang="en">Amount of deduction from previous period includes lapsed receivables</xs:documentation>
+					<xs:documentation xml:lang="hu">Visszaigényelhető adó összege</xs:documentation>
+					<xs:documentation xml:lang="en">Amount of deductible tax</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="sumTransferableTax" type="TaxMonetaryType">
+			<xs:element name="sumTransferableTax" type="TaxMonetaryType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Következő időszakra átvihető követelés összege</xs:documentation>
 					<xs:documentation xml:lang="en">Amount of receivables that can be carried over to the next period</xs:documentation>
