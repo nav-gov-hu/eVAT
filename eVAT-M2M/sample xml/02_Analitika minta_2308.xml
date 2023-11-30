@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<n0:VatDeclarationData xmlns:earbase="http://schemas.nav.gov.hu/EAR/1.0/base" xmlns:n0="http://schemas.nav.gov.hu/EAR/1.0/data" xmlns:osabase="http://schemas.nav.gov.hu/OSA/3.0/base" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.nav.gov.hu/EAR/1.0/data earData.xsd">
+	<n0:declarationInfo>
+		<earbase:taxNumber>12345678</earbase:taxNumber>
+		<earbase:declarationType>NONE</earbase:declarationType>
+		<earbase:declarationKind>NONE</earbase:declarationKind>
+		<earbase:declarationFrequency>MONTHLY</earbase:declarationFrequency>
+		<earbase:declarationPeriodStart>2023-08-01</earbase:declarationPeriodStart>
+		<earbase:declarationPeriodEnd>2023-08-31</earbase:declarationPeriodEnd>
+		<earbase:version>2</earbase:version>
+	</n0:declarationInfo>
+	<n0:declarationStatements>
+		<n0:returnDecision>FULL_RETURN</n0:returnDecision>
+		<n0:taxpayerStatusCode>CODE_1</n0:taxpayerStatusCode>
+		<n0:returnStatements>
+			<n0:returnMethod>
+				<n0:domesticPaymentServiceProvider>
+					<n0:domesticProviderName>Teszt Bank</n0:domesticProviderName>
+					<n0:domesticBankAccountNumber>11111111-11111111-11111111</n0:domesticBankAccountNumber>
+				</n0:domesticPaymentServiceProvider>
+			</n0:returnMethod>
+			<n0:publicLlcIndicator>false</n0:publicLlcIndicator>
+			<n0:expediteReturnIndicator>true</n0:expediteReturnIndicator>
+		</n0:returnStatements>
+	</n0:declarationStatements>
+	<n0:vatAnalytics>
+		<n0:totalRowCount>6</n0:totalRowCount>
+		<n0:vatAnalyticsItem>
+			<n0:lineNumber>1</n0:lineNumber>
+			<n0:sourceDocumentId>Teszt Számla 1</n0:sourceDocumentId>
+			<n0:sourceDocumentIssueDate>2023-08-11</n0:sourceDocumentIssueDate>
+			<n0:sourceDocumentType>INVOICE</n0:sourceDocumentType>
+			<n0:taxpointDate>2023-08-11</n0:taxpointDate>
+			<n0:partnerInfo>
+				<n0:partnerStatus>DOMESTIC</n0:partnerStatus>
+				<n0:partnerTaxData>
+					<n0:domesticTaxData>
+						<n0:taxNumber>22222222</n0:taxNumber>
+					</n0:domesticTaxData>
+				</n0:partnerTaxData>
+				<n0:partnerName>Teszt Partner 1</n0:partnerName>
+				<n0:partnerAddress>
+					<osabase:simpleAddress>
+						<osabase:countryCode>HU</osabase:countryCode>
+						<osabase:postalCode>1111</osabase:postalCode>
+						<osabase:city>Teszt Város 1</osabase:city>
+						<osabase:additionalAddressDetail>Teszt utca 1</osabase:additionalAddressDetail>
+					</osabase:simpleAddress>
+				</n0:partnerAddress>
+			</n0:partnerInfo>
+			<n0:taxInformation>
+				<n0:standardTaxCode>MP07</n0:standardTaxCode>
+				<n0:ownTaxCode>MP07 KVR V27 </n0:ownTaxCode>
+				<n0:taxPosition>
+					<n0:positionType>PAYABLE</n0:positionType>
+					<n0:taxBase>411575</n0:taxBase>
+					<n0:taxAmount>111125</n0:taxAmount>
+				</n0:taxPosition>
+			</n0:taxInformation>
+		</n0:vatAnalyticsItem>
+		<n0:vatAnalyticsItem>
+			<n0:lineNumber>2</n0:lineNumber>
+			<n0:sourceDocumentId>Teszt Számla 2</n0:sourceDocumentId>
+			<n0:sourceDocumentIssueDate>2023-08-22</n0:sourceDocumentIssueDate>
+			<n0:sourceDocumentType>INVOICE</n0:sourceDocumentType>
+			<n0:taxpointDate>2023-08-22</n0:taxpointDate>
+			<n0:partnerInfo>
+				<n0:partnerStatus>DOMESTIC</n0:partnerStatus>
+				<n0:partnerTaxData>
+					<n0:domesticTaxData>
+						<n0:taxNumber>33333333</n0:taxNumber>
+					</n0:domesticTaxData>
+				</n0:partnerTaxData>
+				<n0:partnerName>Teszt Partner 2</n0:partnerName>
+				<n0:partnerAddress>
+					<osabase:simpleAddress>
+						<osabase:countryCode>HU</osabase:countryCode>
+						<osabase:postalCode>2222</osabase:postalCode>
+						<osabase:city>Teszt Város 2</osabase:city>
+						<osabase:additionalAddressDetail>Teszt utca 2</osabase:additionalAddressDetail>
+					</osabase:simpleAddress>
+				</n0:partnerAddress>
+			</n0:partnerInfo>
+			<n0:taxInformation>
+				<n0:standardTaxCode>MP07</n0:standardTaxCode>
+				<n0:ownTaxCode>MP07 KVR V27 </n0:ownTaxCode>
+				<n0:taxPosition>
+					<n0:positionType>PAYABLE</n0:positionType>
+					<n0:taxBase>460000</n0:taxBase>
+					<n0:taxAmount>124200</n0:taxAmount>
+				</n0:taxPosition>
+			</n0:taxInformation>
+		</n0:vatAnalyticsItem>		
+		<n0:vatAnalyticsItem>
+			<n0:lineNumber>3</n0:lineNumber>
+			<n0:sourceDocumentId>Teszt nyugta 1</n0:sourceDocumentId>
+			<n0:sourceDocumentIssueDate>2023-08-17</n0:sourceDocumentIssueDate>
+			<n0:sourceDocumentType>RECEIPT</n0:sourceDocumentType>
+			<n0:taxpointDate>2023-08-17</n0:taxpointDate>
+			<n0:partnerInfo>
+				<n0:partnerStatus>PRIVATE_PERSON</n0:partnerStatus>
+			</n0:partnerInfo>
+			<n0:taxInformation>
+				<n0:standardTaxCode>MP07</n0:standardTaxCode>
+				<n0:ownTaxCode>MP07 KVR V27 </n0:ownTaxCode>
+				<n0:taxPosition>
+					<n0:positionType>PAYABLE</n0:positionType>
+					<n0:taxBase>45000</n0:taxBase>
+					<n0:taxAmount>12150</n0:taxAmount>
+				</n0:taxPosition>
+			</n0:taxInformation>
+		</n0:vatAnalyticsItem>		
+		<n0:vatAnalyticsItem>
+			<n0:lineNumber>4</n0:lineNumber>
+			<n0:sourceDocumentId>Teszt Számla 3</n0:sourceDocumentId>
+			<n0:sourceDocumentIssueDate>2023-08-13</n0:sourceDocumentIssueDate>
+			<n0:sourceDocumentType>INVOICE</n0:sourceDocumentType>
+			<n0:taxpointDate>2023-08-13</n0:taxpointDate>
+			<n0:partnerInfo>
+				<n0:partnerStatus>DOMESTIC</n0:partnerStatus>
+				<n0:partnerTaxData>
+					<n0:domesticTaxData>
+						<n0:taxNumber>44444444</n0:taxNumber>
+					</n0:domesticTaxData>
+				</n0:partnerTaxData>
+				<n0:partnerName>Teszt Partner 3</n0:partnerName>
+				<n0:partnerAddress>
+					<osabase:simpleAddress>
+						<osabase:countryCode>HU</osabase:countryCode>
+						<osabase:postalCode>3333</osabase:postalCode>
+						<osabase:city>Teszt Város 3</osabase:city>
+						<osabase:additionalAddressDetail>Teszt utca 3</osabase:additionalAddressDetail>
+					</osabase:simpleAddress>
+				</n0:partnerAddress>
+			</n0:partnerInfo>
+			<n0:taxInformation>
+				<n0:standardTaxCode>MD66</n0:standardTaxCode>
+				<n0:ownTaxCode>MD66 KVR V27</n0:ownTaxCode>
+				<n0:taxPosition>
+					<n0:positionType>DEDUCTIBLE</n0:positionType>
+					<n0:taxBase>96273</n0:taxBase>
+					<n0:taxAmount>25994</n0:taxAmount>
+					<n0:deductionOptions>
+						<n0:deductionAmount>25994</n0:deductionAmount>
+					</n0:deductionOptions>
+				</n0:taxPosition>
+			</n0:taxInformation>
+		</n0:vatAnalyticsItem>		
+		<n0:vatAnalyticsItem>
+			<n0:lineNumber>5</n0:lineNumber>
+			<n0:sourceDocumentId>Teszt Számla 4</n0:sourceDocumentId>
+			<n0:sourceDocumentIssueDate>2023-08-25</n0:sourceDocumentIssueDate>
+			<n0:sourceDocumentType>INVOICE</n0:sourceDocumentType>
+			<n0:taxpointDate>2023-08-25</n0:taxpointDate>
+			<n0:partnerInfo>
+				<n0:partnerStatus>DOMESTIC</n0:partnerStatus>
+				<n0:partnerTaxData>
+					<n0:domesticTaxData>
+						<n0:taxNumber>55555555</n0:taxNumber>
+					</n0:domesticTaxData>
+				</n0:partnerTaxData>
+				<n0:partnerName>Teszt Partner 4</n0:partnerName>
+				<n0:partnerAddress>
+					<osabase:simpleAddress>
+						<osabase:countryCode>HU</osabase:countryCode>
+						<osabase:postalCode>4444</osabase:postalCode>
+						<osabase:city>Teszt Város 4</osabase:city>
+						<osabase:additionalAddressDetail>Teszt utca 4</osabase:additionalAddressDetail>
+					</osabase:simpleAddress>
+				</n0:partnerAddress>
+			</n0:partnerInfo>
+			<n0:taxInformation>
+				<n0:standardTaxCode>MD66</n0:standardTaxCode>
+				<n0:ownTaxCode>MD66 KVR V27</n0:ownTaxCode>
+				<n0:taxPosition>
+					<n0:positionType>DEDUCTIBLE</n0:positionType>
+					<n0:taxBase>5500000</n0:taxBase>
+					<n0:taxAmount>1485000</n0:taxAmount>
+					<n0:deductionOptions>
+						<n0:deductionAmount>1485000</n0:deductionAmount>
+					</n0:deductionOptions>
+				</n0:taxPosition>
+			</n0:taxInformation>
+			<n0:taxInformation>
+				<n0:standardTaxCode>MD65</n0:standardTaxCode>
+				<n0:ownTaxCode>MD65 KVR V18</n0:ownTaxCode>
+				<n0:taxPosition>
+					<n0:positionType>DEDUCTIBLE</n0:positionType>
+					<n0:taxBase>280000</n0:taxBase>
+					<n0:taxAmount>50400</n0:taxAmount>
+					<n0:deductionOptions>
+						<n0:deductionAmount>50400</n0:deductionAmount>
+					</n0:deductionOptions>
+				</n0:taxPosition>
+			</n0:taxInformation>			
+		</n0:vatAnalyticsItem>		
+		<n0:vatAnalyticsItem>
+			<n0:lineNumber>6</n0:lineNumber>
+			<n0:sourceDocumentId>Teszt Számla 5</n0:sourceDocumentId>
+			<n0:sourceDocumentIssueDate>2023-08-16</n0:sourceDocumentIssueDate>
+			<n0:sourceDocumentType>INVOICE</n0:sourceDocumentType>
+			<n0:taxpointDate>2023-08-16</n0:taxpointDate>
+			<n0:partnerInfo>
+				<n0:partnerStatus>DOMESTIC</n0:partnerStatus>
+				<n0:partnerTaxData>
+					<n0:domesticTaxData>
+						<n0:taxNumber>66666666</n0:taxNumber>
+					</n0:domesticTaxData>
+				</n0:partnerTaxData>
+				<n0:partnerName>Teszt Partner 5</n0:partnerName>
+				<n0:partnerAddress>
+					<osabase:simpleAddress>
+						<osabase:countryCode>HU</osabase:countryCode>
+						<osabase:postalCode>5555</osabase:postalCode>
+						<osabase:city>Teszt Város 5</osabase:city>
+						<osabase:additionalAddressDetail>Teszt utca 5</osabase:additionalAddressDetail>
+					</osabase:simpleAddress>
+				</n0:partnerAddress>
+			</n0:partnerInfo>
+			<n0:taxInformation>
+				<n0:standardTaxCode>MD64</n0:standardTaxCode>
+				<n0:ownTaxCode>MD64 KVR V5</n0:ownTaxCode>
+				<n0:taxPosition>
+					<n0:positionType>DEDUCTIBLE</n0:positionType>
+					<n0:taxBase>20000</n0:taxBase>
+					<n0:taxAmount>1000</n0:taxAmount>
+					<n0:deductionOptions>
+						<n0:deductionAmount>1000</n0:deductionAmount>
+					</n0:deductionOptions>
+				</n0:taxPosition>
+			</n0:taxInformation>
+		</n0:vatAnalyticsItem>		
+	</n0:vatAnalytics>
+	<n0:declarationSummary>
+        <n0:sumResidualTax>0</n0:sumResidualTax>
+        <n0:lapsedResidualTaxIndicator>false</n0:lapsedResidualTaxIndicator>           
+        <n0:sumAccountedTax>-1315</n0:sumAccountedTax>
+        <n0:sumDeductibleTax>1315</n0:sumDeductibleTax>
+        <n0:sumTransferableTax>0</n0:sumTransferableTax>
+    </n0:declarationSummary>
+</n0:VatDeclarationData>
