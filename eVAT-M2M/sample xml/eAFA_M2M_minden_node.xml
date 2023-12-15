@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!---Ez az xml tartalmaz minden, az earData.xsd-ben definiált elemet. Azokat választási lehetőségeket (choice) is, ahol az érintett elemek, node-ok közül, egy adott xml-ben csak az egyik szerepelhet Ezeket az előttük beszúrt megjegyzéssel jelöltük. Az xml elemeinek ismertetését az earData.xsd mellett Az eÁFA M2M xml leírása nevű dokumentum tartalmazza.
+ -->
+<n0:VatDeclarationData xmlns:earbase="http://schemas.nav.gov.hu/EAR/1.0/base" xmlns:n0="http://schemas.nav.gov.hu/EAR/1.0/data" xmlns:osabase="http://schemas.nav.gov.hu/OSA/3.0/base" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.nav.gov.hu/EAR/1.0/data earData.xsd">
+	<n0:declarationInfo>
+		<earbase:modificationReference>
+			<earbase:declarationReferenceId>AB226644BZGH</earbase:declarationReferenceId>
+			<earbase:declarationReferenceIndex>1</earbase:declarationReferenceIndex>
+			<earbase:barCodeReference>1234567890</earbase:barCodeReference>
+		</earbase:modificationReference>
+		<earbase:taxNumber>12332112</earbase:taxNumber>
+		<earbase:declarationType>NONE</earbase:declarationType>
+		<earbase:declarationKind>NONE</earbase:declarationKind>
+		<earbase:declarationFrequency>MONTHLY</earbase:declarationFrequency>
+		<earbase:declarationPeriodStart>2023-12-01</earbase:declarationPeriodStart>
+		<earbase:declarationPeriodEnd>2023-12-31</earbase:declarationPeriodEnd>
+		<earbase:version>1</earbase:version>
+	</n0:declarationInfo>
+	<n0:declarationStatements>
+		<n0:returnDecision>TAX_ACCOUNT_TRANSFER</n0:returnDecision>
+		<n0:taxpayerStatusCode>CODE_4</n0:taxpayerStatusCode>
+		<n0:procedureStatements>
+			<n0:thresholdExceededIndicator>false</n0:thresholdExceededIndicator>
+			<n0:interimFrequencyChangeIndicator>false</n0:interimFrequencyChangeIndicator>
+			<n0:midYearCommunityTaxNumberIndicator>false</n0:midYearCommunityTaxNumberIndicator>
+			<n0:outOfTurnDeclarationCode>FOREIGN_CURRENCY_CHANGE</n0:outOfTurnDeclarationCode>
+			<n0:becomesLiveAgainIndicator>false</n0:becomesLiveAgainIndicator>
+			<n0:animalDiseaseDefermentIndicator>false</n0:animalDiseaseDefermentIndicator>
+			<n0:taxLiabilityBesideExemptmentIndicator>false</n0:taxLiabilityBesideExemptmentIndicator>
+		</n0:procedureStatements>
+		<n0:returnStatements>
+			<n0:returnMethod>
+<!-- 1 Ha a bevallásban adóvisszatértés szerepel, a visszatérítés módját, és az ahhoz tartozó adatokat meg kell adni, ami az alábbi három közül az egyik lehet -->			
+
+			<!-- 1.1 Belföldi pénzügyi szolgáltató -->
+				<n0:domesticPaymentServiceProvider>
+					<n0:domesticProviderName>Belföldi Pénzintézet név</n0:domesticProviderName>
+					<n0:domesticBankAccountNumber>11111111-22222222-00000000</n0:domesticBankAccountNumber>
+				</n0:domesticPaymentServiceProvider>
+
+			<!-- 1.2 Külföldi pénzügyi szolgáltató -->				
+				<n0:foreignPaymentServiceProvider>
+					<n0:foreignProviderName>Külföldi pénzintézet név</n0:foreignProviderName>
+					<n0:foreignProviderAddress>Külföldi város, utca házszám</n0:foreignProviderAddress>
+					<n0:foreignBankAccountOwnerName>Számlatulajdonos neve</n0:foreignBankAccountOwnerName>
+					<n0:foreignBankAccountNumber>AA123456</n0:foreignBankAccountNumber>
+					<n0:ibanIndicator>true</n0:ibanIndicator>
+					<n0:swiftCode>AAAABBCC123</n0:swiftCode>
+					<n0:countryCode>AT</n0:countryCode>
+					<n0:currencyCode>EUR</n0:currencyCode>
+				</n0:foreignPaymentServiceProvider>
+
+			<!-- 1.3 Postai kézbesítés adatai-->				
+				<n0:postalReturn>
+					<n0:postalCode>1111</n0:postalCode>
+					<n0:city>Budapest</n0:city>
+					<n0:additionalAddress>Utca házszám</n0:additionalAddress>
+				</n0:postalReturn>
+				
+			</n0:returnMethod>
+			<n0:publicLlcIndicator>true</n0:publicLlcIndicator>
+			<n0:expediteReturnIndicator>true</n0:expediteReturnIndicator>
+		</n0:returnStatements>
+	</n0:declarationStatements>
+	<n0:vatAnalytics>
+		<n0:totalRowCount>1</n0:totalRowCount>
+		<n0:agriculturalCompensationPremium>
+			<n0:sevenPercentCount>1</n0:sevenPercentCount>
+			<n0:twelvePercentCount>1</n0:twelvePercentCount>
+		</n0:agriculturalCompensationPremium>
+		<n0:vatAnalyticsItem>
+			<n0:lineNumber>1</n0:lineNumber>
+			<n0:generalLedgerInformation>
+				<n0:glAccountId>467</n0:glAccountId>
+				<n0:glPostingDate>2023-12-10</n0:glPostingDate>
+				<n0:glTransactionId>BIZ0001</n0:glTransactionId>
+			</n0:generalLedgerInformation>
+			<n0:sourceDocumentId>SZLA 1234/2023</n0:sourceDocumentId>
+			<n0:sourceDocumentIssueDate>2023-12-10</n0:sourceDocumentIssueDate>
+			<n0:sourceDocumentType>INVOICE</n0:sourceDocumentType>
+			<n0:taxpointDate>2023-12-10</n0:taxpointDate>
+			<n0:partnerInfo>
+				<n0:partnerStatus>DOMESTIC</n0:partnerStatus>
+<!-- 2 A partner státuszának függvényében az alábbi három adat közül az egyik, vagy egyik sem adható meg a z xml-ben-->
+<!-- 2.1 Ha a partnerStatus PRIVATE_PERSON, a partnerTAxData csomópont nem szerepelhet az xml-ben-->
+				<n0:partnerTaxData>
+		<!-- 2.2 Ha a partnerStatus DOMESTIC, akkor a domesticTaxData csomópont  -->
+					<n0:domesticTaxData>
+						<n0:taxNumber>11111112</n0:taxNumber>
+						<n0:groupMemberTaxNumber>22222223</n0:groupMemberTaxNumber>
+					</n0:domesticTaxData>
+					
+		<!--  2.3 Ha a partneStatus OTHER és a partnernek közösségi adószáma van -->					
+					<n0:communityVatNumber>AA001122</n0:communityVatNumber>
+
+		<!-- 2.4 Ha a partneStatus OTHER és a partnernek harmadik országbeli  adószáma van -->
+					<n0:thirdStateTaxId>ABC12345</n0:thirdStateTaxId>
+				</n0:partnerTaxData>
+
+				<n0:partnerName>Partnernév Rt.</n0:partnerName>
+				<n0:partnerAddress>
+<!-- 3. A különböző programok eltérő szerkezetben tarthatják nyilván a cím adatokat. A címadatok az alábbi két foma közül az egyikben -->
+		<!-- 3.1 Egyszerű cím -->			
+					<osabase:simpleAddress>
+						<osabase:countryCode>HU</osabase:countryCode>
+						<osabase:region>Magyarországon nincs</osabase:region>
+						<osabase:postalCode>1234</osabase:postalCode>
+						<osabase:city>Város</osabase:city>
+						<osabase:additionalAddressDetail>A cím többi eleme</osabase:additionalAddressDetail>
+					</osabase:simpleAddress>
+					
+		<!-- 3.2 Részletes cím -->					
+					<osabase:detailedAddress>
+						<osabase:countryCode>HU</osabase:countryCode>
+						<osabase:region>XX-ABC</osabase:region>
+						<osabase:postalCode>1234</osabase:postalCode>
+						<osabase:city>Település neve</osabase:city>
+						<osabase:streetName>Közterület neve</osabase:streetName>
+						<osabase:publicPlaceCategory>Közterület jellege</osabase:publicPlaceCategory>
+						<osabase:number>Házszám</osabase:number>
+						<osabase:building>Épület</osabase:building>
+						<osabase:staircase>lépcsőház</osabase:staircase>
+						<osabase:floor>Emelet</osabase:floor>
+						<osabase:door>Ajtó</osabase:door>
+						<osabase:lotNumber>Hrsz</osabase:lotNumber>
+					</osabase:detailedAddress>
+				</n0:partnerAddress>
+			</n0:partnerInfo>
+			<n0:taxInformation>
+				<n0:standardTaxCode>MP07</n0:standardTaxCode>
+				<n0:ownTaxCode>VMP07</n0:ownTaxCode>
+				<n0:taxPosition>
+					<n0:positionType>PAYABLE</n0:positionType>
+					<n0:taxBase>1000000</n0:taxBase>
+					<n0:taxAmount>270000</n0:taxAmount>
+					<n0:deductionOptions>
+						<n0:deductionRate>0.20</n0:deductionRate>
+						<n0:deductionAmount>54000</n0:deductionAmount>
+					</n0:deductionOptions>
+				</n0:taxPosition>
+				<n0:taxPosition>
+					<n0:positionType>PAYABLE</n0:positionType>
+					<n0:taxBase>1000000</n0:taxBase>
+					<n0:taxAmount>270000</n0:taxAmount>
+					<n0:deductionOptions>
+						<n0:deductionRate>0.20</n0:deductionRate>
+						<n0:deductionAmount>54000</n0:deductionAmount>
+					</n0:deductionOptions>
+				</n0:taxPosition>				
+			</n0:taxInformation>
+		</n0:vatAnalyticsItem>
+	</n0:vatAnalytics>
+	<n0:declarationSummary>
+		<n0:sumResidualTax>20</n0:sumResidualTax>
+		<n0:lapsedResidualTaxIndicator>true</n0:lapsedResidualTaxIndicator>
+		<n0:sumAccountedTax>100</n0:sumAccountedTax>
+		<n0:sumPayableTax>80</n0:sumPayableTax>
+		<n0:sumDeductibleTax>0</n0:sumDeductibleTax>
+		<n0:sumTransferableTax>0</n0:sumTransferableTax>
+	</n0:declarationSummary>
+	<n0:sheetList>
+		<n0:sheet>
+			<n0:sheetName>VAT_SHEET_2</n0:sheetName>
+			<n0:sheetPageCount>1</n0:sheetPageCount>
+			<n0:vpid>123456789012</n0:vpid>
+			<n0:sheetField>
+				<n0:sheetFieldName>0HXXXXC0001AA</n0:sheetFieldName>
+				<n0:sheetFieldValue>50000</n0:sheetFieldValue>
+			</n0:sheetField>
+			<n0:sheetField>
+				<n0:sheetFieldName>0HXXXXC0001AA</n0:sheetFieldName>
+				<n0:sheetFieldValue>50000</n0:sheetFieldValue>
+			</n0:sheetField>
+		</n0:sheet>
+	</n0:sheetList>
+	<n0:attachment>
+		<n0:claimCheckId>AB11Z34H</n0:claimCheckId>
+		<n0:attachmentCategory>FACTORING_CONTRACT</n0:attachmentCategory>
+		<n0:additionalAttachmentInfo>
+			<n0:factoringContractData>
+				<n0:factoringContractNumber>SZ12345</n0:factoringContractNumber>
+				<n0:factoringContractDate>2023-12-08</n0:factoringContractDate>
+				<n0:factoringTaxCode>VAT_104</n0:factoringTaxCode>
+				<n0:factoringAmount>8000</n0:factoringAmount>
+		<!-- 4 A faktorálásban érintett pénzügyi szolgáltató belföldi, vagy külföldi közül az egyik lehet-->
+
+			<!-- 4.1 Belföldi pénzügyi szolgáltató -->				
+				<n0:domesticPaymentServiceProvider>
+					<n0:domesticProviderName>Belföldi Pénzintézet név</n0:domesticProviderName>
+					<n0:domesticBankAccountNumber>11111111-22222222-00000000</n0:domesticBankAccountNumber>
+				</n0:domesticPaymentServiceProvider>
+				
+			<!-- 4.2 Küllföldi pénzügyi szolgáltató -->
+				<n0:foreignPaymentServiceProvider>
+					<n0:foreignProviderName>Külföldi pénzintézet név</n0:foreignProviderName>
+					<n0:foreignProviderAddress>Külföldi város, utca házszám</n0:foreignProviderAddress>
+					<n0:foreignBankAccountOwnerName>Számlatulajdonos neve</n0:foreignBankAccountOwnerName>
+					<n0:foreignBankAccountNumber>AA123456</n0:foreignBankAccountNumber>
+					<n0:ibanIndicator>true</n0:ibanIndicator>
+					<n0:swiftCode>AAAABBCC123</n0:swiftCode>
+					<n0:countryCode>AT</n0:countryCode>
+					<n0:currencyCode>EUR</n0:currencyCode>
+				</n0:foreignPaymentServiceProvider>
+			</n0:factoringContractData>
+		</n0:additionalAttachmentInfo>
+	</n0:attachment>
+</n0:VatDeclarationData>
