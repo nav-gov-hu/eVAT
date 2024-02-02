@@ -272,6 +272,26 @@
 			<xs:minInclusive value="2021-01-01"/>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:complexType name="AddressType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Cím típus, amely vagy egyszerű, vagy részletes címet tartalmaz</xs:documentation>
+			<xs:documentation xml:lang="en">Format of address that includes either a simple or a detailed address</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="simpleAddress" type="SimpleAddressType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Egyszerű cím</xs:documentation>
+					<xs:documentation xml:lang="en">Simple address</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="detailedAddress" type="DetailedAddressType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Részletes cím</xs:documentation>
+					<xs:documentation xml:lang="en">Detailed address</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
 	<xs:complexType name="DeclarationInfoType">
 		<xs:annotation>
 			<xs:documentation xml:lang="hu">A bevallás fejadatai</xs:documentation>
@@ -328,6 +348,86 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="DetailedAddressType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Részletes címadatok</xs:documentation>
+			<xs:documentation xml:lang="en">Detailed address data</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="countryCode" type="common:CountryCodeType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Az országkód ISO 3166 alpha-2 szabvány szerint</xs:documentation>
+					<xs:documentation xml:lang="en">ISO 3166 alpha-2 country code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="region" type="common:SimpleText50NotBlankType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Tartomány kódja (amennyiben értelmezhető az adott országban) az ISO 3166-2 alpha 2 szabvány szerint</xs:documentation>
+					<xs:documentation xml:lang="en">ISO 3166 alpha-2 province code (if appropriate in a given country)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="postalCode" type="common:PostalCodeType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Irányítószám (amennyiben nem értelmezhető, 0000 értékkel kell kitölteni)</xs:documentation>
+					<xs:documentation xml:lang="en">ZIP code (If can not be interpreted, need to be filled "0000")</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="city" type="common:SimpleText255NotBlankType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Település</xs:documentation>
+					<xs:documentation xml:lang="en">Settlement</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="streetName" type="common:SimpleText255NotBlankType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Közterület neve</xs:documentation>
+					<xs:documentation xml:lang="en">Name of public place</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="publicPlaceCategory" type="common:SimpleText50NotBlankType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Közterület jellege</xs:documentation>
+					<xs:documentation xml:lang="en">Category of public place</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="number" type="common:SimpleText50NotBlankType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Házszám</xs:documentation>
+					<xs:documentation xml:lang="en">House number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="building" type="common:SimpleText50NotBlankType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Épület</xs:documentation>
+					<xs:documentation xml:lang="en">Building</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="staircase" type="common:SimpleText50NotBlankType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Lépcsőház</xs:documentation>
+					<xs:documentation xml:lang="en">Staircase</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="floor" type="common:SimpleText50NotBlankType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Emelet</xs:documentation>
+					<xs:documentation xml:lang="en">Floor</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="door" type="common:SimpleText50NotBlankType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Ajtó</xs:documentation>
+					<xs:documentation xml:lang="en">Door number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lotNumber" type="common:SimpleText50NotBlankType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Helyrajzi szám</xs:documentation>
+					<xs:documentation xml:lang="en">Lot number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="ModificationReferenceType">
 		<xs:annotation>
 			<xs:documentation xml:lang="hu">Módosítás adatai</xs:documentation>
@@ -350,6 +450,44 @@
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Hibásnak minősített bevallás vonalkódja</xs:documentation>
 					<xs:documentation xml:lang="en">Barcode of the declaration declared as incorrect</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SimpleAddressType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Egyszerű címtípus</xs:documentation>
+			<xs:documentation xml:lang="en">Simple address type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="countryCode" type="common:CountryCodeType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Az országkód az ISO 3166 alpha-2 szabvány szerint</xs:documentation>
+					<xs:documentation xml:lang="en">ISO 3166 alpha-2 country code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="region" type="common:SimpleText50NotBlankType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Tartomány kódja (amennyiben értelmezhető az adott országban) az ISO 3166-2 alpha 2 szabvány szerint</xs:documentation>
+					<xs:documentation xml:lang="en">ISO 3166 alpha-2 province code (if appropriate in a given country)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="postalCode" type="common:PostalCodeType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Irányítószám (amennyiben nem értelmezhető, 0000 értékkel kell kitölteni)</xs:documentation>
+					<xs:documentation xml:lang="en">ZIP code (If can not be interpreted, need to be filled "0000")</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="city" type="common:SimpleText255NotBlankType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Település</xs:documentation>
+					<xs:documentation xml:lang="en">Settlement</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="additionalAddressDetail" type="common:SimpleText255NotBlankType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">További címadatok (pl. közterület neve és jellege, házszám, emelet, ajtó, helyrajzi szám, stb.)</xs:documentation>
+					<xs:documentation xml:lang="en">Further address data (name and type of public place, house number, floor, door, lot number, etc.)</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
