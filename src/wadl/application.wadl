@@ -1,1625 +1,1576 @@
-<application xmlns="http://wadl.dev.java.net/2009/02" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-             xmlns:prefix2="http://schemas.nav.gov.hu/EAR/1.0/api"
-             xmlns:prefix1="http://schemas.nav.gov.hu/OSA/3.0/metrics">
-    <grammars>
-        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.nav.gov.hu/EAR/1.0/base"
-                   attributeFormDefault="unqualified" elementFormDefault="qualified"
-                   targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/base" version="1.0">
-            <xs:complexType name="DeclarationInfoType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="modificationReference" type="tns:ModificationReferenceType"/>
-                    <xs:element name="taxNumber" type="xs:string"/>
-                    <xs:element name="declarationType" type="xs:string"/>
-                    <xs:element name="declarationKind" type="xs:string"/>
-                    <xs:element name="declarationFrequency" type="xs:string"/>
-                    <xs:element name="declarationPeriodStart" type="xs:date"/>
-                    <xs:element name="declarationPeriodEnd" type="xs:date"/>
-                    <xs:element name="version" type="xs:integer"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="ModificationReferenceType">
-                <xs:sequence>
-                    <xs:element name="declarationReferenceId" type="xs:string"/>
-                    <xs:element name="declarationReferenceIndex" type="xs:integer"/>
-                    <xs:element minOccurs="0" name="barCodeReference" type="xs:integer"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:simpleType name="DeclarationTypeType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="NONE"/>
-                    <xs:enumeration value="ELIMINATION"/>
-                    <xs:enumeration value="LIQUIDATION"/>
-                    <xs:enumeration value="SELF_EMPLOYMENT_END"/>
-                    <xs:enumeration value="TRANSFORMATION"/>
-                    <xs:enumeration value="TERMINATION"/>
-                    <xs:enumeration value="PAUSING"/>
-                    <xs:enumeration value="STATE_POWER_END"/>
-                    <xs:enumeration value="VAT_GROUP_END"/>
-                    <xs:enumeration value="GROUP_TAXPAYER_END"/>
-                    <xs:enumeration value="BECAME_VAT_FREE"/>
-                    <xs:enumeration value="BECAME_VAT_OBLIGED"/>
-                    <xs:enumeration value="FUSION"/>
-                    <xs:enumeration value="FORCED_CANCELLATION"/>
-                    <xs:enumeration value="BECAME_TAXPAYER"/>
-                    <xs:enumeration value="OUT_OF_VAT_CLASS"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="DeclarationKindType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="NONE"/>
-                    <xs:enumeration value="PREVIOUS_PERIOD"/>
-                    <xs:enumeration value="UNDER_PROCESS"/>
-                    <xs:enumeration value="CLOSURE"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="DeclarationFrequencyType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="ANNUAL"/>
-                    <xs:enumeration value="QUARTERLY"/>
-                    <xs:enumeration value="MONTHLY"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:schema>
-        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.nav.gov.hu/EAR/1.0/data"
-                   attributeFormDefault="unqualified" elementFormDefault="qualified"
-                   targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/data" version="1.0">
-            <xs:complexType name="TaxPositionType">
-                <xs:sequence>
-                    <xs:element name="positionType" type="xs:string"/>
-                    <xs:element name="taxBase" type="xs:decimal"/>
-                    <xs:element name="taxAmount" type="xs:decimal"/>
-                    <xs:element minOccurs="0" name="deductionOptions" type="tns:DeductionOptionsType"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="DeductionOptionsType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="deductionRate" type="xs:decimal"/>
-                    <xs:element name="deductionAmount" type="xs:decimal"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="DeclarationSummaryType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="sumResidualTax" type="xs:decimal"/>
-                    <xs:element minOccurs="0" name="lapsedResidualTaxIndicator" type="xs:boolean"/>
-                    <xs:element name="sumAccountedTax" type="xs:decimal"/>
-                    <xs:element minOccurs="0" name="sumPayableTax" type="xs:decimal"/>
-                    <xs:element minOccurs="0" name="sumDeductibleTax" type="xs:decimal"/>
-                    <xs:element minOccurs="0" name="sumTransferableTax" type="xs:decimal"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:simpleType name="SheetNameType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="VAT_SHEET_2"/>
-                    <xs:enumeration value="VAT_SHEET_6"/>
-                    <xs:enumeration value="VAT_SHEET_7"/>
-                    <xs:enumeration value="VAT_SHEET_8"/>
-                    <xs:enumeration value="VAT_SHEET_9"/>
-                    <xs:enumeration value="VAT_SHEET_A88"/>
-                    <xs:enumeration value="VAT_SHEET_170"/>
-                    <xs:enumeration value="VAT_SHEET_4"/>
-                    <xs:enumeration value="VAT_SHEET_EUNY"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="PositionTypeType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="PAYABLE"/>
-                    <xs:enumeration value="DEDUCTIBLE"/>
-                    <xs:enumeration value="OTHER"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:schema>
-        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://schemas.nav.gov.hu/NTCA/1.0/common"
-                   xmlns:tns="http://schemas.nav.gov.hu/OSA/3.0/metrics" attributeFormDefault="unqualified"
-                   elementFormDefault="qualified" targetNamespace="http://schemas.nav.gov.hu/OSA/3.0/metrics"
-                   version="1.0">
-            <xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common"/>
-            <xs:element name="QueryServiceMetricsListResponse">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryServiceMetricsListResponseType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="QueryServiceMetricsResponse">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryServiceMetricsResponseType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:complexType name="QueryServiceMetricsListResponseType">
-                <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="metricDefinition" nillable="true"
-                                type="tns:MetricDefinitionType"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="MetricDefinitionType">
-                <xs:sequence>
-                    <xs:element name="metricName" type="xs:string"/>
-                    <xs:element name="metricType" type="xs:string"/>
-                    <xs:element maxOccurs="unbounded" name="metricDescription" type="tns:MetricDescriptionType"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="MetricDescriptionType">
-                <xs:sequence>
-                    <xs:element name="language" type="xs:string"/>
-                    <xs:element name="localizedDescription" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="QueryServiceMetricsResponseType">
-                <xs:sequence>
-                    <xs:element name="result" type="ns1:BasicResultType"/>
-                    <xs:element minOccurs="0" name="metricsLastUpdateTime" type="xs:dateTime"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="metric" nillable="true"
-                                type="tns:MetricType"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="MetricType">
-                <xs:sequence>
-                    <xs:element name="metricDefinition" type="tns:MetricDefinitionType"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="metricValues" nillable="true"
-                                type="tns:MetricValueType"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="MetricValueType">
-                <xs:sequence>
-                    <xs:element name="value" type="xs:decimal"/>
-                    <xs:element name="timestamp" type="xs:dateTime"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:simpleType name="MetricTypeType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="COUNTER"/>
-                    <xs:enumeration value="GAUGE"/>
-                    <xs:enumeration value="HISTOGRAM"/>
-                    <xs:enumeration value="SUMMARY"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="LanguageType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="HU"/>
-                    <xs:enumeration value="EN"/>
-                    <xs:enumeration value="DE"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:schema>
-        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://schemas.nav.gov.hu/NTCA/1.0/common"
-                   xmlns:ns2="http://schemas.nav.gov.hu/EAR/1.0/data" xmlns:ns3="http://schemas.nav.gov.hu/EAR/1.0/base"
-                   xmlns:tns="http://schemas.nav.gov.hu/EAR/1.0/api" attributeFormDefault="unqualified"
-                   elementFormDefault="qualified" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/api" version="1.0">
-            <xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common"/>
-            <xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/data"/>
-            <xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/base"/>
-            <xs:element name="GeneralErrorResponse">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:GeneralErrorResponseType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="ManageAttachmentUploadRequest">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:ManageAttachmentUploadRequestType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="ManageAttachmentUploadResponse">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:ManageAttachmentUploadResponseType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="ManageDeclarationFinalizeRequest">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:ManageDeclarationFinalizeRequestType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="ManageDeclarationFinalizeResponse">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:ManageDeclarationFinalizeResponseType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="ManageDeclarationPartitionRequest">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:ManageDeclarationPartitionRequestType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="ManageDeclarationPartitionResponse">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:ManageDeclarationPartitionResponseType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="ManageDeclarationSubmissionRequest">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:ManageDeclarationSubmissionRequestType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="ManageDeclarationSubmissionResponse">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:ManageDeclarationSubmissionResponseType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="ManageDeclarationUploadRequest">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:ManageDeclarationUploadRequestType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="ManageDeclarationUploadResponse">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:ManageDeclarationUploadResponseType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="PurgeAttachmentRequest">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:PurgeAttachmentRequestType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="PurgeAttachmentResponse">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:PurgeAttachmentResponseType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="QueryAttachmentListRequest">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryAttachmentListRequestType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="QueryAttachmentListResponse">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryAttachmentListResponseType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="QueryCustomsDeclarationDigestRequest">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryCustomsDeclarationDigestRequestType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="QueryCustomsDeclarationDigestResponse">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryCustomsDeclarationDigestResponseType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="QueryCustomsDeclarationTaxCodeRequest">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryCustomsDeclarationTaxCodeRequestType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="QueryCustomsDeclarationTaxCodeResponse">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryCustomsDeclarationTaxCodeResponseType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="QueryDeclarationDataRequest">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryDeclarationDataRequestType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="QueryDeclarationDataResponse">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryDeclarationDataResponseType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="QueryDeclarationListRequest">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryDeclarationListRequestType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="QueryDeclarationListResponse">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryDeclarationListResponseType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="QueryDeclarationProcessingStatusRequest">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryDeclarationProcessingStatusRequestType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="QueryDeclarationProcessingStatusResponse">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryDeclarationProcessingStatusResponseType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="QueryDocumentListRequest">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryDocumentListRequestType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="QueryDocumentListResponse">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryDocumentListResponseType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="QueryDocumentListResultRequest">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryDocumentListResultRequestType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="QueryDocumentListResultResponse">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryDocumentListResultResponseType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="QueryInvoiceTaxCodeRequest">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryInvoiceTaxCodeRequestType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="QueryInvoiceTaxCodeResponse">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryInvoiceTaxCodeResponseType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="QueryTaxCodeCatalogRequest">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryTaxCodeCatalogRequestType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="QueryTaxCodeCatalogResponse">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryTaxCodeCatalogResponseType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="QueryVatDeclarationDataRequest">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryVatDeclarationDataRequestType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="QueryVatDeclarationDataResponse">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:QueryVatDeclarationDataResponseType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:complexType name="PurgeAttachmentResponseType">
-                <xs:complexContent>
-                    <xs:extension base="ns1:BasicResponseType">
-                        <xs:sequence/>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="QueryVatDeclarationDataResponseType">
-                <xs:complexContent>
-                    <xs:extension base="ns1:BasicResponseType">
-                        <xs:sequence>
-                            <xs:element minOccurs="0" name="vatDeclarationData" type="tns:VatDeclarationDataType"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="VatDeclarationDataType">
-                <xs:sequence>
-                    <xs:element name="declarationSchema" type="xs:string"/>
-                    <xs:element name="originalRequestVersion" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="QueryTaxCodeCatalogResponseType">
-                <xs:complexContent>
-                    <xs:extension base="ns1:BasicResponseType">
-                        <xs:sequence>
-                            <xs:element minOccurs="0" name="taxCodeCatalog" type="tns:TaxCodeCatalogType"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="TaxCodeCatalogType">
-                <xs:sequence>
-                    <xs:element name="validFrom" type="xs:date"/>
-                    <xs:element name="validTo" type="xs:date"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="taxCodes" nillable="true"
-                                type="tns:TaxCodesType"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="TaxCodesType">
-                <xs:sequence>
-                    <xs:element name="standardTaxCode" type="xs:string"/>
-                    <xs:element name="transactionCode" type="xs:string"/>
-                    <xs:element minOccurs="0" name="mandatorySubpage" type="xs:string"/>
-                    <xs:element name="payableTaxCode" type="xs:boolean"/>
-                    <xs:element name="deductibleTaxCode" type="xs:boolean"/>
-                    <xs:element maxOccurs="unbounded" name="taxCodeDescription" type="tns:TaxCodeDescriptionType"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="declarationLineData" nillable="true"
-                                type="tns:DeclarationLineDataType"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="TaxCodeDescriptionType">
-                <xs:sequence>
-                    <xs:element name="localization" type="xs:string"/>
-                    <xs:element name="description" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="DeclarationLineDataType">
-                <xs:sequence>
-                    <xs:element name="declarationLineNumber" type="xs:integer"/>
-                    <xs:element maxOccurs="unbounded" name="declarationFieldData" type="tns:DeclarationFieldDataType"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="DeclarationFieldDataType">
-                <xs:sequence>
-                    <xs:element name="fieldId" type="xs:string"/>
-                    <xs:element name="fieldType" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="QueryInvoiceTaxCodeResponseType">
-                <xs:complexContent>
-                    <xs:extension base="ns1:BasicResponseType">
-                        <xs:sequence>
-                            <xs:element minOccurs="0" name="invoiceDigest" type="tns:InvoiceDigestType"/>
-                            <xs:element maxOccurs="unbounded" minOccurs="0" name="taxCodeInformation" nillable="true"
-                                        type="tns:TaxCodeInformationType"/>
-                            <xs:element maxOccurs="unbounded" minOccurs="0" name="vatRelevantWarning" nillable="true"
-                                        type="tns:VatRelevantWarningType"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="InvoiceDigestType">
-                <xs:sequence>
-                    <xs:element name="invoiceNumber" type="xs:string"/>
-                    <xs:element minOccurs="0" name="batchIndex" type="xs:int"/>
-                    <xs:element name="invoiceOperation" type="xs:string"/>
-                    <xs:element name="invoiceCategory" type="xs:string"/>
-                    <xs:element name="invoiceIssueDate" type="xs:date"/>
-                    <xs:element name="supplierTaxNumber" type="xs:string"/>
-                    <xs:element minOccurs="0" name="supplierGroupMemberTaxNumber" type="xs:string"/>
-                    <xs:element name="supplierName" type="xs:string"/>
-                    <xs:element minOccurs="0" name="customerTaxNumber" type="xs:string"/>
-                    <xs:element minOccurs="0" name="customerGroupMemberTaxNumber" type="xs:string"/>
-                    <xs:element minOccurs="0" name="customerName" type="xs:string"/>
-                    <xs:element minOccurs="0" name="paymentMethod" type="xs:string"/>
-                    <xs:element minOccurs="0" name="paymentDate" type="xs:date"/>
-                    <xs:element minOccurs="0" name="invoiceAppearance" type="xs:string"/>
-                    <xs:element minOccurs="0" name="source" type="xs:string"/>
-                    <xs:element minOccurs="0" name="invoiceDeliveryDate" type="xs:date"/>
-                    <xs:element minOccurs="0" name="currency" type="xs:string"/>
-                    <xs:element minOccurs="0" name="invoiceNetAmount" type="xs:decimal"/>
-                    <xs:element minOccurs="0" name="invoiceNetAmountHUF" type="xs:decimal"/>
-                    <xs:element minOccurs="0" name="invoiceVatAmount" type="xs:decimal"/>
-                    <xs:element minOccurs="0" name="invoiceVatAmountHUF" type="xs:decimal"/>
-                    <xs:element minOccurs="0" name="transactionId" type="xs:string"/>
-                    <xs:element minOccurs="0" name="index" type="xs:int"/>
-                    <xs:element minOccurs="0" name="originalInvoiceNumber" type="xs:string"/>
-                    <xs:element minOccurs="0" name="modificationIndex" type="xs:int"/>
-                    <xs:element name="insDate" type="xs:dateTime"/>
-                    <xs:element minOccurs="0" name="completenessIndicator" type="xs:boolean"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="TaxCodeInformationType">
-                <xs:sequence>
-                    <xs:element name="standardTaxCode" type="xs:string"/>
-                    <xs:element maxOccurs="unbounded" name="taxPosition" type="ns2:TaxPositionType"/>
-                    <xs:element name="lineNumber" type="xs:nonNegativeInteger"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="VatRelevantWarningType">
-                <xs:sequence>
-                    <xs:element name="validationResultCode" type="xs:string"/>
-                    <xs:element minOccurs="0" name="validationErrorCode" type="xs:string"/>
-                    <xs:element minOccurs="0" name="message" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="QueryDocumentListResultResponseType">
-                <xs:complexContent>
-                    <xs:extension base="ns1:BasicResponseType">
-                        <xs:sequence>
-                            <xs:element minOccurs="0" name="documentList" type="tns:DocumentListType"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="DocumentListType">
-                <xs:sequence>
-                    <xs:element name="queryResultStatus" type="xs:string"/>
-                    <xs:element minOccurs="0" name="queryResultAvailableFrom" type="xs:dateTime"/>
-                    <xs:element minOccurs="0" name="queryResultAvailableTo" type="xs:dateTime"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="invoiceDigest" nillable="true"
-                                type="tns:InvoiceDigestType"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="cashRegisterDigest" nillable="true"
-                                type="tns:CashRegisterDigestType"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="declarationDigest" nillable="true"
-                                type="tns:DeclarationDigestType"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="CashRegisterDigestType">
-                <xs:sequence>
-                    <xs:element name="taxpointDate" type="xs:date"/>
-                    <xs:element name="apNumber" type="xs:string"/>
-                    <xs:element name="registerType" type="xs:string"/>
-                    <xs:element name="baseReceiptNetAmount" type="xs:decimal"/>
-                    <xs:element name="stornoReceiptNetAmount" type="xs:decimal"/>
-                    <xs:element name="returnReceiptNetAmount" type="xs:decimal"/>
-                    <xs:element name="baseReceiptVatAmount" type="xs:decimal"/>
-                    <xs:element name="stornoReceiptVatAmount" type="xs:decimal"/>
-                    <xs:element name="returnReceiptVatAmount" type="xs:decimal"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="DeclarationDigestType">
-                <xs:sequence>
-                    <xs:element name="cdpsId" type="xs:string"/>
-                    <xs:element name="resolutionId" type="xs:string"/>
-                    <xs:element name="declarationOperation" type="xs:string"/>
-                    <xs:element name="importerTaxNumber" type="xs:string"/>
-                    <xs:element minOccurs="0" name="indirectRepresentativeTaxNumber" type="xs:string"/>
-                    <xs:element name="importerSelfTaxationIndicator" type="xs:boolean"/>
-                    <xs:element minOccurs="0" name="indirectRepresentativeSelfTaxationIndicator" type="xs:boolean"/>
-                    <xs:element name="taxpointDate" type="xs:date"/>
-                    <xs:element name="deliveryDate" type="xs:date"/>
-                    <xs:element name="totalNetAmount" type="xs:decimal"/>
-                    <xs:element name="totalVatAmount" type="xs:decimal"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="QueryDocumentListResponseType">
-                <xs:complexContent>
-                    <xs:extension base="ns1:BasicResponseType">
-                        <xs:sequence>
-                            <xs:element name="queryId" type="xs:string"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="QueryDeclarationProcessingStatusResponseType">
-                <xs:complexContent>
-                    <xs:extension base="ns1:BasicResponseType">
-                        <xs:sequence>
-                            <xs:element minOccurs="0" name="declarationProcessingStatus"
-                                        type="tns:DeclarationProcessingStatusType"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="DeclarationProcessingStatusType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="declarationInfo" type="ns3:DeclarationInfoType"/>
-                    <xs:element name="declarationStatus" type="tns:DeclarationStatusType"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="technicalValidationMessages" nillable="true"
-                                type="ns1:TechnicalValidationResultType"/>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="businessValidationMessages" nillable="true"
-                                type="tns:BusinessValidationResultType"/>
-                    <xs:element minOccurs="0" name="longRunWarningStatus" type="tns:LongRunWarningStatusType"/>
-                    <xs:element name="declarationUploadId" type="xs:string"/>
-                    <xs:element name="contentHash" type="ns1:CryptoType"/>
-                    <xs:element name="declarationSchema" type="xs:string"/>
-                    <xs:element name="originalRequestVersion" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="DeclarationStatusType">
-                <xs:sequence>
-                    <xs:element name="declarationStatusCode" type="xs:string"/>
-                    <xs:element name="declarationStatusMessage" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="BusinessValidationResultType">
-                <xs:sequence>
-                    <xs:element name="validationResultCode" type="xs:string"/>
-                    <xs:element minOccurs="0" name="validationErrorCode" type="xs:string"/>
-                    <xs:element minOccurs="0" name="message" type="xs:string"/>
-                    <xs:element minOccurs="0" name="pointer" type="tns:PointerType"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="PointerType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="lineNumber" type="xs:integer"/>
-                    <xs:element minOccurs="0" name="tag" type="xs:string"/>
-                    <xs:element minOccurs="0" name="value" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="LongRunWarningStatusType">
-                <xs:sequence>
-                    <xs:element name="longRunWarningStatusCode" type="xs:string"/>
-                    <xs:element name="longRunWarningStatusMessage" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="QueryDeclarationListResponseType">
-                <xs:complexContent>
-                    <xs:extension base="ns1:BasicResponseType">
-                        <xs:sequence>
-                            <xs:element minOccurs="0" name="declarationList" type="tns:DeclarationListType"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="DeclarationListType">
-                <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="declarationListItem" type="tns:DeclarationListItemType"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="DeclarationListItemType">
-                <xs:sequence>
-                    <xs:element name="declarationProcessingId" type="xs:string"/>
-                    <xs:element name="declarationSchema" type="xs:string"/>
-                    <xs:element name="declarationInfo" type="ns3:DeclarationInfoType"/>
-                    <xs:element name="originalRequestVersion" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="QueryDeclarationDataResponseType">
-                <xs:complexContent>
-                    <xs:extension base="ns1:BasicResponseType">
-                        <xs:sequence>
-                            <xs:element minOccurs="0" name="declarationData" type="tns:DeclarationDataType"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="DeclarationDataType">
-                <xs:sequence>
-                    <xs:element name="declarationInfo" type="ns3:DeclarationInfoType"/>
-                    <xs:element name="contentHash" type="ns1:CryptoType"/>
-                    <xs:element name="declarationSchema" type="xs:string"/>
-                    <xs:element name="declarationSummary" type="ns2:DeclarationSummaryType"/>
-                    <xs:element minOccurs="0" name="BevfeldData" type="xs:base64Binary"/>
-                    <xs:element name="originalRequestVersion" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="QueryCustomsDeclarationTaxCodeResponseType">
-                <xs:complexContent>
-                    <xs:extension base="ns1:BasicResponseType">
-                        <xs:sequence>
-                            <xs:element minOccurs="0" name="declarationDigest" type="tns:DeclarationDigestType"/>
-                            <xs:element maxOccurs="unbounded" minOccurs="0" name="taxCodeInformation" nillable="true"
-                                        type="tns:TaxCodeInformationType"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="QueryCustomsDeclarationDigestResponseType">
-                <xs:complexContent>
-                    <xs:extension base="ns1:BasicResponseType">
-                        <xs:sequence>
-                            <xs:element name="availablePage" type="xs:int"/>
-                            <xs:element name="currentPage" type="xs:int"/>
-                            <xs:element maxOccurs="unbounded" minOccurs="0" name="declarationDigest" nillable="true"
-                                        type="tns:DeclarationDigestType"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="QueryAttachmentListResponseType">
-                <xs:complexContent>
-                    <xs:extension base="ns1:BasicResponseType">
-                        <xs:sequence>
-                            <xs:element minOccurs="0" name="attachmentList" type="tns:AttachmentListType"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="AttachmentListType">
-                <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="attachmentListItem" type="tns:AttachmentListItemType"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="AttachmentListItemType">
-                <xs:sequence>
-                    <xs:element name="claimCheckId" type="xs:string"/>
-                    <xs:element name="fileName" type="xs:string"/>
-                    <xs:element name="fileExtension" type="xs:string"/>
-                    <xs:element name="contentHash" type="ns1:CryptoType"/>
-                    <xs:element name="claimCheckIdValidFrom" type="xs:dateTime"/>
-                    <xs:element name="claimCheckIdValidTo" type="xs:dateTime"/>
-                    <xs:element name="fileStatus" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="ManageDeclarationUploadResponseType">
-                <xs:complexContent>
-                    <xs:extension base="ns1:BasicResponseType">
-                        <xs:sequence>
-                            <xs:element name="declarationUploadId" type="xs:string"/>
-                            <xs:element name="declarationUploadValidFrom" type="xs:dateTime"/>
-                            <xs:element name="declarationUploadValidTo" type="xs:dateTime"/>
-                            <xs:element minOccurs="0" name="cancelledDeclarationUploadId" type="xs:string"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="ManageDeclarationSubmissionResponseType">
-                <xs:complexContent>
-                    <xs:extension base="ns1:BasicResponseType">
-                        <xs:sequence>
-                            <xs:element name="contentHash" type="ns1:CryptoType"/>
-                            <xs:element name="declarationSummary" type="ns2:DeclarationSummaryType"/>
-                            <xs:element minOccurs="0" name="bevfeldData" type="xs:base64Binary"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="ManageDeclarationPartitionResponseType">
-                <xs:complexContent>
-                    <xs:extension base="ns1:BasicResponseType">
-                        <xs:sequence>
-                            <xs:element name="declarationUploadId" type="xs:string"/>
-                            <xs:element name="partition" type="xs:integer"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="ManageDeclarationFinalizeResponseType">
-                <xs:complexContent>
-                    <xs:extension base="ns1:BasicResponseType">
-                        <xs:sequence>
-                            <xs:element name="declarationProcessingId" type="xs:string"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="ManageAttachmentUploadResponseType">
-                <xs:complexContent>
-                    <xs:extension base="ns1:BasicResponseType">
-                        <xs:sequence>
-                            <xs:element name="claimCheckId" type="xs:string"/>
-                            <xs:element name="claimCheckIdValidFrom" type="xs:dateTime"/>
-                            <xs:element name="claimCheckIdValidTo" type="xs:dateTime"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="GeneralErrorResponseType">
-                <xs:complexContent>
-                    <xs:extension base="ns1:GeneralErrorHeaderResponseType">
-                        <xs:sequence>
-                            <xs:element name="software" type="tns:SoftwareType"/>
-                            <xs:element maxOccurs="unbounded" minOccurs="0" name="technicalValidationMessages"
-                                        nillable="true" type="ns1:TechnicalValidationResultType"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="SoftwareType">
-                <xs:sequence>
-                    <xs:element name="softwareId" type="xs:string"/>
-                    <xs:element name="softwareName" type="xs:string"/>
-                    <xs:element name="softwareOperation" type="xs:string"/>
-                    <xs:element name="softwareMainVersion" type="xs:string"/>
-                    <xs:element name="softwareDevName" type="xs:string"/>
-                    <xs:element name="softwareDevContact" type="xs:string"/>
-                    <xs:element name="softwareDevCountryCode" type="xs:string"/>
-                    <xs:element name="softwareDevTaxNumber" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="QueryInvoiceTaxCodeRequestType">
-                <xs:complexContent>
-                    <xs:extension base="tns:BasicEVatRequestType">
-                        <xs:sequence>
-                            <xs:element name="invoiceNumberQuery" type="tns:InvoiceNumberQueryType"/>
-                            <xs:element name="additionalInvoiceTaxCodeQueryParams"
-                                        type="tns:AdditionalInvoiceTaxCodeQueryParamsType"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="BasicEVatRequestType">
-                <xs:complexContent>
-                    <xs:extension base="ns1:BasicRequestType">
-                        <xs:sequence>
-                            <xs:element name="software" type="tns:SoftwareType"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="InvoiceNumberQueryType">
-                <xs:sequence>
-                    <xs:element name="invoiceNumber" type="xs:string"/>
-                    <xs:element name="invoiceDirection" type="xs:string"/>
-                    <xs:element minOccurs="0" name="batchIndex" type="xs:int"/>
-                    <xs:element minOccurs="0" name="supplierTaxNumber" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="AdditionalInvoiceTaxCodeQueryParamsType">
-                <xs:sequence>
-                    <xs:element minOccurs="0" name="invoiceItemLine" type="xs:boolean"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="QueryVatDeclarationDataRequestType">
-                <xs:complexContent>
-                    <xs:extension base="tns:BasicEVatRequestType">
-                        <xs:sequence>
-                            <xs:element name="declarationProcessingId" type="xs:string"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="QueryTaxCodeCatalogRequestType">
-                <xs:complexContent>
-                    <xs:extension base="tns:BasicEVatRequestType">
-                        <xs:sequence>
-                            <xs:element name="taxpointDate" type="xs:date"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="QueryDocumentListResultRequestType">
-                <xs:complexContent>
-                    <xs:extension base="tns:BasicEVatRequestType">
-                        <xs:sequence>
-                            <xs:element name="queryId" type="xs:string"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="QueryDocumentListRequestType">
-                <xs:complexContent>
-                    <xs:extension base="tns:BasicEVatRequestType">
-                        <xs:sequence>
-                            <xs:element name="taxpointDateFrom" type="xs:date"/>
-                            <xs:element name="taxpointDateTo" type="xs:date"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="QueryDeclarationProcessingStatusRequestType">
-                <xs:complexContent>
-                    <xs:extension base="tns:BasicEVatRequestType">
-                        <xs:sequence>
-                            <xs:element name="declarationProcessingId" type="xs:string"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="QueryDeclarationListRequestType">
-                <xs:complexContent>
-                    <xs:extension base="tns:BasicEVatRequestType">
-                        <xs:sequence>
-                            <xs:element name="taxpointDateFrom" type="xs:date"/>
-                            <xs:element name="taxpointDateTo" type="xs:date"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="QueryDeclarationDataRequestType">
-                <xs:complexContent>
-                    <xs:extension base="tns:BasicEVatRequestType">
-                        <xs:sequence>
-                            <xs:element name="declarationProcessingId" type="xs:string"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="QueryCustomsDeclarationTaxCodeRequestType">
-                <xs:complexContent>
-                    <xs:extension base="tns:BasicEVatRequestType">
-                        <xs:sequence>
-                            <xs:element name="cdpsId" type="xs:string"/>
-                            <xs:element name="resolutionId" type="xs:string"/>
-                            <xs:element name="declarationDirection" type="xs:string"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="QueryCustomsDeclarationDigestRequestType">
-                <xs:complexContent>
-                    <xs:extension base="tns:BasicEVatRequestType">
-                        <xs:sequence>
-                            <xs:element name="page" type="xs:int"/>
-                            <xs:element name="declarationDirection" type="xs:string"/>
-                            <xs:element name="declarationQueryParams" type="tns:DeclarationQueryType"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="DeclarationQueryType">
-                <xs:sequence>
-                    <xs:element name="mandatoryDeclarationQueryParams" type="tns:MandatoryDeclarationQueryParamsType"/>
-                    <xs:element minOccurs="0" name="additionalDeclarationQueryParams"
-                                type="tns:AdditionalDeclarationQueryParamsType"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="MandatoryDeclarationQueryParamsType">
-                <xs:sequence>
-                    <xs:element name="declarationDateFrom" type="xs:date"/>
-                    <xs:element name="declarationDateTo" type="xs:date"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="AdditionalDeclarationQueryParamsType">
-                <xs:sequence>
-                    <xs:element name="declarationOperation" type="xs:string"/>
-                    <xs:element name="returnDualAgentDeclarationsOnly" type="xs:boolean"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="QueryAttachmentListRequestType">
-                <xs:complexContent>
-                    <xs:extension base="tns:BasicEVatRequestType">
-                        <xs:sequence/>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="PurgeAttachmentRequestType">
-                <xs:complexContent>
-                    <xs:extension base="tns:BasicEVatRequestType">
-                        <xs:sequence>
-                            <xs:element name="claimCheckId" type="xs:string"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="ManageDeclarationUploadRequestType">
-                <xs:complexContent>
-                    <xs:extension base="tns:BasicEVatRequestType">
-                        <xs:sequence>
-                            <xs:element name="partitionCount" type="xs:integer"/>
-                            <xs:element name="contentHash" type="ns1:CryptoType"/>
-                            <xs:element name="declarationSchema" type="xs:string"/>
-                            <xs:element minOccurs="0" name="attachmentIdList" type="tns:AttachmentIdListType"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="AttachmentIdListType">
-                <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="attachmentIdListItem" type="tns:AttachmentIdListItemType"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="AttachmentIdListItemType">
-                <xs:sequence>
-                    <xs:element name="claimCheckId" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="ManageDeclarationSubmissionRequestType">
-                <xs:complexContent>
-                    <xs:extension base="tns:BasicEVatRequestType">
-                        <xs:sequence>
-                            <xs:element name="declarationProcessingId" type="xs:string"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="ManageDeclarationPartitionRequestType">
-                <xs:complexContent>
-                    <xs:extension base="tns:BasicEVatRequestType">
-                        <xs:sequence>
-                            <xs:element name="declarationUploadId" type="xs:string"/>
-                            <xs:element name="partition" type="xs:integer"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="ManageDeclarationFinalizeRequestType">
-                <xs:complexContent>
-                    <xs:extension base="tns:BasicEVatRequestType">
-                        <xs:sequence>
-                            <xs:element name="declarationUploadId" type="xs:string"/>
-                            <xs:element name="preliminaryConfirmation" type="xs:boolean"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="ManageAttachmentUploadRequestType">
-                <xs:complexContent>
-                    <xs:extension base="tns:BasicEVatRequestType">
-                        <xs:sequence>
-                            <xs:element name="fileName" type="xs:string"/>
-                            <xs:element name="fileExtension" type="xs:string"/>
-                            <xs:element name="contentHash" type="ns1:CryptoType"/>
-                        </xs:sequence>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:simpleType name="DeclarationSchemaType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="VAT_DECLARATION"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="FieldTypeType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="NET_AMOUNT"/>
-                    <xs:enumeration value="VAT_AMOUNT"/>
-                    <xs:enumeration value="QUANTITY"/>
-                    <xs:enumeration value="OTHER"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="ManageInvoiceOperationType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="CREATE"/>
-                    <xs:enumeration value="MODIFY"/>
-                    <xs:enumeration value="STORNO"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="InvoiceCategoryType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="NORMAL"/>
-                    <xs:enumeration value="SIMPLIFIED"/>
-                    <xs:enumeration value="AGGREGATE"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="PaymentMethodType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="TRANSFER"/>
-                    <xs:enumeration value="CASH"/>
-                    <xs:enumeration value="CARD"/>
-                    <xs:enumeration value="VOUCHER"/>
-                    <xs:enumeration value="OTHER"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="InvoiceAppearanceType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="PAPER"/>
-                    <xs:enumeration value="ELECTRONIC"/>
-                    <xs:enumeration value="EDI"/>
-                    <xs:enumeration value="UNKNOWN"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="SourceType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="WEB"/>
-                    <xs:enumeration value="XML"/>
-                    <xs:enumeration value="MGM"/>
-                    <xs:enumeration value="OPG"/>
-                    <xs:enumeration value="OSZ"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="QueryResultStatusType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="PROCESSING"/>
-                    <xs:enumeration value="DONE"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="RegisterTypeType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="A_REGISTER"/>
-                    <xs:enumeration value="B_REGISTER"/>
-                    <xs:enumeration value="C_REGISTER"/>
-                    <xs:enumeration value="D_REGISTER"/>
-                    <xs:enumeration value="E_REGISTER"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="DeclarationOperationType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="CREATE"/>
-                    <xs:enumeration value="MODIFY"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="DeclarationStatusCodeType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="RECEIVED"/>
-                    <xs:enumeration value="PROCESSING"/>
-                    <xs:enumeration value="BEVFELD_CHECK"/>
-                    <xs:enumeration value="FINISHED"/>
-                    <xs:enumeration value="SUBMITTED"/>
-                    <xs:enumeration value="ABORTED"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="LongRunWarningStatusCodeType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="POST_EVALUATOR_PROCESSING"/>
-                    <xs:enumeration value="POST_EVALUATED"/>
-                    <xs:enumeration value="POST_EVALUATOR_FAILED"/>
-                    <xs:enumeration value="POST_EVALUATOR_ABORTED"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="FileExtensionType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="PDF"/>
-                    <xs:enumeration value="JPEG"/>
-                    <xs:enumeration value="PNG"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="FileStatusType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="ACTIVE"/>
-                    <xs:enumeration value="MARKED_FOR_DELETE"/>
-                    <xs:enumeration value="BLOCKED"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="SoftwareOperationType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="LOCAL_SOFTWARE"/>
-                    <xs:enumeration value="ONLINE_SERVICE"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="InvoiceDirectionType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="INBOUND"/>
-                    <xs:enumeration value="OUTBOUND"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="DeclarationDirectionType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="IMPORTER"/>
-                    <xs:enumeration value="INDIRECT_REPRESENTATIVE"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:schema>
-        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.nav.gov.hu/NTCA/1.0/common"
-                   attributeFormDefault="unqualified" elementFormDefault="qualified"
-                   targetNamespace="http://schemas.nav.gov.hu/NTCA/1.0/common" version="1.0">
-            <xs:element name="GeneralErrorHeaderResponse">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:GeneralErrorHeaderResponseType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="GeneralExceptionResponse">
-                <xs:complexType>
-                    <xs:complexContent>
-                        <xs:extension base="tns:BasicResultType">
-                            <xs:sequence/>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-            </xs:element>
-            <xs:complexType name="BasicResponseType">
-                <xs:sequence>
-                    <xs:element name="header" type="tns:BasicHeaderType"/>
-                    <xs:element name="result" type="tns:BasicResultType"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="BasicHeaderType">
-                <xs:sequence>
-                    <xs:element name="requestId" type="xs:string"/>
-                    <xs:element name="timestamp" type="xs:dateTime"/>
-                    <xs:element name="requestVersion" type="xs:string"/>
-                    <xs:element minOccurs="0" name="headerVersion" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="BasicResultType">
-                <xs:sequence>
-                    <xs:element name="funcCode" type="xs:string"/>
-                    <xs:element minOccurs="0" name="errorCode" type="xs:string"/>
-                    <xs:element minOccurs="0" name="message" type="xs:string"/>
-                    <xs:element minOccurs="0" name="notifications" type="tns:NotificationsType"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="NotificationsType">
-                <xs:sequence>
-                    <xs:element maxOccurs="unbounded" name="notification" type="tns:NotificationType"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="NotificationType">
-                <xs:sequence>
-                    <xs:element name="notificationCode" type="xs:string"/>
-                    <xs:element name="notificationText" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="TechnicalValidationResultType">
-                <xs:sequence>
-                    <xs:element name="validationResultCode" type="xs:string"/>
-                    <xs:element minOccurs="0" name="validationErrorCode" type="xs:string"/>
-                    <xs:element minOccurs="0" name="message" type="xs:string"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="CryptoType">
-                <xs:simpleContent>
-                    <xs:extension base="xs:string">
-                        <xs:attribute name="cryptoType" type="xs:string" use="required"/>
-                    </xs:extension>
-                </xs:simpleContent>
-            </xs:complexType>
-            <xs:complexType name="GeneralErrorHeaderResponseType">
-                <xs:complexContent>
-                    <xs:extension base="tns:BasicResponseType">
-                        <xs:sequence/>
-                    </xs:extension>
-                </xs:complexContent>
-            </xs:complexType>
-            <xs:complexType name="BasicRequestType">
-                <xs:sequence>
-                    <xs:element name="header" type="tns:BasicHeaderType"/>
-                    <xs:element name="user" type="tns:UserHeaderType"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:complexType name="UserHeaderType">
-                <xs:sequence>
-                    <xs:element name="login" type="xs:string"/>
-                    <xs:element name="passwordHash" type="tns:CryptoType"/>
-                    <xs:element name="taxNumber" type="xs:string"/>
-                    <xs:element name="requestSignature" type="tns:CryptoType"/>
-                </xs:sequence>
-            </xs:complexType>
-            <xs:simpleType name="FunctionCodeType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="OK"/>
-                    <xs:enumeration value="ERROR"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="LocalizationType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="HU"/>
-                    <xs:enumeration value="EN"/>
-                    <xs:enumeration value="DE"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="BusinessResultCodeType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="ERROR"/>
-                    <xs:enumeration value="WARN"/>
-                    <xs:enumeration value="INFO"/>
-                </xs:restriction>
-            </xs:simpleType>
-            <xs:simpleType name="TechnicalResultCodeType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="CRITICAL"/>
-                    <xs:enumeration value="ERROR"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:schema>
-    </grammars>
-    <resources base="/">
-        <resource path="/metricService/v1/queryServiceMetrics">
-            <resource path="/list">
-                <method name="GET">
-                    <response>
-                        <representation mediaType="application/xml" element="prefix1:QueryServiceMetricsListResponse"/>
-                        <representation mediaType="text/xml" element="prefix1:QueryServiceMetricsListResponse"/>
-                    </response>
-                </method>
-            </resource>
-            <resource path="/metric">
-                <method name="GET">
-                    <response>
-                        <representation mediaType="application/xml" element="prefix1:QueryServiceMetricsResponse"/>
-                        <representation mediaType="text/xml" element="prefix1:QueryServiceMetricsResponse"/>
-                    </response>
-                </method>
-            </resource>
-            <resource path="/metric/{metricName}">
-                <param name="metricName" style="template" type="xs:string"/>
-                <method name="GET">
-                    <request></request>
-                    <response>
-                        <representation mediaType="application/xml" element="prefix1:QueryServiceMetricsResponse"/>
-                        <representation mediaType="text/xml" element="prefix1:QueryServiceMetricsResponse"/>
-                    </response>
-                </method>
-            </resource>
-        </resource>
-        <resource path="/analyticsService/v1">
-            <resource path="/manageDeclarationFinalize">
-                <method name="POST">
-                    <request>
-                        <representation mediaType="application/xml" element="prefix2:ManageDeclarationFinalizeRequest"/>
-                        <representation mediaType="text/xml" element="prefix2:ManageDeclarationFinalizeRequest"/>
-                    </request>
-                    <response>
-                        <representation mediaType="application/xml"
-                                        element="prefix2:ManageDeclarationFinalizeResponse"/>
-                        <representation mediaType="text/xml" element="prefix2:ManageDeclarationFinalizeResponse"/>
-                    </response>
-                </method>
-            </resource>
-            <resource path="/manageDeclarationSubmission">
-                <method name="POST">
-                    <request>
-                        <representation mediaType="application/xml"
-                                        element="prefix2:ManageDeclarationSubmissionRequest"/>
-                        <representation mediaType="text/xml" element="prefix2:ManageDeclarationSubmissionRequest"/>
-                    </request>
-                    <response>
-                        <representation mediaType="application/xml"
-                                        element="prefix2:ManageDeclarationSubmissionResponse"/>
-                        <representation mediaType="text/xml" element="prefix2:ManageDeclarationSubmissionResponse"/>
-                    </response>
-                </method>
-            </resource>
-            <resource path="/manageDeclarationUpload">
-                <method name="POST">
-                    <request>
-                        <representation mediaType="application/xml" element="prefix2:ManageDeclarationUploadRequest"/>
-                        <representation mediaType="text/xml" element="prefix2:ManageDeclarationUploadRequest"/>
-                    </request>
-                    <response>
-                        <representation mediaType="application/xml" element="prefix2:ManageDeclarationUploadResponse"/>
-                        <representation mediaType="text/xml" element="prefix2:ManageDeclarationUploadResponse"/>
-                    </response>
-                </method>
-            </resource>
-            <resource path="/queryDeclarationData">
-                <method name="POST">
-                    <request>
-                        <representation mediaType="application/xml" element="prefix2:QueryDeclarationDataRequest"/>
-                        <representation mediaType="text/xml" element="prefix2:QueryDeclarationDataRequest"/>
-                    </request>
-                    <response>
-                        <representation mediaType="application/xml" element="prefix2:QueryDeclarationDataResponse"/>
-                        <representation mediaType="text/xml" element="prefix2:QueryDeclarationDataResponse"/>
-                    </response>
-                </method>
-            </resource>
-            <resource path="/queryDeclarationList">
-                <method name="POST">
-                    <request>
-                        <representation mediaType="application/xml" element="prefix2:QueryDeclarationListRequest"/>
-                        <representation mediaType="text/xml" element="prefix2:QueryDeclarationListRequest"/>
-                    </request>
-                    <response>
-                        <representation mediaType="application/xml" element="prefix2:QueryDeclarationListResponse"/>
-                        <representation mediaType="text/xml" element="prefix2:QueryDeclarationListResponse"/>
-                    </response>
-                </method>
-            </resource>
-            <resource path="/queryDeclarationProcessingStatus">
-                <method name="POST">
-                    <request>
-                        <representation mediaType="application/xml"
-                                        element="prefix2:QueryDeclarationProcessingStatusRequest"/>
-                        <representation mediaType="text/xml" element="prefix2:QueryDeclarationProcessingStatusRequest"/>
-                    </request>
-                    <response>
-                        <representation mediaType="application/xml"
-                                        element="prefix2:QueryDeclarationProcessingStatusResponse"/>
-                        <representation mediaType="text/xml"
-                                        element="prefix2:QueryDeclarationProcessingStatusResponse"/>
-                    </response>
-                </method>
-            </resource>
-            <resource path="/queryVatDeclarationData">
-                <method name="POST">
-                    <request>
-                        <representation mediaType="application/xml" element="prefix2:QueryVatDeclarationDataRequest"/>
-                        <representation mediaType="text/xml" element="prefix2:QueryVatDeclarationDataRequest"/>
-                    </request>
-                    <response>
-                        <representation mediaType="application/xml" element="prefix2:QueryVatDeclarationDataResponse"/>
-                        <representation mediaType="text/xml" element="prefix2:QueryVatDeclarationDataResponse"/>
-                        <representation mediaType="multipart/form-data"/>
-                    </response>
-                </method>
-            </resource>
-        </resource>
-        <resource path="/analyticsService/v1">
-            <resource path="/manageAttachmentUpload">
-                <method name="POST">
-                    <request>
-                        <representation mediaType="multipart/form-data"/>
-                    </request>
-                    <response>
-                        <representation mediaType="application/xml" element="prefix2:ManageAttachmentUploadResponse"/>
-                        <representation mediaType="text/xml" element="prefix2:ManageAttachmentUploadResponse"/>
-                    </response>
-                </method>
-            </resource>
-            <resource path="/purgeAttachment">
-                <method name="POST">
-                    <request>
-                        <representation mediaType="application/xml" element="prefix2:PurgeAttachmentRequest"/>
-                        <representation mediaType="text/xml" element="prefix2:PurgeAttachmentRequest"/>
-                    </request>
-                    <response>
-                        <representation mediaType="application/xml" element="prefix2:PurgeAttachmentResponse"/>
-                        <representation mediaType="text/xml" element="prefix2:PurgeAttachmentResponse"/>
-                    </response>
-                </method>
-            </resource>
-            <resource path="/queryAttachmentList">
-                <method name="POST">
-                    <request>
-                        <representation mediaType="application/xml" element="prefix2:QueryAttachmentListRequest"/>
-                        <representation mediaType="text/xml" element="prefix2:QueryAttachmentListRequest"/>
-                    </request>
-                    <response>
-                        <representation mediaType="application/xml" element="prefix2:QueryAttachmentListResponse"/>
-                        <representation mediaType="text/xml" element="prefix2:QueryAttachmentListResponse"/>
-                    </response>
-                </method>
-            </resource>
-        </resource>
-        <resource path="/analyticsService/v1">
-            <resource path="/queryCustomsDeclarationDigest">
-                <method name="POST">
-                    <request>
-                        <representation mediaType="application/xml"
-                                        element="prefix2:QueryCustomsDeclarationDigestRequest"/>
-                        <representation mediaType="text/xml" element="prefix2:QueryCustomsDeclarationDigestRequest"/>
-                    </request>
-                    <response>
-                        <representation mediaType="application/xml"
-                                        element="prefix2:QueryCustomsDeclarationDigestResponse"/>
-                        <representation mediaType="text/xml" element="prefix2:QueryCustomsDeclarationDigestResponse"/>
-                    </response>
-                </method>
-            </resource>
-            <resource path="/queryCustomsDeclarationTaxCode">
-                <method name="POST">
-                    <request>
-                        <representation mediaType="application/xml"
-                                        element="prefix2:QueryCustomsDeclarationTaxCodeRequest"/>
-                        <representation mediaType="text/xml" element="prefix2:QueryCustomsDeclarationTaxCodeRequest"/>
-                    </request>
-                    <response>
-                        <representation mediaType="application/xml"
-                                        element="prefix2:QueryCustomsDeclarationTaxCodeResponse"/>
-                        <representation mediaType="text/xml" element="prefix2:QueryCustomsDeclarationTaxCodeResponse"/>
-                    </response>
-                </method>
-            </resource>
-            <resource path="/queryDocumentList">
-                <method name="POST">
-                    <request>
-                        <representation mediaType="application/xml" element="prefix2:QueryDocumentListRequest"/>
-                        <representation mediaType="text/xml" element="prefix2:QueryDocumentListRequest"/>
-                    </request>
-                    <response>
-                        <representation mediaType="application/xml" element="prefix2:QueryDocumentListResponse"/>
-                        <representation mediaType="text/xml" element="prefix2:QueryDocumentListResponse"/>
-                    </response>
-                </method>
-            </resource>
-            <resource path="/queryDocumentListResult">
-                <method name="POST">
-                    <request>
-                        <representation mediaType="application/xml" element="prefix2:QueryDocumentListResultRequest"/>
-                        <representation mediaType="text/xml" element="prefix2:QueryDocumentListResultRequest"/>
-                    </request>
-                    <response>
-                        <representation mediaType="application/xml" element="prefix2:QueryDocumentListResultResponse"/>
-                        <representation mediaType="text/xml" element="prefix2:QueryDocumentListResultResponse"/>
-                    </response>
-                </method>
-            </resource>
-            <resource path="/queryInvoiceTaxCode">
-                <method name="POST">
-                    <request>
-                        <representation mediaType="application/xml" element="prefix2:QueryInvoiceTaxCodeRequest"/>
-                        <representation mediaType="text/xml" element="prefix2:QueryInvoiceTaxCodeRequest"/>
-                    </request>
-                    <response>
-                        <representation mediaType="application/xml" element="prefix2:QueryInvoiceTaxCodeResponse"/>
-                        <representation mediaType="text/xml" element="prefix2:QueryInvoiceTaxCodeResponse"/>
-                    </response>
-                </method>
-            </resource>
-            <resource path="/queryTaxCodeCatalog">
-                <method name="POST">
-                    <request>
-                        <representation mediaType="application/xml" element="prefix2:QueryTaxCodeCatalogRequest"/>
-                        <representation mediaType="text/xml" element="prefix2:QueryTaxCodeCatalogRequest"/>
-                    </request>
-                    <response>
-                        <representation mediaType="application/xml" element="prefix2:QueryTaxCodeCatalogResponse"/>
-                        <representation mediaType="text/xml" element="prefix2:QueryTaxCodeCatalogResponse"/>
-                    </response>
-                </method>
-            </resource>
-        </resource>
-        <resource path="/analyticsService/v1">
-            <resource path="/manageDeclarationPartition">
-                <method name="POST">
-                    <request>
-                        <representation mediaType="multipart/form-data"/>
-                    </request>
-                    <response>
-                        <representation mediaType="application/xml"
-                                        element="prefix2:ManageDeclarationPartitionResponse"/>
-                    </response>
-                </method>
-            </resource>
-        </resource>
-    </resources>
+<application xmlns="http://wadl.dev.java.net/2009/02" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:prefix2="http://schemas.nav.gov.hu/EAR/1.0/api" xmlns:prefix1="http://schemas.nav.gov.hu/OSA/3.0/metrics">
+	<grammars>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.nav.gov.hu/EAR/1.0/base" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/base" version="1.0">
+			<xs:complexType name="DeclarationInfoType">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="modificationReference" type="tns:ModificationReferenceType"/>
+					<xs:element name="taxNumber" type="xs:string"/>
+					<xs:element name="declarationType" type="xs:string"/>
+					<xs:element name="declarationKind" type="xs:string"/>
+					<xs:element name="declarationFrequency" type="xs:string"/>
+					<xs:element name="declarationPeriodStart" type="xs:date"/>
+					<xs:element name="declarationPeriodEnd" type="xs:date"/>
+					<xs:element name="version" type="xs:integer"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ModificationReferenceType">
+				<xs:sequence>
+					<xs:element name="declarationReferenceId" type="xs:string"/>
+					<xs:element name="declarationReferenceIndex" type="xs:integer"/>
+					<xs:element minOccurs="0" name="barCodeReference" type="xs:integer"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:simpleType name="DeclarationTypeType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="NONE"/>
+					<xs:enumeration value="ELIMINATION"/>
+					<xs:enumeration value="LIQUIDATION"/>
+					<xs:enumeration value="SELF_EMPLOYMENT_END"/>
+					<xs:enumeration value="TRANSFORMATION"/>
+					<xs:enumeration value="TERMINATION"/>
+					<xs:enumeration value="PAUSING"/>
+					<xs:enumeration value="STATE_POWER_END"/>
+					<xs:enumeration value="VAT_GROUP_END"/>
+					<xs:enumeration value="GROUP_TAXPAYER_END"/>
+					<xs:enumeration value="BECAME_VAT_FREE"/>
+					<xs:enumeration value="BECAME_VAT_OBLIGED"/>
+					<xs:enumeration value="FUSION"/>
+					<xs:enumeration value="FORCED_CANCELLATION"/>
+					<xs:enumeration value="BECAME_TAXPAYER"/>
+					<xs:enumeration value="OUT_OF_VAT_CLASS"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="DeclarationKindType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="NONE"/>
+					<xs:enumeration value="PREVIOUS_PERIOD"/>
+					<xs:enumeration value="UNDER_PROCESS"/>
+					<xs:enumeration value="CLOSURE"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="DeclarationFrequencyType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="ANNUAL"/>
+					<xs:enumeration value="QUARTERLY"/>
+					<xs:enumeration value="MONTHLY"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:schema>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.nav.gov.hu/EAR/1.0/data" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/data" version="1.0">
+			<xs:complexType name="TaxPositionType">
+				<xs:sequence>
+					<xs:element name="positionType" type="xs:string"/>
+					<xs:element name="taxBase" type="xs:decimal"/>
+					<xs:element name="taxAmount" type="xs:decimal"/>
+					<xs:element minOccurs="0" name="deductionOptions" type="tns:DeductionOptionsType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DeductionOptionsType">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="deductionRate" type="xs:decimal"/>
+					<xs:element name="deductionAmount" type="xs:decimal"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DeclarationSummaryType">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="sumResidualTax" type="xs:decimal"/>
+					<xs:element minOccurs="0" name="lapsedResidualTaxIndicator" type="xs:boolean"/>
+					<xs:element name="sumAccountedTax" type="xs:decimal"/>
+					<xs:element minOccurs="0" name="sumPayableTax" type="xs:decimal"/>
+					<xs:element minOccurs="0" name="sumDeductibleTax" type="xs:decimal"/>
+					<xs:element minOccurs="0" name="sumTransferableTax" type="xs:decimal"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:simpleType name="SheetNameType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="VAT_SHEET_2"/>
+					<xs:enumeration value="VAT_SHEET_6"/>
+					<xs:enumeration value="VAT_SHEET_7"/>
+					<xs:enumeration value="VAT_SHEET_8"/>
+					<xs:enumeration value="VAT_SHEET_9"/>
+					<xs:enumeration value="VAT_SHEET_A88"/>
+					<xs:enumeration value="VAT_SHEET_170"/>
+					<xs:enumeration value="VAT_SHEET_4"/>
+					<xs:enumeration value="VAT_SHEET_EUNY"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="PositionTypeType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="PAYABLE"/>
+					<xs:enumeration value="DEDUCTIBLE"/>
+					<xs:enumeration value="OTHER"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:schema>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://schemas.nav.gov.hu/NTCA/1.0/common" xmlns:tns="http://schemas.nav.gov.hu/OSA/3.0/metrics" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.nav.gov.hu/OSA/3.0/metrics" version="1.0">
+			<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common"/>
+			<xs:element name="QueryServiceMetricsListResponse">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryServiceMetricsListResponseType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryServiceMetricsResponse">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryServiceMetricsResponseType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:complexType name="QueryServiceMetricsListResponseType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="metricDefinition" nillable="true" type="tns:MetricDefinitionType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="MetricDefinitionType">
+				<xs:sequence>
+					<xs:element name="metricName" type="xs:string"/>
+					<xs:element name="metricType" type="xs:string"/>
+					<xs:element maxOccurs="unbounded" name="metricDescription" type="tns:MetricDescriptionType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="MetricDescriptionType">
+				<xs:sequence>
+					<xs:element name="language" type="xs:string"/>
+					<xs:element name="localizedDescription" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="QueryServiceMetricsResponseType">
+				<xs:sequence>
+					<xs:element name="result" type="ns1:BasicResultType"/>
+					<xs:element minOccurs="0" name="metricsLastUpdateTime" type="xs:dateTime"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="metric" nillable="true" type="tns:MetricType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="MetricType">
+				<xs:sequence>
+					<xs:element name="metricDefinition" type="tns:MetricDefinitionType"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="metricValues" nillable="true" type="tns:MetricValueType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="MetricValueType">
+				<xs:sequence>
+					<xs:element name="value" type="xs:decimal"/>
+					<xs:element name="timestamp" type="xs:dateTime"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:simpleType name="MetricTypeType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="COUNTER"/>
+					<xs:enumeration value="GAUGE"/>
+					<xs:enumeration value="HISTOGRAM"/>
+					<xs:enumeration value="SUMMARY"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="LanguageType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="HU"/>
+					<xs:enumeration value="EN"/>
+					<xs:enumeration value="DE"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:schema>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://schemas.nav.gov.hu/NTCA/1.0/common" xmlns:ns2="http://schemas.nav.gov.hu/EAR/1.0/data" xmlns:ns3="http://schemas.nav.gov.hu/EAR/1.0/base" xmlns:tns="http://schemas.nav.gov.hu/EAR/1.0/api" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/api" version="1.0">
+			<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common"/>
+			<xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/data"/>
+			<xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/base"/>
+			<xs:element name="GeneralErrorResponse">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:GeneralErrorResponseType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ManageAttachmentUploadRequest">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:ManageAttachmentUploadRequestType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ManageAttachmentUploadResponse">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:ManageAttachmentUploadResponseType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ManageDeclarationFinalizeRequest">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:ManageDeclarationFinalizeRequestType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ManageDeclarationFinalizeResponse">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:ManageDeclarationFinalizeResponseType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ManageDeclarationPartitionRequest">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:ManageDeclarationPartitionRequestType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ManageDeclarationPartitionResponse">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:ManageDeclarationPartitionResponseType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ManageDeclarationSubmissionRequest">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:ManageDeclarationSubmissionRequestType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ManageDeclarationSubmissionResponse">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:ManageDeclarationSubmissionResponseType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ManageDeclarationUploadRequest">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:ManageDeclarationUploadRequestType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="ManageDeclarationUploadResponse">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:ManageDeclarationUploadResponseType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PurgeAttachmentRequest">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:PurgeAttachmentRequestType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="PurgeAttachmentResponse">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:PurgeAttachmentResponseType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryAttachmentListRequest">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryAttachmentListRequestType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryAttachmentListResponse">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryAttachmentListResponseType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryCustomsDeclarationDigestRequest">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryCustomsDeclarationDigestRequestType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryCustomsDeclarationDigestResponse">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryCustomsDeclarationDigestResponseType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryCustomsDeclarationTaxCodeRequest">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryCustomsDeclarationTaxCodeRequestType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryCustomsDeclarationTaxCodeResponse">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryCustomsDeclarationTaxCodeResponseType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryDeclarationDataRequest">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryDeclarationDataRequestType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryDeclarationDataResponse">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryDeclarationDataResponseType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryDeclarationListRequest">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryDeclarationListRequestType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryDeclarationListResponse">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryDeclarationListResponseType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryDeclarationProcessingStatusRequest">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryDeclarationProcessingStatusRequestType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryDeclarationProcessingStatusResponse">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryDeclarationProcessingStatusResponseType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryDocumentListRequest">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryDocumentListRequestType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryDocumentListResponse">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryDocumentListResponseType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryDocumentListResultRequest">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryDocumentListResultRequestType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryDocumentListResultResponse">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryDocumentListResultResponseType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryInvoiceTaxCodeRequest">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryInvoiceTaxCodeRequestType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryInvoiceTaxCodeResponse">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryInvoiceTaxCodeResponseType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryTaxCodeCatalogRequest">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryTaxCodeCatalogRequestType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryTaxCodeCatalogResponse">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryTaxCodeCatalogResponseType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryVatDeclarationDataRequest">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryVatDeclarationDataRequestType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="QueryVatDeclarationDataResponse">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:QueryVatDeclarationDataResponseType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:complexType name="PurgeAttachmentResponseType">
+				<xs:complexContent>
+					<xs:extension base="ns1:BasicResponseType">
+						<xs:sequence/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="QueryVatDeclarationDataResponseType">
+				<xs:complexContent>
+					<xs:extension base="ns1:BasicResponseType">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="vatDeclarationData" type="tns:VatDeclarationDataType"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="VatDeclarationDataType">
+				<xs:sequence>
+					<xs:element name="declarationSchema" type="xs:string"/>
+					<xs:element name="originalRequestVersion" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="QueryTaxCodeCatalogResponseType">
+				<xs:complexContent>
+					<xs:extension base="ns1:BasicResponseType">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="taxCodeCatalog" type="tns:TaxCodeCatalogType"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="TaxCodeCatalogType">
+				<xs:sequence>
+					<xs:element name="validFrom" type="xs:date"/>
+					<xs:element name="validTo" type="xs:date"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="taxCodes" nillable="true" type="tns:TaxCodesType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TaxCodesType">
+				<xs:sequence>
+					<xs:element name="standardTaxCode" type="xs:string"/>
+					<xs:element name="transactionCode" type="xs:string"/>
+					<xs:element minOccurs="0" name="mandatorySubpage" type="xs:string"/>
+					<xs:element name="payableTaxCode" type="xs:boolean"/>
+					<xs:element name="deductibleTaxCode" type="xs:boolean"/>
+					<xs:element maxOccurs="unbounded" name="taxCodeDescription" type="tns:TaxCodeDescriptionType"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="declarationLineData" nillable="true" type="tns:DeclarationLineDataType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TaxCodeDescriptionType">
+				<xs:sequence>
+					<xs:element name="localization" type="xs:string"/>
+					<xs:element name="description" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DeclarationLineDataType">
+				<xs:sequence>
+					<xs:element name="declarationLineNumber" type="xs:integer"/>
+					<xs:element maxOccurs="unbounded" name="declarationFieldData" type="tns:DeclarationFieldDataType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DeclarationFieldDataType">
+				<xs:sequence>
+					<xs:element name="fieldId" type="xs:string"/>
+					<xs:element name="fieldType" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="QueryInvoiceTaxCodeResponseType">
+				<xs:complexContent>
+					<xs:extension base="ns1:BasicResponseType">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="invoiceDigest" type="tns:InvoiceDigestType"/>
+							<xs:element maxOccurs="unbounded" minOccurs="0" name="taxCodeInformation" nillable="true" type="tns:TaxCodeInformationType"/>
+							<xs:element maxOccurs="unbounded" minOccurs="0" name="vatRelevantWarning" nillable="true" type="tns:VatRelevantWarningType"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="InvoiceDigestType">
+				<xs:sequence>
+					<xs:element name="invoiceNumber" type="xs:string"/>
+					<xs:element minOccurs="0" name="batchIndex" type="xs:int"/>
+					<xs:element name="invoiceOperation" type="xs:string"/>
+					<xs:element name="invoiceCategory" type="xs:string"/>
+					<xs:element name="invoiceIssueDate" type="xs:date"/>
+					<xs:element name="supplierTaxNumber" type="xs:string"/>
+					<xs:element minOccurs="0" name="supplierGroupMemberTaxNumber" type="xs:string"/>
+					<xs:element name="supplierName" type="xs:string"/>
+					<xs:element minOccurs="0" name="customerTaxNumber" type="xs:string"/>
+					<xs:element minOccurs="0" name="customerGroupMemberTaxNumber" type="xs:string"/>
+					<xs:element minOccurs="0" name="customerName" type="xs:string"/>
+					<xs:element minOccurs="0" name="paymentMethod" type="xs:string"/>
+					<xs:element minOccurs="0" name="paymentDate" type="xs:date"/>
+					<xs:element minOccurs="0" name="invoiceAppearance" type="xs:string"/>
+					<xs:element minOccurs="0" name="source" type="xs:string"/>
+					<xs:element minOccurs="0" name="invoiceDeliveryDate" type="xs:date"/>
+					<xs:element minOccurs="0" name="currency" type="xs:string"/>
+					<xs:element minOccurs="0" name="invoiceNetAmount" type="xs:decimal"/>
+					<xs:element minOccurs="0" name="invoiceNetAmountHUF" type="xs:decimal"/>
+					<xs:element minOccurs="0" name="invoiceVatAmount" type="xs:decimal"/>
+					<xs:element minOccurs="0" name="invoiceVatAmountHUF" type="xs:decimal"/>
+					<xs:element minOccurs="0" name="transactionId" type="xs:string"/>
+					<xs:element minOccurs="0" name="index" type="xs:int"/>
+					<xs:element minOccurs="0" name="originalInvoiceNumber" type="xs:string"/>
+					<xs:element minOccurs="0" name="modificationIndex" type="xs:int"/>
+					<xs:element name="insDate" type="xs:dateTime"/>
+					<xs:element minOccurs="0" name="completenessIndicator" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TaxCodeInformationType">
+				<xs:sequence>
+					<xs:element name="standardTaxCode" type="xs:string"/>
+					<xs:element maxOccurs="unbounded" name="taxPosition" type="ns2:TaxPositionType"/>
+					<xs:element name="lineNumber" type="xs:nonNegativeInteger"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="VatRelevantWarningType">
+				<xs:sequence>
+					<xs:element name="validationResultCode" type="xs:string"/>
+					<xs:element minOccurs="0" name="validationErrorCode" type="xs:string"/>
+					<xs:element minOccurs="0" name="message" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="QueryDocumentListResultResponseType">
+				<xs:complexContent>
+					<xs:extension base="ns1:BasicResponseType">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="documentList" type="tns:DocumentListType"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="DocumentListType">
+				<xs:sequence>
+					<xs:element name="queryResultStatus" type="xs:string"/>
+					<xs:element minOccurs="0" name="queryResultAvailableFrom" type="xs:dateTime"/>
+					<xs:element minOccurs="0" name="queryResultAvailableTo" type="xs:dateTime"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="invoiceDigest" nillable="true" type="tns:InvoiceDigestType"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="cashRegisterDigest" nillable="true" type="tns:CashRegisterDigestType"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="declarationDigest" nillable="true" type="tns:DeclarationDigestType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CashRegisterDigestType">
+				<xs:sequence>
+					<xs:element name="taxpointDate" type="xs:date"/>
+					<xs:element name="apNumber" type="xs:string"/>
+					<xs:element name="registerType" type="xs:string"/>
+					<xs:element name="baseReceiptNetAmount" type="xs:decimal"/>
+					<xs:element name="stornoReceiptNetAmount" type="xs:decimal"/>
+					<xs:element name="returnReceiptNetAmount" type="xs:decimal"/>
+					<xs:element name="baseReceiptVatAmount" type="xs:decimal"/>
+					<xs:element name="stornoReceiptVatAmount" type="xs:decimal"/>
+					<xs:element name="returnReceiptVatAmount" type="xs:decimal"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DeclarationDigestType">
+				<xs:sequence>
+					<xs:element name="cdpsId" type="xs:string"/>
+					<xs:element name="resolutionId" type="xs:string"/>
+					<xs:element name="declarationOperation" type="xs:string"/>
+					<xs:element name="importerTaxNumber" type="xs:string"/>
+					<xs:element minOccurs="0" name="indirectRepresentativeTaxNumber" type="xs:string"/>
+					<xs:element name="importerSelfTaxationIndicator" type="xs:boolean"/>
+					<xs:element minOccurs="0" name="indirectRepresentativeSelfTaxationIndicator" type="xs:boolean"/>
+					<xs:element name="taxpointDate" type="xs:date"/>
+					<xs:element name="deliveryDate" type="xs:date"/>
+					<xs:element name="totalNetAmount" type="xs:decimal"/>
+					<xs:element name="totalVatAmount" type="xs:decimal"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="QueryDocumentListResponseType">
+				<xs:complexContent>
+					<xs:extension base="ns1:BasicResponseType">
+						<xs:sequence>
+							<xs:element name="queryId" type="xs:string"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="QueryDeclarationProcessingStatusResponseType">
+				<xs:complexContent>
+					<xs:extension base="ns1:BasicResponseType">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="declarationProcessingStatus" type="tns:DeclarationProcessingStatusType"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="DeclarationProcessingStatusType">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="declarationInfo" type="ns3:DeclarationInfoType"/>
+					<xs:element name="declarationStatus" type="tns:DeclarationStatusType"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="technicalValidationMessages" nillable="true" type="ns1:TechnicalValidationResultType"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="businessValidationMessages" nillable="true" type="tns:BusinessValidationResultType"/>
+					<xs:element minOccurs="0" name="longRunWarningStatus" type="tns:LongRunWarningStatusType"/>
+					<xs:element name="declarationUploadId" type="xs:string"/>
+					<xs:element name="contentHash" type="ns1:CryptoType"/>
+					<xs:element name="declarationSchema" type="xs:string"/>
+					<xs:element name="originalRequestVersion" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DeclarationStatusType">
+				<xs:sequence>
+					<xs:element name="declarationStatusCode" type="xs:string"/>
+					<xs:element name="declarationStatusMessage" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="BusinessValidationResultType">
+				<xs:sequence>
+					<xs:element name="validationResultCode" type="xs:string"/>
+					<xs:element minOccurs="0" name="validationErrorCode" type="xs:string"/>
+					<xs:element minOccurs="0" name="message" type="xs:string"/>
+					<xs:element minOccurs="0" name="pointer" type="tns:PointerType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="PointerType">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="lineNumber" type="xs:integer"/>
+					<xs:element minOccurs="0" name="tag" type="xs:string"/>
+					<xs:element minOccurs="0" name="value" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="LongRunWarningStatusType">
+				<xs:sequence>
+					<xs:element name="longRunWarningStatusCode" type="xs:string"/>
+					<xs:element name="longRunWarningStatusMessage" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="QueryDeclarationListResponseType">
+				<xs:complexContent>
+					<xs:extension base="ns1:BasicResponseType">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="declarationList" type="tns:DeclarationListType"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="DeclarationListType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" name="declarationListItem" type="tns:DeclarationListItemType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="DeclarationListItemType">
+				<xs:sequence>
+					<xs:element name="declarationProcessingId" type="xs:string"/>
+					<xs:element name="declarationSchema" type="xs:string"/>
+					<xs:element name="declarationInfo" type="ns3:DeclarationInfoType"/>
+					<xs:element name="originalRequestVersion" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="QueryDeclarationDataResponseType">
+				<xs:complexContent>
+					<xs:extension base="ns1:BasicResponseType">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="declarationData" type="tns:DeclarationDataType"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="DeclarationDataType">
+				<xs:sequence>
+					<xs:element name="declarationInfo" type="ns3:DeclarationInfoType"/>
+					<xs:element name="contentHash" type="ns1:CryptoType"/>
+					<xs:element name="declarationSchema" type="xs:string"/>
+					<xs:element name="declarationSummary" type="ns2:DeclarationSummaryType"/>
+					<xs:element minOccurs="0" name="BevfeldData" type="xs:base64Binary"/>
+					<xs:element name="originalRequestVersion" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="QueryCustomsDeclarationTaxCodeResponseType">
+				<xs:complexContent>
+					<xs:extension base="ns1:BasicResponseType">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="declarationDigest" type="tns:DeclarationDigestType"/>
+							<xs:element maxOccurs="unbounded" minOccurs="0" name="taxCodeInformation" nillable="true" type="tns:TaxCodeInformationType"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="QueryCustomsDeclarationDigestResponseType">
+				<xs:complexContent>
+					<xs:extension base="ns1:BasicResponseType">
+						<xs:sequence>
+							<xs:element name="availablePage" type="xs:int"/>
+							<xs:element name="currentPage" type="xs:int"/>
+							<xs:element maxOccurs="unbounded" minOccurs="0" name="declarationDigest" nillable="true" type="tns:DeclarationDigestType"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="QueryAttachmentListResponseType">
+				<xs:complexContent>
+					<xs:extension base="ns1:BasicResponseType">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="attachmentList" type="tns:AttachmentListType"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="AttachmentListType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" name="attachmentListItem" type="tns:AttachmentListItemType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AttachmentListItemType">
+				<xs:sequence>
+					<xs:element name="claimCheckId" type="xs:string"/>
+					<xs:element name="fileName" type="xs:string"/>
+					<xs:element name="fileExtension" type="xs:string"/>
+					<xs:element name="contentHash" type="ns1:CryptoType"/>
+					<xs:element name="claimCheckIdValidFrom" type="xs:dateTime"/>
+					<xs:element name="claimCheckIdValidTo" type="xs:dateTime"/>
+					<xs:element name="fileStatus" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ManageDeclarationUploadResponseType">
+				<xs:complexContent>
+					<xs:extension base="ns1:BasicResponseType">
+						<xs:sequence>
+							<xs:element name="declarationUploadId" type="xs:string"/>
+							<xs:element name="declarationUploadValidFrom" type="xs:dateTime"/>
+							<xs:element name="declarationUploadValidTo" type="xs:dateTime"/>
+							<xs:element minOccurs="0" name="cancelledDeclarationUploadId" type="xs:string"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ManageDeclarationSubmissionResponseType">
+				<xs:complexContent>
+					<xs:extension base="ns1:BasicResponseType">
+						<xs:sequence>
+							<xs:element name="contentHash" type="ns1:CryptoType"/>
+							<xs:element name="declarationSummary" type="ns2:DeclarationSummaryType"/>
+							<xs:element minOccurs="0" name="bevfeldData" type="xs:base64Binary"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ManageDeclarationPartitionResponseType">
+				<xs:complexContent>
+					<xs:extension base="ns1:BasicResponseType">
+						<xs:sequence>
+							<xs:element name="declarationUploadId" type="xs:string"/>
+							<xs:element name="partition" type="xs:integer"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ManageDeclarationFinalizeResponseType">
+				<xs:complexContent>
+					<xs:extension base="ns1:BasicResponseType">
+						<xs:sequence>
+							<xs:element name="declarationProcessingId" type="xs:string"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ManageAttachmentUploadResponseType">
+				<xs:complexContent>
+					<xs:extension base="ns1:BasicResponseType">
+						<xs:sequence>
+							<xs:element name="claimCheckId" type="xs:string"/>
+							<xs:element name="claimCheckIdValidFrom" type="xs:dateTime"/>
+							<xs:element name="claimCheckIdValidTo" type="xs:dateTime"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="GeneralErrorResponseType">
+				<xs:complexContent>
+					<xs:extension base="ns1:GeneralErrorHeaderResponseType">
+						<xs:sequence>
+							<xs:element name="software" type="tns:SoftwareType"/>
+							<xs:element maxOccurs="unbounded" minOccurs="0" name="technicalValidationMessages" nillable="true" type="ns1:TechnicalValidationResultType"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="SoftwareType">
+				<xs:sequence>
+					<xs:element name="softwareId" type="xs:string"/>
+					<xs:element name="softwareName" type="xs:string"/>
+					<xs:element name="softwareOperation" type="xs:string"/>
+					<xs:element name="softwareMainVersion" type="xs:string"/>
+					<xs:element name="softwareDevName" type="xs:string"/>
+					<xs:element name="softwareDevContact" type="xs:string"/>
+					<xs:element name="softwareDevCountryCode" type="xs:string"/>
+					<xs:element name="softwareDevTaxNumber" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="QueryInvoiceTaxCodeRequestType">
+				<xs:complexContent>
+					<xs:extension base="tns:BasicEVatRequestType">
+						<xs:sequence>
+							<xs:element name="invoiceNumberQuery" type="tns:InvoiceNumberQueryType"/>
+							<xs:element name="additionalInvoiceTaxCodeQueryParams" type="tns:AdditionalInvoiceTaxCodeQueryParamsType"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="BasicEVatRequestType">
+				<xs:complexContent>
+					<xs:extension base="ns1:BasicRequestType">
+						<xs:sequence>
+							<xs:element name="software" type="tns:SoftwareType"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="InvoiceNumberQueryType">
+				<xs:sequence>
+					<xs:element name="invoiceNumber" type="xs:string"/>
+					<xs:element name="invoiceDirection" type="xs:string"/>
+					<xs:element minOccurs="0" name="batchIndex" type="xs:int"/>
+					<xs:element minOccurs="0" name="supplierTaxNumber" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AdditionalInvoiceTaxCodeQueryParamsType">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="invoiceItemLine" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="QueryVatDeclarationDataRequestType">
+				<xs:complexContent>
+					<xs:extension base="tns:BasicEVatRequestType">
+						<xs:sequence>
+							<xs:element name="declarationProcessingId" type="xs:string"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="QueryTaxCodeCatalogRequestType">
+				<xs:complexContent>
+					<xs:extension base="tns:BasicEVatRequestType">
+						<xs:sequence>
+							<xs:element name="taxpointDate" type="xs:date"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="QueryDocumentListResultRequestType">
+				<xs:complexContent>
+					<xs:extension base="tns:BasicEVatRequestType">
+						<xs:sequence>
+							<xs:element name="queryId" type="xs:string"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="QueryDocumentListRequestType">
+				<xs:complexContent>
+					<xs:extension base="tns:BasicEVatRequestType">
+						<xs:sequence>
+							<xs:element name="taxpointDateFrom" type="xs:date"/>
+							<xs:element name="taxpointDateTo" type="xs:date"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="QueryDeclarationProcessingStatusRequestType">
+				<xs:complexContent>
+					<xs:extension base="tns:BasicEVatRequestType">
+						<xs:sequence>
+							<xs:element name="declarationProcessingId" type="xs:string"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="QueryDeclarationListRequestType">
+				<xs:complexContent>
+					<xs:extension base="tns:BasicEVatRequestType">
+						<xs:sequence>
+							<xs:element name="taxpointDateFrom" type="xs:date"/>
+							<xs:element name="taxpointDateTo" type="xs:date"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="QueryDeclarationDataRequestType">
+				<xs:complexContent>
+					<xs:extension base="tns:BasicEVatRequestType">
+						<xs:sequence>
+							<xs:element name="declarationProcessingId" type="xs:string"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="QueryCustomsDeclarationTaxCodeRequestType">
+				<xs:complexContent>
+					<xs:extension base="tns:BasicEVatRequestType">
+						<xs:sequence>
+							<xs:element name="cdpsId" type="xs:string"/>
+							<xs:element name="resolutionId" type="xs:string"/>
+							<xs:element name="declarationDirection" type="xs:string"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="QueryCustomsDeclarationDigestRequestType">
+				<xs:complexContent>
+					<xs:extension base="tns:BasicEVatRequestType">
+						<xs:sequence>
+							<xs:element name="page" type="xs:int"/>
+							<xs:element name="declarationDirection" type="xs:string"/>
+							<xs:element name="declarationQueryParams" type="tns:DeclarationQueryType"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="DeclarationQueryType">
+				<xs:sequence>
+					<xs:element name="mandatoryDeclarationQueryParams" type="tns:MandatoryDeclarationQueryParamsType"/>
+					<xs:element minOccurs="0" name="additionalDeclarationQueryParams" type="tns:AdditionalDeclarationQueryParamsType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="MandatoryDeclarationQueryParamsType">
+				<xs:sequence>
+					<xs:element name="declarationDateFrom" type="xs:date"/>
+					<xs:element name="declarationDateTo" type="xs:date"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AdditionalDeclarationQueryParamsType">
+				<xs:sequence>
+					<xs:element name="declarationOperation" type="xs:string"/>
+					<xs:element name="returnDualAgentDeclarationsOnly" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="QueryAttachmentListRequestType">
+				<xs:complexContent>
+					<xs:extension base="tns:BasicEVatRequestType">
+						<xs:sequence/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="PurgeAttachmentRequestType">
+				<xs:complexContent>
+					<xs:extension base="tns:BasicEVatRequestType">
+						<xs:sequence>
+							<xs:element name="claimCheckId" type="xs:string"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ManageDeclarationUploadRequestType">
+				<xs:complexContent>
+					<xs:extension base="tns:BasicEVatRequestType">
+						<xs:sequence>
+							<xs:element name="partitionCount" type="xs:integer"/>
+							<xs:element name="contentHash" type="ns1:CryptoType"/>
+							<xs:element name="declarationSchema" type="xs:string"/>
+							<xs:element minOccurs="0" name="attachmentIdList" type="tns:AttachmentIdListType"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="AttachmentIdListType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" name="attachmentIdListItem" type="tns:AttachmentIdListItemType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AttachmentIdListItemType">
+				<xs:sequence>
+					<xs:element name="claimCheckId" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="ManageDeclarationSubmissionRequestType">
+				<xs:complexContent>
+					<xs:extension base="tns:BasicEVatRequestType">
+						<xs:sequence>
+							<xs:element name="declarationProcessingId" type="xs:string"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ManageDeclarationPartitionRequestType">
+				<xs:complexContent>
+					<xs:extension base="tns:BasicEVatRequestType">
+						<xs:sequence>
+							<xs:element name="declarationUploadId" type="xs:string"/>
+							<xs:element name="partition" type="xs:integer"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ManageDeclarationFinalizeRequestType">
+				<xs:complexContent>
+					<xs:extension base="tns:BasicEVatRequestType">
+						<xs:sequence>
+							<xs:element name="declarationUploadId" type="xs:string"/>
+							<xs:element name="preliminaryConfirmation" type="xs:boolean"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="ManageAttachmentUploadRequestType">
+				<xs:complexContent>
+					<xs:extension base="tns:BasicEVatRequestType">
+						<xs:sequence>
+							<xs:element name="fileName" type="xs:string"/>
+							<xs:element name="fileExtension" type="xs:string"/>
+							<xs:element name="contentHash" type="ns1:CryptoType"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:simpleType name="DeclarationSchemaType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="VAT_DECLARATION"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="FieldTypeType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="NET_AMOUNT"/>
+					<xs:enumeration value="VAT_AMOUNT"/>
+					<xs:enumeration value="QUANTITY"/>
+					<xs:enumeration value="OTHER"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="ManageInvoiceOperationType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="CREATE"/>
+					<xs:enumeration value="MODIFY"/>
+					<xs:enumeration value="STORNO"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="InvoiceCategoryType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="NORMAL"/>
+					<xs:enumeration value="SIMPLIFIED"/>
+					<xs:enumeration value="AGGREGATE"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="PaymentMethodType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="TRANSFER"/>
+					<xs:enumeration value="CASH"/>
+					<xs:enumeration value="CARD"/>
+					<xs:enumeration value="VOUCHER"/>
+					<xs:enumeration value="OTHER"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="InvoiceAppearanceType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="PAPER"/>
+					<xs:enumeration value="ELECTRONIC"/>
+					<xs:enumeration value="EDI"/>
+					<xs:enumeration value="UNKNOWN"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="SourceType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="WEB"/>
+					<xs:enumeration value="XML"/>
+					<xs:enumeration value="MGM"/>
+					<xs:enumeration value="OPG"/>
+					<xs:enumeration value="OSZ"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="QueryResultStatusType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="PROCESSING"/>
+					<xs:enumeration value="DONE"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="RegisterTypeType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="A_REGISTER"/>
+					<xs:enumeration value="B_REGISTER"/>
+					<xs:enumeration value="C_REGISTER"/>
+					<xs:enumeration value="D_REGISTER"/>
+					<xs:enumeration value="E_REGISTER"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="DeclarationOperationType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="CREATE"/>
+					<xs:enumeration value="MODIFY"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="DeclarationStatusCodeType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="RECEIVED"/>
+					<xs:enumeration value="PROCESSING"/>
+					<xs:enumeration value="BEVFELD_CHECK"/>
+					<xs:enumeration value="FINISHED"/>
+					<xs:enumeration value="SUBMITTED"/>
+					<xs:enumeration value="ABORTED"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="LongRunWarningStatusCodeType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="POST_EVALUATOR_PROCESSING"/>
+					<xs:enumeration value="POST_EVALUATED"/>
+					<xs:enumeration value="POST_EVALUATOR_FAILED"/>
+					<xs:enumeration value="POST_EVALUATOR_ABORTED"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="FileExtensionType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="PDF"/>
+					<xs:enumeration value="JPEG"/>
+					<xs:enumeration value="PNG"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="FileStatusType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="ACTIVE"/>
+					<xs:enumeration value="MARKED_FOR_DELETE"/>
+					<xs:enumeration value="BLOCKED"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="SoftwareOperationType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="LOCAL_SOFTWARE"/>
+					<xs:enumeration value="ONLINE_SERVICE"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="InvoiceDirectionType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="INBOUND"/>
+					<xs:enumeration value="OUTBOUND"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="DeclarationDirectionType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="IMPORTER"/>
+					<xs:enumeration value="INDIRECT_REPRESENTATIVE"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:schema>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.nav.gov.hu/NTCA/1.0/common" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.nav.gov.hu/NTCA/1.0/common" version="1.0">
+			<xs:element name="GeneralErrorHeaderResponse">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:GeneralErrorHeaderResponseType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="GeneralExceptionResponse">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:BasicResultType">
+							<xs:sequence/>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:complexType name="BasicResponseType">
+				<xs:sequence>
+					<xs:element name="header" type="tns:BasicHeaderType"/>
+					<xs:element name="result" type="tns:BasicResultType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="BasicHeaderType">
+				<xs:sequence>
+					<xs:element name="requestId" type="xs:string"/>
+					<xs:element name="timestamp" type="xs:dateTime"/>
+					<xs:element name="requestVersion" type="xs:string"/>
+					<xs:element minOccurs="0" name="headerVersion" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="BasicResultType">
+				<xs:sequence>
+					<xs:element name="funcCode" type="xs:string"/>
+					<xs:element minOccurs="0" name="errorCode" type="xs:string"/>
+					<xs:element minOccurs="0" name="message" type="xs:string"/>
+					<xs:element minOccurs="0" name="notifications" type="tns:NotificationsType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="NotificationsType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" name="notification" type="tns:NotificationType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="NotificationType">
+				<xs:sequence>
+					<xs:element name="notificationCode" type="xs:string"/>
+					<xs:element name="notificationText" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TechnicalValidationResultType">
+				<xs:sequence>
+					<xs:element name="validationResultCode" type="xs:string"/>
+					<xs:element minOccurs="0" name="validationErrorCode" type="xs:string"/>
+					<xs:element minOccurs="0" name="message" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="CryptoType">
+				<xs:simpleContent>
+					<xs:extension base="xs:string">
+						<xs:attribute name="cryptoType" type="xs:string" use="required"/>
+					</xs:extension>
+				</xs:simpleContent>
+			</xs:complexType>
+			<xs:complexType name="GeneralErrorHeaderResponseType">
+				<xs:complexContent>
+					<xs:extension base="tns:BasicResponseType">
+						<xs:sequence/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="BasicRequestType">
+				<xs:sequence>
+					<xs:element name="header" type="tns:BasicHeaderType"/>
+					<xs:element name="user" type="tns:UserHeaderType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="UserHeaderType">
+				<xs:sequence>
+					<xs:element name="login" type="xs:string"/>
+					<xs:element name="passwordHash" type="tns:CryptoType"/>
+					<xs:element name="taxNumber" type="xs:string"/>
+					<xs:element name="requestSignature" type="tns:CryptoType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:simpleType name="FunctionCodeType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="OK"/>
+					<xs:enumeration value="ERROR"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="LocalizationType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="HU"/>
+					<xs:enumeration value="EN"/>
+					<xs:enumeration value="DE"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="BusinessResultCodeType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="ERROR"/>
+					<xs:enumeration value="WARN"/>
+					<xs:enumeration value="INFO"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="TechnicalResultCodeType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="CRITICAL"/>
+					<xs:enumeration value="ERROR"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:schema>
+	</grammars>
+	<resources base="/">
+		<resource path="/metricService/v1/queryServiceMetrics">
+			<resource path="/list">
+				<method name="GET">
+					<response>
+						<representation mediaType="application/xml" element="prefix1:QueryServiceMetricsListResponse"/>
+						<representation mediaType="text/xml" element="prefix1:QueryServiceMetricsListResponse"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/metric">
+				<method name="GET">
+					<response>
+						<representation mediaType="application/xml" element="prefix1:QueryServiceMetricsResponse"/>
+						<representation mediaType="text/xml" element="prefix1:QueryServiceMetricsResponse"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/metric/{metricName}">
+				<param name="metricName" style="template" type="xs:string"/>
+				<method name="GET">
+					<request/>
+					<response>
+						<representation mediaType="application/xml" element="prefix1:QueryServiceMetricsResponse"/>
+						<representation mediaType="text/xml" element="prefix1:QueryServiceMetricsResponse"/>
+					</response>
+				</method>
+			</resource>
+		</resource>
+		<resource path="/analyticsService/v1">
+			<resource path="/manageDeclarationFinalize">
+				<method name="POST">
+					<request>
+						<representation mediaType="application/xml" element="prefix2:ManageDeclarationFinalizeRequest"/>
+						<representation mediaType="text/xml" element="prefix2:ManageDeclarationFinalizeRequest"/>
+					</request>
+					<response>
+						<representation mediaType="application/xml" element="prefix2:ManageDeclarationFinalizeResponse"/>
+						<representation mediaType="text/xml" element="prefix2:ManageDeclarationFinalizeResponse"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/manageDeclarationSubmission">
+				<method name="POST">
+					<request>
+						<representation mediaType="application/xml" element="prefix2:ManageDeclarationSubmissionRequest"/>
+						<representation mediaType="text/xml" element="prefix2:ManageDeclarationSubmissionRequest"/>
+					</request>
+					<response>
+						<representation mediaType="application/xml" element="prefix2:ManageDeclarationSubmissionResponse"/>
+						<representation mediaType="text/xml" element="prefix2:ManageDeclarationSubmissionResponse"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/manageDeclarationUpload">
+				<method name="POST">
+					<request>
+						<representation mediaType="application/xml" element="prefix2:ManageDeclarationUploadRequest"/>
+						<representation mediaType="text/xml" element="prefix2:ManageDeclarationUploadRequest"/>
+					</request>
+					<response>
+						<representation mediaType="application/xml" element="prefix2:ManageDeclarationUploadResponse"/>
+						<representation mediaType="text/xml" element="prefix2:ManageDeclarationUploadResponse"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/queryDeclarationData">
+				<method name="POST">
+					<request>
+						<representation mediaType="application/xml" element="prefix2:QueryDeclarationDataRequest"/>
+						<representation mediaType="text/xml" element="prefix2:QueryDeclarationDataRequest"/>
+					</request>
+					<response>
+						<representation mediaType="application/xml" element="prefix2:QueryDeclarationDataResponse"/>
+						<representation mediaType="text/xml" element="prefix2:QueryDeclarationDataResponse"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/queryDeclarationList">
+				<method name="POST">
+					<request>
+						<representation mediaType="application/xml" element="prefix2:QueryDeclarationListRequest"/>
+						<representation mediaType="text/xml" element="prefix2:QueryDeclarationListRequest"/>
+					</request>
+					<response>
+						<representation mediaType="application/xml" element="prefix2:QueryDeclarationListResponse"/>
+						<representation mediaType="text/xml" element="prefix2:QueryDeclarationListResponse"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/queryDeclarationProcessingStatus">
+				<method name="POST">
+					<request>
+						<representation mediaType="application/xml" element="prefix2:QueryDeclarationProcessingStatusRequest"/>
+						<representation mediaType="text/xml" element="prefix2:QueryDeclarationProcessingStatusRequest"/>
+					</request>
+					<response>
+						<representation mediaType="application/xml" element="prefix2:QueryDeclarationProcessingStatusResponse"/>
+						<representation mediaType="text/xml" element="prefix2:QueryDeclarationProcessingStatusResponse"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/queryVatDeclarationData">
+				<method name="POST">
+					<request>
+						<representation mediaType="application/xml" element="prefix2:QueryVatDeclarationDataRequest"/>
+						<representation mediaType="text/xml" element="prefix2:QueryVatDeclarationDataRequest"/>
+					</request>
+					<response>
+						<representation mediaType="application/xml" element="prefix2:QueryVatDeclarationDataResponse"/>
+						<representation mediaType="text/xml" element="prefix2:QueryVatDeclarationDataResponse"/>
+						<representation mediaType="multipart/form-data"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/manageAttachmentUpload">
+				<method name="POST">
+					<request>
+						<representation mediaType="multipart/form-data"/>
+					</request>
+					<response>
+						<representation mediaType="application/xml" element="prefix2:ManageAttachmentUploadResponse"/>
+						<representation mediaType="text/xml" element="prefix2:ManageAttachmentUploadResponse"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/purgeAttachment">
+				<method name="POST">
+					<request>
+						<representation mediaType="application/xml" element="prefix2:PurgeAttachmentRequest"/>
+						<representation mediaType="text/xml" element="prefix2:PurgeAttachmentRequest"/>
+					</request>
+					<response>
+						<representation mediaType="application/xml" element="prefix2:PurgeAttachmentResponse"/>
+						<representation mediaType="text/xml" element="prefix2:PurgeAttachmentResponse"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/queryAttachmentList">
+				<method name="POST">
+					<request>
+						<representation mediaType="application/xml" element="prefix2:QueryAttachmentListRequest"/>
+						<representation mediaType="text/xml" element="prefix2:QueryAttachmentListRequest"/>
+					</request>
+					<response>
+						<representation mediaType="application/xml" element="prefix2:QueryAttachmentListResponse"/>
+						<representation mediaType="text/xml" element="prefix2:QueryAttachmentListResponse"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/queryCustomsDeclarationDigest">
+				<method name="POST">
+					<request>
+						<representation mediaType="application/xml" element="prefix2:QueryCustomsDeclarationDigestRequest"/>
+						<representation mediaType="text/xml" element="prefix2:QueryCustomsDeclarationDigestRequest"/>
+					</request>
+					<response>
+						<representation mediaType="application/xml" element="prefix2:QueryCustomsDeclarationDigestResponse"/>
+						<representation mediaType="text/xml" element="prefix2:QueryCustomsDeclarationDigestResponse"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/queryCustomsDeclarationTaxCode">
+				<method name="POST">
+					<request>
+						<representation mediaType="application/xml" element="prefix2:QueryCustomsDeclarationTaxCodeRequest"/>
+						<representation mediaType="text/xml" element="prefix2:QueryCustomsDeclarationTaxCodeRequest"/>
+					</request>
+					<response>
+						<representation mediaType="application/xml" element="prefix2:QueryCustomsDeclarationTaxCodeResponse"/>
+						<representation mediaType="text/xml" element="prefix2:QueryCustomsDeclarationTaxCodeResponse"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/queryDocumentList">
+				<method name="POST">
+					<request>
+						<representation mediaType="application/xml" element="prefix2:QueryDocumentListRequest"/>
+						<representation mediaType="text/xml" element="prefix2:QueryDocumentListRequest"/>
+					</request>
+					<response>
+						<representation mediaType="application/xml" element="prefix2:QueryDocumentListResponse"/>
+						<representation mediaType="text/xml" element="prefix2:QueryDocumentListResponse"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/queryDocumentListResult">
+				<method name="POST">
+					<request>
+						<representation mediaType="application/xml" element="prefix2:QueryDocumentListResultRequest"/>
+						<representation mediaType="text/xml" element="prefix2:QueryDocumentListResultRequest"/>
+					</request>
+					<response>
+						<representation mediaType="application/xml" element="prefix2:QueryDocumentListResultResponse"/>
+						<representation mediaType="text/xml" element="prefix2:QueryDocumentListResultResponse"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/queryInvoiceTaxCode">
+				<method name="POST">
+					<request>
+						<representation mediaType="application/xml" element="prefix2:QueryInvoiceTaxCodeRequest"/>
+						<representation mediaType="text/xml" element="prefix2:QueryInvoiceTaxCodeRequest"/>
+					</request>
+					<response>
+						<representation mediaType="application/xml" element="prefix2:QueryInvoiceTaxCodeResponse"/>
+						<representation mediaType="text/xml" element="prefix2:QueryInvoiceTaxCodeResponse"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/queryTaxCodeCatalog">
+				<method name="POST">
+					<request>
+						<representation mediaType="application/xml" element="prefix2:QueryTaxCodeCatalogRequest"/>
+						<representation mediaType="text/xml" element="prefix2:QueryTaxCodeCatalogRequest"/>
+					</request>
+					<response>
+						<representation mediaType="application/xml" element="prefix2:QueryTaxCodeCatalogResponse"/>
+						<representation mediaType="text/xml" element="prefix2:QueryTaxCodeCatalogResponse"/>
+					</response>
+				</method>
+			</resource>
+			<resource path="/manageDeclarationPartition">
+				<method name="POST">
+					<request>
+						<representation mediaType="multipart/form-data"/>
+					</request>
+					<response>
+						<representation mediaType="application/xml" element="prefix2:ManageDeclarationPartitionResponse"/>
+					</response>
+				</method>
+			</resource>
+		</resource>
+	</resources>
 </application>
