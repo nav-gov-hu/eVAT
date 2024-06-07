@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2016 sp1 (x64) (http://www.altova.com) by NAV (Hungarian Tax Authority) -->
 <!--
 # Project: NAV Elektronikus ÁFA rendszer earAPI XML séma
 # Author: NAV Informatikai Intézet
@@ -6,9 +7,9 @@
 # Version: v1.0 2023/06/02
 -->
 <xs:schema xmlns="http://schemas.nav.gov.hu/EAR/1.0/api" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://schemas.nav.gov.hu/NTCA/1.0/common" xmlns:earbase="http://schemas.nav.gov.hu/EAR/1.0/base" xmlns:eardata="http://schemas.nav.gov.hu/EAR/1.0/data" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/api" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common"/>
-	<xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/base"/>
-	<xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/data"/>
+	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common" schemaLocation="common.xsd"/>
+	<xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/base" schemaLocation="earBase.xsd"/>
+	<xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/data" schemaLocation="earData.xsd"/>
 	<xs:simpleType name="DeclarationDirectionType">
 		<xs:annotation>
 			<xs:documentation xml:lang="hu">Importőri vagy közvetett vámjogi képviselői keresés paramétere</xs:documentation>
@@ -1612,6 +1613,24 @@
 						<xs:annotation>
 							<xs:documentation xml:lang="hu">Feltöltött melléklet id-k listája</xs:documentation>
 							<xs:documentation xml:lang="en">List of uploaded attachment ids</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="xsdVersion" type="common:AtomicStringType32">
+						<xs:annotation>
+							<xs:documentation xml:lang="hu">XSD verziója</xs:documentation>
+							<xs:documentation xml:lang="en">XSD version</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="requestPeriodStart" type="earbase:DeclarationBaseDateType">
+						<xs:annotation>
+							<xs:documentation xml:lang="hu">Bevallási időszak kezdete</xs:documentation>
+							<xs:documentation xml:lang="en">Beginning of reporting period</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="requestPeriodEnd" type="earbase:DeclarationBaseDateType">
+						<xs:annotation>
+							<xs:documentation xml:lang="hu">Bevallási időszak vége</xs:documentation>
+							<xs:documentation xml:lang="en">End of reporting period</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>

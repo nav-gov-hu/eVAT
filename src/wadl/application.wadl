@@ -11,13 +11,15 @@
 					<xs:element name="declarationPeriodStart" type="xs:date"/>
 					<xs:element name="declarationPeriodEnd" type="xs:date"/>
 					<xs:element name="version" type="xs:integer"/>
+					<xs:element name="declarationMethod" type="xs:string"/>
+					<xs:element name="navCorrection" type="xs:boolean"/>
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="ModificationReferenceType">
 				<xs:sequence>
 					<xs:element name="declarationReferenceId" type="xs:string"/>
 					<xs:element name="declarationReferenceIndex" type="xs:integer"/>
-					<xs:element minOccurs="0" name="barCodeReference" type="xs:integer"/>
+					<xs:element minOccurs="0" name="barCodeReference" type="xs:string"/>
 				</xs:sequence>
 			</xs:complexType>
 			<xs:simpleType name="DeclarationTypeType">
@@ -55,6 +57,13 @@
 					<xs:enumeration value="MONTHLY"/>
 				</xs:restriction>
 			</xs:simpleType>
+			<xs:simpleType name="DeclarationMethodType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="BASE"/>
+					<xs:enumeration value="SELF_CHECK"/>
+					<xs:enumeration value="CORRECTION"/>
+				</xs:restriction>
+			</xs:simpleType>
 		</xs:schema>
 		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.nav.gov.hu/EAR/1.0/data" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/data" version="1.0">
 			<xs:complexType name="TaxPositionType">
@@ -72,15 +81,30 @@
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="DeclarationSummaryType">
+				<xs:complexContent>
+					<xs:extension base="tns:SummaryType">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="lapsedResidualTaxIndicator" type="xs:boolean"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="SummaryType">
 				<xs:sequence>
 					<xs:element minOccurs="0" name="sumResidualTax" type="xs:decimal"/>
-					<xs:element minOccurs="0" name="lapsedResidualTaxIndicator" type="xs:boolean"/>
 					<xs:element name="sumAccountedTax" type="xs:decimal"/>
 					<xs:element minOccurs="0" name="sumPayableTax" type="xs:decimal"/>
 					<xs:element minOccurs="0" name="sumDeductibleTax" type="xs:decimal"/>
 					<xs:element minOccurs="0" name="sumTransferableTax" type="xs:decimal"/>
 				</xs:sequence>
 			</xs:complexType>
+			<xs:simpleType name="PositionTypeType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="PAYABLE"/>
+					<xs:enumeration value="DEDUCTIBLE"/>
+					<xs:enumeration value="OTHER"/>
+				</xs:restriction>
+			</xs:simpleType>
 			<xs:simpleType name="SheetNameType">
 				<xs:restriction base="xs:string">
 					<xs:enumeration value="VAT_SHEET_2"/>
@@ -92,13 +116,6 @@
 					<xs:enumeration value="VAT_SHEET_170"/>
 					<xs:enumeration value="VAT_SHEET_4"/>
 					<xs:enumeration value="VAT_SHEET_EUNY"/>
-				</xs:restriction>
-			</xs:simpleType>
-			<xs:simpleType name="PositionTypeType">
-				<xs:restriction base="xs:string">
-					<xs:enumeration value="PAYABLE"/>
-					<xs:enumeration value="DEDUCTIBLE"/>
-					<xs:enumeration value="OTHER"/>
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:schema>
@@ -122,9 +139,17 @@
 					</xs:complexContent>
 				</xs:complexType>
 			</xs:element>
-			<xs:complexType name="QueryServiceMetricsListResponseType">
+			<xs:complexType name="QueryServiceMetricsResponseType">
 				<xs:sequence>
-					<xs:element maxOccurs="unbounded" minOccurs="0" name="metricDefinition" nillable="true" type="tns:MetricDefinitionType"/>
+					<xs:element name="result" type="ns1:BasicResultType"/>
+					<xs:element minOccurs="0" name="metricsLastUpdateTime" type="xs:dateTime"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="metric" nillable="true" type="tns:MetricType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="MetricType">
+				<xs:sequence>
+					<xs:element name="metricDefinition" type="tns:MetricDefinitionType"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="metricValues" nillable="true" type="tns:MetricValueType"/>
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="MetricDefinitionType">
@@ -140,23 +165,15 @@
 					<xs:element name="localizedDescription" type="xs:string"/>
 				</xs:sequence>
 			</xs:complexType>
-			<xs:complexType name="QueryServiceMetricsResponseType">
-				<xs:sequence>
-					<xs:element name="result" type="ns1:BasicResultType"/>
-					<xs:element minOccurs="0" name="metricsLastUpdateTime" type="xs:dateTime"/>
-					<xs:element maxOccurs="unbounded" minOccurs="0" name="metric" nillable="true" type="tns:MetricType"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:complexType name="MetricType">
-				<xs:sequence>
-					<xs:element name="metricDefinition" type="tns:MetricDefinitionType"/>
-					<xs:element maxOccurs="unbounded" minOccurs="0" name="metricValues" nillable="true" type="tns:MetricValueType"/>
-				</xs:sequence>
-			</xs:complexType>
 			<xs:complexType name="MetricValueType">
 				<xs:sequence>
 					<xs:element name="value" type="xs:decimal"/>
 					<xs:element name="timestamp" type="xs:dateTime"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="QueryServiceMetricsListResponseType">
+				<xs:sequence>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="metricDefinition" nillable="true" type="tns:MetricDefinitionType"/>
 				</xs:sequence>
 			</xs:complexType>
 			<xs:simpleType name="MetricTypeType">
@@ -175,9 +192,9 @@
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:schema>
-		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://schemas.nav.gov.hu/NTCA/1.0/common" xmlns:ns2="http://schemas.nav.gov.hu/EAR/1.0/data" xmlns:ns3="http://schemas.nav.gov.hu/EAR/1.0/base" xmlns:tns="http://schemas.nav.gov.hu/EAR/1.0/api" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/api" version="1.0">
-			<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common"/>
+		<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://schemas.nav.gov.hu/EAR/1.0/data" xmlns:ns2="http://schemas.nav.gov.hu/NTCA/1.0/common" xmlns:ns3="http://schemas.nav.gov.hu/EAR/1.0/base" xmlns:tns="http://schemas.nav.gov.hu/EAR/1.0/api" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/api" version="1.0">
 			<xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/data"/>
+			<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common"/>
 			<xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/base"/>
 			<xs:element name="GeneralErrorResponse">
 				<xs:complexType>
@@ -494,16 +511,41 @@
 					</xs:complexContent>
 				</xs:complexType>
 			</xs:element>
-			<xs:complexType name="PurgeAttachmentResponseType">
+			<xs:complexType name="QueryCustomsDeclarationTaxCodeResponseType">
 				<xs:complexContent>
-					<xs:extension base="ns1:BasicResponseType">
-						<xs:sequence/>
+					<xs:extension base="ns2:BasicResponseType">
+						<xs:sequence>
+							<xs:element minOccurs="0" name="declarationDigest" type="tns:DeclarationDigestType"/>
+							<xs:element maxOccurs="unbounded" minOccurs="0" name="taxCodeInformation" nillable="true" type="tns:TaxCodeInformationType"/>
+						</xs:sequence>
 					</xs:extension>
 				</xs:complexContent>
 			</xs:complexType>
+			<xs:complexType name="DeclarationDigestType">
+				<xs:sequence>
+					<xs:element name="cdpsId" type="xs:string"/>
+					<xs:element name="resolutionId" type="xs:string"/>
+					<xs:element name="declarationOperation" type="xs:string"/>
+					<xs:element name="importerTaxNumber" type="xs:string"/>
+					<xs:element minOccurs="0" name="indirectRepresentativeTaxNumber" type="xs:string"/>
+					<xs:element name="importerSelfTaxationIndicator" type="xs:boolean"/>
+					<xs:element minOccurs="0" name="indirectRepresentativeSelfTaxationIndicator" type="xs:boolean"/>
+					<xs:element name="taxpointDate" type="xs:date"/>
+					<xs:element name="deliveryDate" type="xs:date"/>
+					<xs:element name="totalNetAmount" type="xs:decimal"/>
+					<xs:element name="totalVatAmount" type="xs:decimal"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="TaxCodeInformationType">
+				<xs:sequence>
+					<xs:element name="standardTaxCode" type="xs:string"/>
+					<xs:element maxOccurs="unbounded" name="taxPosition" type="ns1:TaxPositionType"/>
+					<xs:element name="lineNumber" type="xs:nonNegativeInteger"/>
+				</xs:sequence>
+			</xs:complexType>
 			<xs:complexType name="QueryVatDeclarationDataResponseType">
 				<xs:complexContent>
-					<xs:extension base="ns1:BasicResponseType">
+					<xs:extension base="ns2:BasicResponseType">
 						<xs:sequence>
 							<xs:element minOccurs="0" name="vatDeclarationData" type="tns:VatDeclarationDataType"/>
 						</xs:sequence>
@@ -518,7 +560,7 @@
 			</xs:complexType>
 			<xs:complexType name="QueryTaxCodeCatalogResponseType">
 				<xs:complexContent>
-					<xs:extension base="ns1:BasicResponseType">
+					<xs:extension base="ns2:BasicResponseType">
 						<xs:sequence>
 							<xs:element minOccurs="0" name="taxCodeCatalog" type="tns:TaxCodeCatalogType"/>
 						</xs:sequence>
@@ -563,7 +605,7 @@
 			</xs:complexType>
 			<xs:complexType name="QueryInvoiceTaxCodeResponseType">
 				<xs:complexContent>
-					<xs:extension base="ns1:BasicResponseType">
+					<xs:extension base="ns2:BasicResponseType">
 						<xs:sequence>
 							<xs:element minOccurs="0" name="invoiceDigest" type="tns:InvoiceDigestType"/>
 							<xs:element maxOccurs="unbounded" minOccurs="0" name="taxCodeInformation" nillable="true" type="tns:TaxCodeInformationType"/>
@@ -603,13 +645,6 @@
 					<xs:element minOccurs="0" name="completenessIndicator" type="xs:boolean"/>
 				</xs:sequence>
 			</xs:complexType>
-			<xs:complexType name="TaxCodeInformationType">
-				<xs:sequence>
-					<xs:element name="standardTaxCode" type="xs:string"/>
-					<xs:element maxOccurs="unbounded" name="taxPosition" type="ns2:TaxPositionType"/>
-					<xs:element name="lineNumber" type="xs:nonNegativeInteger"/>
-				</xs:sequence>
-			</xs:complexType>
 			<xs:complexType name="VatRelevantWarningType">
 				<xs:sequence>
 					<xs:element name="validationResultCode" type="xs:string"/>
@@ -619,7 +654,7 @@
 			</xs:complexType>
 			<xs:complexType name="QueryDocumentListResultResponseType">
 				<xs:complexContent>
-					<xs:extension base="ns1:BasicResponseType">
+					<xs:extension base="ns2:BasicResponseType">
 						<xs:sequence>
 							<xs:element minOccurs="0" name="documentList" type="tns:DocumentListType"/>
 						</xs:sequence>
@@ -649,24 +684,9 @@
 					<xs:element name="returnReceiptVatAmount" type="xs:decimal"/>
 				</xs:sequence>
 			</xs:complexType>
-			<xs:complexType name="DeclarationDigestType">
-				<xs:sequence>
-					<xs:element name="cdpsId" type="xs:string"/>
-					<xs:element name="resolutionId" type="xs:string"/>
-					<xs:element name="declarationOperation" type="xs:string"/>
-					<xs:element name="importerTaxNumber" type="xs:string"/>
-					<xs:element minOccurs="0" name="indirectRepresentativeTaxNumber" type="xs:string"/>
-					<xs:element name="importerSelfTaxationIndicator" type="xs:boolean"/>
-					<xs:element minOccurs="0" name="indirectRepresentativeSelfTaxationIndicator" type="xs:boolean"/>
-					<xs:element name="taxpointDate" type="xs:date"/>
-					<xs:element name="deliveryDate" type="xs:date"/>
-					<xs:element name="totalNetAmount" type="xs:decimal"/>
-					<xs:element name="totalVatAmount" type="xs:decimal"/>
-				</xs:sequence>
-			</xs:complexType>
 			<xs:complexType name="QueryDocumentListResponseType">
 				<xs:complexContent>
-					<xs:extension base="ns1:BasicResponseType">
+					<xs:extension base="ns2:BasicResponseType">
 						<xs:sequence>
 							<xs:element name="queryId" type="xs:string"/>
 						</xs:sequence>
@@ -675,7 +695,7 @@
 			</xs:complexType>
 			<xs:complexType name="QueryDeclarationProcessingStatusResponseType">
 				<xs:complexContent>
-					<xs:extension base="ns1:BasicResponseType">
+					<xs:extension base="ns2:BasicResponseType">
 						<xs:sequence>
 							<xs:element minOccurs="0" name="declarationProcessingStatus" type="tns:DeclarationProcessingStatusType"/>
 						</xs:sequence>
@@ -686,11 +706,11 @@
 				<xs:sequence>
 					<xs:element minOccurs="0" name="declarationInfo" type="ns3:DeclarationInfoType"/>
 					<xs:element name="declarationStatus" type="tns:DeclarationStatusType"/>
-					<xs:element maxOccurs="unbounded" minOccurs="0" name="technicalValidationMessages" nillable="true" type="ns1:TechnicalValidationResultType"/>
+					<xs:element maxOccurs="unbounded" minOccurs="0" name="technicalValidationMessages" nillable="true" type="ns2:TechnicalValidationResultType"/>
 					<xs:element maxOccurs="unbounded" minOccurs="0" name="businessValidationMessages" nillable="true" type="tns:BusinessValidationResultType"/>
 					<xs:element minOccurs="0" name="longRunWarningStatus" type="tns:LongRunWarningStatusType"/>
 					<xs:element name="declarationUploadId" type="xs:string"/>
-					<xs:element name="contentHash" type="ns1:CryptoType"/>
+					<xs:element name="contentHash" type="ns2:CryptoType"/>
 					<xs:element name="declarationSchema" type="xs:string"/>
 					<xs:element name="originalRequestVersion" type="xs:string"/>
 				</xs:sequence>
@@ -724,7 +744,7 @@
 			</xs:complexType>
 			<xs:complexType name="QueryDeclarationListResponseType">
 				<xs:complexContent>
-					<xs:extension base="ns1:BasicResponseType">
+					<xs:extension base="ns2:BasicResponseType">
 						<xs:sequence>
 							<xs:element minOccurs="0" name="declarationList" type="tns:DeclarationListType"/>
 						</xs:sequence>
@@ -746,7 +766,7 @@
 			</xs:complexType>
 			<xs:complexType name="QueryDeclarationDataResponseType">
 				<xs:complexContent>
-					<xs:extension base="ns1:BasicResponseType">
+					<xs:extension base="ns2:BasicResponseType">
 						<xs:sequence>
 							<xs:element minOccurs="0" name="declarationData" type="tns:DeclarationDataType"/>
 						</xs:sequence>
@@ -756,26 +776,16 @@
 			<xs:complexType name="DeclarationDataType">
 				<xs:sequence>
 					<xs:element name="declarationInfo" type="ns3:DeclarationInfoType"/>
-					<xs:element name="contentHash" type="ns1:CryptoType"/>
+					<xs:element name="contentHash" type="ns2:CryptoType"/>
 					<xs:element name="declarationSchema" type="xs:string"/>
-					<xs:element name="declarationSummary" type="ns2:DeclarationSummaryType"/>
+					<xs:element name="declarationSummary" type="ns1:DeclarationSummaryType"/>
 					<xs:element minOccurs="0" name="BevfeldData" type="xs:base64Binary"/>
 					<xs:element name="originalRequestVersion" type="xs:string"/>
 				</xs:sequence>
 			</xs:complexType>
-			<xs:complexType name="QueryCustomsDeclarationTaxCodeResponseType">
-				<xs:complexContent>
-					<xs:extension base="ns1:BasicResponseType">
-						<xs:sequence>
-							<xs:element minOccurs="0" name="declarationDigest" type="tns:DeclarationDigestType"/>
-							<xs:element maxOccurs="unbounded" minOccurs="0" name="taxCodeInformation" nillable="true" type="tns:TaxCodeInformationType"/>
-						</xs:sequence>
-					</xs:extension>
-				</xs:complexContent>
-			</xs:complexType>
 			<xs:complexType name="QueryCustomsDeclarationDigestResponseType">
 				<xs:complexContent>
-					<xs:extension base="ns1:BasicResponseType">
+					<xs:extension base="ns2:BasicResponseType">
 						<xs:sequence>
 							<xs:element name="availablePage" type="xs:int"/>
 							<xs:element name="currentPage" type="xs:int"/>
@@ -786,7 +796,7 @@
 			</xs:complexType>
 			<xs:complexType name="QueryAttachmentListResponseType">
 				<xs:complexContent>
-					<xs:extension base="ns1:BasicResponseType">
+					<xs:extension base="ns2:BasicResponseType">
 						<xs:sequence>
 							<xs:element minOccurs="0" name="attachmentList" type="tns:AttachmentListType"/>
 						</xs:sequence>
@@ -803,15 +813,22 @@
 					<xs:element name="claimCheckId" type="xs:string"/>
 					<xs:element name="fileName" type="xs:string"/>
 					<xs:element name="fileExtension" type="xs:string"/>
-					<xs:element name="contentHash" type="ns1:CryptoType"/>
+					<xs:element name="contentHash" type="ns2:CryptoType"/>
 					<xs:element name="claimCheckIdValidFrom" type="xs:dateTime"/>
 					<xs:element name="claimCheckIdValidTo" type="xs:dateTime"/>
 					<xs:element name="fileStatus" type="xs:string"/>
 				</xs:sequence>
 			</xs:complexType>
+			<xs:complexType name="PurgeAttachmentResponseType">
+				<xs:complexContent>
+					<xs:extension base="ns2:BasicResponseType">
+						<xs:sequence/>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
 			<xs:complexType name="ManageDeclarationUploadResponseType">
 				<xs:complexContent>
-					<xs:extension base="ns1:BasicResponseType">
+					<xs:extension base="ns2:BasicResponseType">
 						<xs:sequence>
 							<xs:element name="declarationUploadId" type="xs:string"/>
 							<xs:element name="declarationUploadValidFrom" type="xs:dateTime"/>
@@ -823,10 +840,10 @@
 			</xs:complexType>
 			<xs:complexType name="ManageDeclarationSubmissionResponseType">
 				<xs:complexContent>
-					<xs:extension base="ns1:BasicResponseType">
+					<xs:extension base="ns2:BasicResponseType">
 						<xs:sequence>
-							<xs:element name="contentHash" type="ns1:CryptoType"/>
-							<xs:element name="declarationSummary" type="ns2:DeclarationSummaryType"/>
+							<xs:element name="contentHash" type="ns2:CryptoType"/>
+							<xs:element name="declarationSummary" type="ns1:DeclarationSummaryType"/>
 							<xs:element minOccurs="0" name="bevfeldData" type="xs:base64Binary"/>
 						</xs:sequence>
 					</xs:extension>
@@ -834,7 +851,7 @@
 			</xs:complexType>
 			<xs:complexType name="ManageDeclarationPartitionResponseType">
 				<xs:complexContent>
-					<xs:extension base="ns1:BasicResponseType">
+					<xs:extension base="ns2:BasicResponseType">
 						<xs:sequence>
 							<xs:element name="declarationUploadId" type="xs:string"/>
 							<xs:element name="partition" type="xs:integer"/>
@@ -844,7 +861,7 @@
 			</xs:complexType>
 			<xs:complexType name="ManageDeclarationFinalizeResponseType">
 				<xs:complexContent>
-					<xs:extension base="ns1:BasicResponseType">
+					<xs:extension base="ns2:BasicResponseType">
 						<xs:sequence>
 							<xs:element name="declarationProcessingId" type="xs:string"/>
 						</xs:sequence>
@@ -853,7 +870,7 @@
 			</xs:complexType>
 			<xs:complexType name="ManageAttachmentUploadResponseType">
 				<xs:complexContent>
-					<xs:extension base="ns1:BasicResponseType">
+					<xs:extension base="ns2:BasicResponseType">
 						<xs:sequence>
 							<xs:element name="claimCheckId" type="xs:string"/>
 							<xs:element name="claimCheckIdValidFrom" type="xs:dateTime"/>
@@ -864,10 +881,10 @@
 			</xs:complexType>
 			<xs:complexType name="GeneralErrorResponseType">
 				<xs:complexContent>
-					<xs:extension base="ns1:GeneralErrorHeaderResponseType">
+					<xs:extension base="ns2:GeneralErrorHeaderResponseType">
 						<xs:sequence>
 							<xs:element name="software" type="tns:SoftwareType"/>
-							<xs:element maxOccurs="unbounded" minOccurs="0" name="technicalValidationMessages" nillable="true" type="ns1:TechnicalValidationResultType"/>
+							<xs:element maxOccurs="unbounded" minOccurs="0" name="technicalValidationMessages" nillable="true" type="ns2:TechnicalValidationResultType"/>
 						</xs:sequence>
 					</xs:extension>
 				</xs:complexContent>
@@ -884,36 +901,42 @@
 					<xs:element name="softwareDevTaxNumber" type="xs:string"/>
 				</xs:sequence>
 			</xs:complexType>
-			<xs:complexType name="QueryInvoiceTaxCodeRequestType">
+			<xs:complexType name="QueryCustomsDeclarationDigestRequestType">
 				<xs:complexContent>
 					<xs:extension base="tns:BasicEVatRequestType">
 						<xs:sequence>
-							<xs:element name="invoiceNumberQuery" type="tns:InvoiceNumberQueryType"/>
-							<xs:element name="additionalInvoiceTaxCodeQueryParams" type="tns:AdditionalInvoiceTaxCodeQueryParamsType"/>
+							<xs:element name="page" type="xs:int"/>
+							<xs:element name="declarationDirection" type="xs:string"/>
+							<xs:element name="declarationQueryParams" type="tns:DeclarationQueryType"/>
 						</xs:sequence>
 					</xs:extension>
 				</xs:complexContent>
 			</xs:complexType>
 			<xs:complexType name="BasicEVatRequestType">
 				<xs:complexContent>
-					<xs:extension base="ns1:BasicRequestType">
+					<xs:extension base="ns2:BasicRequestType">
 						<xs:sequence>
 							<xs:element name="software" type="tns:SoftwareType"/>
 						</xs:sequence>
 					</xs:extension>
 				</xs:complexContent>
 			</xs:complexType>
-			<xs:complexType name="InvoiceNumberQueryType">
+			<xs:complexType name="DeclarationQueryType">
 				<xs:sequence>
-					<xs:element name="invoiceNumber" type="xs:string"/>
-					<xs:element name="invoiceDirection" type="xs:string"/>
-					<xs:element minOccurs="0" name="batchIndex" type="xs:int"/>
-					<xs:element minOccurs="0" name="supplierTaxNumber" type="xs:string"/>
+					<xs:element name="mandatoryDeclarationQueryParams" type="tns:MandatoryDeclarationQueryParamsType"/>
+					<xs:element minOccurs="0" name="additionalDeclarationQueryParams" type="tns:AdditionalDeclarationQueryParamsType"/>
 				</xs:sequence>
 			</xs:complexType>
-			<xs:complexType name="AdditionalInvoiceTaxCodeQueryParamsType">
+			<xs:complexType name="MandatoryDeclarationQueryParamsType">
 				<xs:sequence>
-					<xs:element minOccurs="0" name="invoiceItemLine" type="xs:boolean"/>
+					<xs:element name="declarationDateFrom" type="xs:date"/>
+					<xs:element name="declarationDateTo" type="xs:date"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AdditionalDeclarationQueryParamsType">
+				<xs:sequence>
+					<xs:element name="declarationOperation" type="xs:string"/>
+					<xs:element name="returnDualAgentDeclarationsOnly" type="xs:boolean"/>
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="QueryVatDeclarationDataRequestType">
@@ -933,6 +956,29 @@
 						</xs:sequence>
 					</xs:extension>
 				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="QueryInvoiceTaxCodeRequestType">
+				<xs:complexContent>
+					<xs:extension base="tns:BasicEVatRequestType">
+						<xs:sequence>
+							<xs:element name="invoiceNumberQuery" type="tns:InvoiceNumberQueryType"/>
+							<xs:element name="additionalInvoiceTaxCodeQueryParams" type="tns:AdditionalInvoiceTaxCodeQueryParamsType"/>
+						</xs:sequence>
+					</xs:extension>
+				</xs:complexContent>
+			</xs:complexType>
+			<xs:complexType name="InvoiceNumberQueryType">
+				<xs:sequence>
+					<xs:element name="invoiceNumber" type="xs:string"/>
+					<xs:element name="invoiceDirection" type="xs:string"/>
+					<xs:element minOccurs="0" name="batchIndex" type="xs:int"/>
+					<xs:element minOccurs="0" name="supplierTaxNumber" type="xs:string"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name="AdditionalInvoiceTaxCodeQueryParamsType">
+				<xs:sequence>
+					<xs:element minOccurs="0" name="invoiceItemLine" type="xs:boolean"/>
+				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="QueryDocumentListResultRequestType">
 				<xs:complexContent>
@@ -992,35 +1038,6 @@
 					</xs:extension>
 				</xs:complexContent>
 			</xs:complexType>
-			<xs:complexType name="QueryCustomsDeclarationDigestRequestType">
-				<xs:complexContent>
-					<xs:extension base="tns:BasicEVatRequestType">
-						<xs:sequence>
-							<xs:element name="page" type="xs:int"/>
-							<xs:element name="declarationDirection" type="xs:string"/>
-							<xs:element name="declarationQueryParams" type="tns:DeclarationQueryType"/>
-						</xs:sequence>
-					</xs:extension>
-				</xs:complexContent>
-			</xs:complexType>
-			<xs:complexType name="DeclarationQueryType">
-				<xs:sequence>
-					<xs:element name="mandatoryDeclarationQueryParams" type="tns:MandatoryDeclarationQueryParamsType"/>
-					<xs:element minOccurs="0" name="additionalDeclarationQueryParams" type="tns:AdditionalDeclarationQueryParamsType"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:complexType name="MandatoryDeclarationQueryParamsType">
-				<xs:sequence>
-					<xs:element name="declarationDateFrom" type="xs:date"/>
-					<xs:element name="declarationDateTo" type="xs:date"/>
-				</xs:sequence>
-			</xs:complexType>
-			<xs:complexType name="AdditionalDeclarationQueryParamsType">
-				<xs:sequence>
-					<xs:element name="declarationOperation" type="xs:string"/>
-					<xs:element name="returnDualAgentDeclarationsOnly" type="xs:boolean"/>
-				</xs:sequence>
-			</xs:complexType>
 			<xs:complexType name="QueryAttachmentListRequestType">
 				<xs:complexContent>
 					<xs:extension base="tns:BasicEVatRequestType">
@@ -1042,9 +1059,12 @@
 					<xs:extension base="tns:BasicEVatRequestType">
 						<xs:sequence>
 							<xs:element name="partitionCount" type="xs:integer"/>
-							<xs:element name="contentHash" type="ns1:CryptoType"/>
+							<xs:element name="contentHash" type="ns2:CryptoType"/>
 							<xs:element name="declarationSchema" type="xs:string"/>
 							<xs:element minOccurs="0" name="attachmentIdList" type="tns:AttachmentIdListType"/>
+							<xs:element name="xsdVersion" type="xs:string"/>
+							<xs:element name="requestPeriodStart" type="xs:date"/>
+							<xs:element name="requestPeriodEnd" type="xs:date"/>
 						</xs:sequence>
 					</xs:extension>
 				</xs:complexContent>
@@ -1094,11 +1114,17 @@
 						<xs:sequence>
 							<xs:element name="fileName" type="xs:string"/>
 							<xs:element name="fileExtension" type="xs:string"/>
-							<xs:element name="contentHash" type="ns1:CryptoType"/>
+							<xs:element name="contentHash" type="ns2:CryptoType"/>
 						</xs:sequence>
 					</xs:extension>
 				</xs:complexContent>
 			</xs:complexType>
+			<xs:simpleType name="DeclarationOperationType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="CREATE"/>
+					<xs:enumeration value="MODIFY"/>
+				</xs:restriction>
+			</xs:simpleType>
 			<xs:simpleType name="DeclarationSchemaType">
 				<xs:restriction base="xs:string">
 					<xs:enumeration value="VAT_DECLARATION"/>
@@ -1167,12 +1193,6 @@
 					<xs:enumeration value="E_REGISTER"/>
 				</xs:restriction>
 			</xs:simpleType>
-			<xs:simpleType name="DeclarationOperationType">
-				<xs:restriction base="xs:string">
-					<xs:enumeration value="CREATE"/>
-					<xs:enumeration value="MODIFY"/>
-				</xs:restriction>
-			</xs:simpleType>
 			<xs:simpleType name="DeclarationStatusCodeType">
 				<xs:restriction base="xs:string">
 					<xs:enumeration value="RECEIVED"/>
@@ -1211,16 +1231,16 @@
 					<xs:enumeration value="ONLINE_SERVICE"/>
 				</xs:restriction>
 			</xs:simpleType>
-			<xs:simpleType name="InvoiceDirectionType">
-				<xs:restriction base="xs:string">
-					<xs:enumeration value="INBOUND"/>
-					<xs:enumeration value="OUTBOUND"/>
-				</xs:restriction>
-			</xs:simpleType>
 			<xs:simpleType name="DeclarationDirectionType">
 				<xs:restriction base="xs:string">
 					<xs:enumeration value="IMPORTER"/>
 					<xs:enumeration value="INDIRECT_REPRESENTATIVE"/>
+				</xs:restriction>
+			</xs:simpleType>
+			<xs:simpleType name="InvoiceDirectionType">
+				<xs:restriction base="xs:string">
+					<xs:enumeration value="INBOUND"/>
+					<xs:enumeration value="OUTBOUND"/>
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:schema>
@@ -1338,7 +1358,7 @@
 				</xs:restriction>
 			</xs:simpleType>
 		</xs:schema>
-	</grammars>
+</grammars>
 	<resources base="/">
 		<resource path="/metricService/v1/queryServiceMetrics">
 			<resource path="/list">
@@ -1360,7 +1380,7 @@
 			<resource path="/metric/{metricName}">
 				<param name="metricName" style="template" type="xs:string"/>
 				<method name="GET">
-					<request/>
+					<request></request>
 					<response>
 						<representation mediaType="application/xml" element="prefix1:QueryServiceMetricsResponse"/>
 						<representation mediaType="text/xml" element="prefix1:QueryServiceMetricsResponse"/>
@@ -1376,7 +1396,8 @@
 						<representation mediaType="text/xml" element="prefix2:ManageDeclarationFinalizeRequest"/>
 					</request>
 					<response>
-						<representation mediaType="application/xml" element="prefix2:ManageDeclarationFinalizeResponse"/>
+						<representation mediaType="application/xml"
+										element="prefix2:ManageDeclarationFinalizeResponse"/>
 						<representation mediaType="text/xml" element="prefix2:ManageDeclarationFinalizeResponse"/>
 					</response>
 				</method>
@@ -1384,11 +1405,13 @@
 			<resource path="/manageDeclarationSubmission">
 				<method name="POST">
 					<request>
-						<representation mediaType="application/xml" element="prefix2:ManageDeclarationSubmissionRequest"/>
+						<representation mediaType="application/xml"
+										element="prefix2:ManageDeclarationSubmissionRequest"/>
 						<representation mediaType="text/xml" element="prefix2:ManageDeclarationSubmissionRequest"/>
 					</request>
 					<response>
-						<representation mediaType="application/xml" element="prefix2:ManageDeclarationSubmissionResponse"/>
+						<representation mediaType="application/xml"
+										element="prefix2:ManageDeclarationSubmissionResponse"/>
 						<representation mediaType="text/xml" element="prefix2:ManageDeclarationSubmissionResponse"/>
 					</response>
 				</method>
@@ -1432,12 +1455,15 @@
 			<resource path="/queryDeclarationProcessingStatus">
 				<method name="POST">
 					<request>
-						<representation mediaType="application/xml" element="prefix2:QueryDeclarationProcessingStatusRequest"/>
+						<representation mediaType="application/xml"
+										element="prefix2:QueryDeclarationProcessingStatusRequest"/>
 						<representation mediaType="text/xml" element="prefix2:QueryDeclarationProcessingStatusRequest"/>
 					</request>
 					<response>
-						<representation mediaType="application/xml" element="prefix2:QueryDeclarationProcessingStatusResponse"/>
-						<representation mediaType="text/xml" element="prefix2:QueryDeclarationProcessingStatusResponse"/>
+						<representation mediaType="application/xml"
+										element="prefix2:QueryDeclarationProcessingStatusResponse"/>
+						<representation mediaType="text/xml"
+										element="prefix2:QueryDeclarationProcessingStatusResponse"/>
 					</response>
 				</method>
 			</resource>
@@ -1492,11 +1518,13 @@
 			<resource path="/queryCustomsDeclarationDigest">
 				<method name="POST">
 					<request>
-						<representation mediaType="application/xml" element="prefix2:QueryCustomsDeclarationDigestRequest"/>
+						<representation mediaType="application/xml"
+										element="prefix2:QueryCustomsDeclarationDigestRequest"/>
 						<representation mediaType="text/xml" element="prefix2:QueryCustomsDeclarationDigestRequest"/>
 					</request>
 					<response>
-						<representation mediaType="application/xml" element="prefix2:QueryCustomsDeclarationDigestResponse"/>
+						<representation mediaType="application/xml"
+										element="prefix2:QueryCustomsDeclarationDigestResponse"/>
 						<representation mediaType="text/xml" element="prefix2:QueryCustomsDeclarationDigestResponse"/>
 					</response>
 				</method>
@@ -1504,11 +1532,13 @@
 			<resource path="/queryCustomsDeclarationTaxCode">
 				<method name="POST">
 					<request>
-						<representation mediaType="application/xml" element="prefix2:QueryCustomsDeclarationTaxCodeRequest"/>
+						<representation mediaType="application/xml"
+										element="prefix2:QueryCustomsDeclarationTaxCodeRequest"/>
 						<representation mediaType="text/xml" element="prefix2:QueryCustomsDeclarationTaxCodeRequest"/>
 					</request>
 					<response>
-						<representation mediaType="application/xml" element="prefix2:QueryCustomsDeclarationTaxCodeResponse"/>
+						<representation mediaType="application/xml"
+										element="prefix2:QueryCustomsDeclarationTaxCodeResponse"/>
 						<representation mediaType="text/xml" element="prefix2:QueryCustomsDeclarationTaxCodeResponse"/>
 					</response>
 				</method>
@@ -1567,7 +1597,8 @@
 						<representation mediaType="multipart/form-data"/>
 					</request>
 					<response>
-						<representation mediaType="application/xml" element="prefix2:ManageDeclarationPartitionResponse"/>
+						<representation mediaType="application/xml"
+										element="prefix2:ManageDeclarationPartitionResponse"/>
 					</response>
 				</method>
 			</resource>

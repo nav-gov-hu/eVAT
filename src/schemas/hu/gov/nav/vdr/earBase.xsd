@@ -6,14 +6,15 @@
 # Version: v1.0 2023/02/10
 -->
 <xs:schema xmlns="http://schemas.nav.gov.hu/EAR/1.0/base" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://schemas.nav.gov.hu/NTCA/1.0/common" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/base" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common"/>
+	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common" schemaLocation="../../NTCA/1.0/common.xsd"/>
 	<xs:simpleType name="BarCodeType">
 		<xs:annotation>
 			<xs:documentation xml:lang="hu">Bárkód típus</xs:documentation>
 			<xs:documentation xml:lang="en">Barcode type</xs:documentation>
 		</xs:annotation>
-		<xs:restriction base="xs:integer">
-			<xs:totalDigits value="10"/>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="10"/>
+			<xs:maxLength value="10"/>
 			<xs:pattern value="[0-9]{10}"/>
 		</xs:restriction>
 	</xs:simpleType>
@@ -123,6 +124,32 @@
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Havi</xs:documentation>
 					<xs:documentation xml:lang="en">Monthly</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+<xs:simpleType name="DeclarationMethodType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Bevallás jellegének típusa</xs:documentation>
+			<xs:documentation xml:lang="en">Type of declartion method</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="BASE">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Alap bevallást</xs:documentation>
+					<xs:documentation xml:lang="en">Basic declaration</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="SELF_CHECK">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Önellenőrzés</xs:documentation>
+					<xs:documentation xml:lang="en">Selfcheck</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CORRECTION">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Helyesbítés</xs:documentation>
+					<xs:documentation xml:lang="en">Correction</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
 		</xs:restriction>
@@ -344,6 +371,18 @@
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">A benyújtott bevallás verziószáma</xs:documentation>
 					<xs:documentation xml:lang="en">Version of the submitted declaration</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="declarationMethod" type="DeclarationMethodType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Bevallás jellege</xs:documentation>
+					<xs:documentation xml:lang="en">Method of declaration</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="navCorrection" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">NAV kiértesítés szerinti javítás.</xs:documentation>
+					<xs:documentation xml:lang="en">Correction according to NAV notification.</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
