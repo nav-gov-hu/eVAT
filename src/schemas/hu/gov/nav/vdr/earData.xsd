@@ -6,7 +6,7 @@
 # Version: v1.0 2023/06/02
 -->
 <xs:schema xmlns="http://schemas.nav.gov.hu/EAR/1.0/data" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://schemas.nav.gov.hu/NTCA/1.0/common" xmlns:earbase="http://schemas.nav.gov.hu/EAR/1.0/base" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/data" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common" schemaLocation="../../NTCA/1.0/common.xsd"/>
+	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common" schemaLocation="common.xsd"/>
 	<xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/base" schemaLocation="earBase.xsd"/>
 	<xs:simpleType name="AttachmentCategoryType">
 		<xs:annotation>

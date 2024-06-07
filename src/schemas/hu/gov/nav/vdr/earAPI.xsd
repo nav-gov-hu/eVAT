@@ -4,7 +4,7 @@
 # Project: NAV Elektronikus ÁFA rendszer earAPI XML séma
 # Author: NAV Informatikai Intézet
 
-# Version: v1.0 2023/06/02
+# Version: v1.0 2024/06/02
 -->
 <xs:schema xmlns="http://schemas.nav.gov.hu/EAR/1.0/api" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://schemas.nav.gov.hu/NTCA/1.0/common" xmlns:earbase="http://schemas.nav.gov.hu/EAR/1.0/base" xmlns:eardata="http://schemas.nav.gov.hu/EAR/1.0/data" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/api" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common" schemaLocation="common.xsd"/>

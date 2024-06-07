@@ -6,7 +6,7 @@
 # Version: v1.0 2023/02/10
 -->
 <xs:schema xmlns="http://schemas.nav.gov.hu/EAR/1.0/base" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://schemas.nav.gov.hu/NTCA/1.0/common" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/base" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common" schemaLocation="../../NTCA/1.0/common.xsd"/>
+	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common" schemaLocation="common.xsd"/>
 	<xs:simpleType name="BarCodeType">
 		<xs:annotation>
 			<xs:documentation xml:lang="hu">Bárkód típus</xs:documentation>
