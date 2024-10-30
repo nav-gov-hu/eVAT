@@ -3,10 +3,10 @@
 # Project: NAV Elektronikus ÁFA rendszer earBase XML séma
 # Author: NAV Informatikai Intézet
 
-# Version: v1.0 2023/02/10
+# Version: v1.1 2024/07/04
 -->
 <xs:schema xmlns="http://schemas.nav.gov.hu/EAR/1.0/base" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://schemas.nav.gov.hu/NTCA/1.0/common" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/base" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common" schemaLocation="common.xsd"/>
+	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common" schemaLocation="file:///Z:/work/repos/evat-m2m/evat-m2m-xsd/src/main/resources/xsd/hu/gov/nav/schemas/NTCA/common.xsd"/>
 	<xs:simpleType name="BarCodeType">
 		<xs:annotation>
 			<xs:documentation xml:lang="hu">Bárkód típus</xs:documentation>
@@ -128,7 +128,7 @@
 			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
-<xs:simpleType name="DeclarationMethodType">
+	<xs:simpleType name="DeclarationMethodType">
 		<xs:annotation>
 			<xs:documentation xml:lang="hu">Bevallás jellegének típusa</xs:documentation>
 			<xs:documentation xml:lang="en">Type of declartion method</xs:documentation>
@@ -290,6 +290,163 @@
 			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
+	<xs:simpleType name="FieldNameType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Nyomtatvány oldalain szereplő BEVFELD mező azonosítója típus</xs:documentation>
+			<xs:documentation xml:lang="en">Type of BEVFELD field identifier on the page of the statement</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="13"/>
+			<xs:minLength value="4"/>
+			<xs:pattern value="[A-Z0-9]{4,13}"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FormFrequencyType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Nyilatkozat gyakoriság típus</xs:documentation>
+			<xs:documentation xml:lang="en">Statement frequency type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="common:AtomicStringType200">
+			<xs:enumeration value="MONTHLY_TO_QUARTERLY">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Haviról negyedévesre</xs:documentation>
+					<xs:documentation xml:lang="en">Monthly to quarterly</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="QUARTERLY_TO_MONTHLY">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Negyedévesről havira</xs:documentation>
+					<xs:documentation xml:lang="en">Quarterly to monthly</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="QUARTERLY">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Negyedéves</xs:documentation>
+					<xs:documentation xml:lang="en">Quarterly</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="MONTHLY">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Havi</xs:documentation>
+					<xs:documentation xml:lang="en">Monthly</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FormMethodType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Nyilatkozat jellegének típusa</xs:documentation>
+			<xs:documentation xml:lang="en">Type of statement method</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="common:AtomicStringType32">
+			<xs:enumeration value="BASE">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Alap nyilatkozat</xs:documentation>
+					<xs:documentation xml:lang="en">Base statement</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="CORRECTION">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Helyesbítés</xs:documentation>
+					<xs:documentation xml:lang="en">Correction</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FormNameType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Nyilatkozat megnevezése típus</xs:documentation>
+			<xs:documentation xml:lang="en">Statement name type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="common:AtomicStringType32">
+			<xs:enumeration value="A60">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">A60</xs:documentation>
+					<xs:documentation xml:lang="en">A60</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TaxpayerTitleType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Adózó titulusa típus</xs:documentation>
+			<xs:documentation xml:lang="en">Taxpayer title type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="common:AtomicStringType32">
+			<xs:enumeration value="Dr.">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Doktor</xs:documentation>
+					<xs:documentation xml:lang="en">Doctor</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Dr.Dr.">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Doktor Doktor</xs:documentation>
+					<xs:documentation xml:lang="en">Doctor Doctor</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Dr.Habil.">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Habilitált doktor</xs:documentation>
+					<xs:documentation xml:lang="en">Habilitated doctor</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Dr.Pr.">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Doktor Professzor</xs:documentation>
+					<xs:documentation xml:lang="en">Doctor professor</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Id.">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Idősb</xs:documentation>
+					<xs:documentation xml:lang="en">Senior</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Id.Dr.">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Idősb Doktor</xs:documentation>
+					<xs:documentation xml:lang="en">Senior Doctor</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Ifj.">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Ifjabb</xs:documentation>
+					<xs:documentation xml:lang="en">Junior</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Ifj.Dr.">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Ifjabb Doktor</xs:documentation>
+					<xs:documentation xml:lang="en">Junior Doctor</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Özv.">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Özvegy</xs:documentation>
+					<xs:documentation xml:lang="en">Widow</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Özv.Dr.">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Özvegy Doktor</xs:documentation>
+					<xs:documentation xml:lang="en">Widow Doctor</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Prof.">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Professzor</xs:documentation>
+					<xs:documentation xml:lang="en">Professor</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="Pr.Dr.">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Professzor Doktor</xs:documentation>
+					<xs:documentation xml:lang="en">Professor Doctor</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="TaxpointDateType">
 		<xs:annotation>
 			<xs:documentation xml:lang="hu">Adózási dátum típus (amely napon az adófizetési kötelezettség és/vagy a levonási jog keletkezett)</xs:documentation>
@@ -297,6 +454,16 @@
 		</xs:annotation>
 		<xs:restriction base="xs:date">
 			<xs:minInclusive value="2021-01-01"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="VatIdentificationNumberType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Közösségi adószám típus</xs:documentation>
+			<xs:documentation xml:lang="en">Vat identification number type</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1"/>
+			<xs:maxLength value="10"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="AddressType">
@@ -463,6 +630,92 @@
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Helyrajzi szám</xs:documentation>
 					<xs:documentation xml:lang="en">Lot number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FormInfoType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">A nyomtatvány fejadatai</xs:documentation>
+			<xs:documentation xml:lang="en">Header data of the statement</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="modificationReference" type="ModificationReferenceType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Módosítás adatai</xs:documentation>
+					<xs:documentation xml:lang="en">Modification reference data</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="formName" type="FormNameType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Nyilatkozat megnevezése</xs:documentation>
+					<xs:documentation xml:lang="en">Statement name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="taxIdentificationNumber" type="common:TaxIdentificationNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Adóazonosító jel</xs:documentation>
+					<xs:documentation xml:lang="en">Tax identification number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="taxpayerTitle" type="TaxpayerTitleType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Adózó titulusa</xs:documentation>
+					<xs:documentation xml:lang="en">Taxpayer title</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="surName" type="common:AtomicStringType50" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Családi név</xs:documentation>
+					<xs:documentation xml:lang="en">Surname</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="firstName" type="common:AtomicStringType50" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Utónév</xs:documentation>
+					<xs:documentation xml:lang="en">First name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="vatIdentificationNumber" type="VatIdentificationNumberType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Adózó közösségi adószáma</xs:documentation>
+					<xs:documentation xml:lang="en">VAT identification number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="predecessorVatIdentificationNumber" type="VatIdentificationNumberType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Jogelőd közösségi adószáma</xs:documentation>
+					<xs:documentation xml:lang="en">Predecessor's VAT identification number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="formMethod" type="FormMethodType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Nyilatkozat jellege</xs:documentation>
+					<xs:documentation xml:lang="en">Statement method</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="formFrequency" type="FormFrequencyType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Nyilatkozat gyakorisága</xs:documentation>
+					<xs:documentation xml:lang="en">Statement frequency</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="periodStart" type="TaxpointDateType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Nyomtatvány időszak kezdete</xs:documentation>
+					<xs:documentation xml:lang="en">Statement period start</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="periodEnd" type="TaxpointDateType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Nyomtatvány időszak vége</xs:documentation>
+					<xs:documentation xml:lang="en">Statement period end</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="version" type="common:GenericUnsignedIntegerType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">A benyújtott nyomtatvány verziószáma</xs:documentation>
+					<xs:documentation xml:lang="en">Version of the submitted statement</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>

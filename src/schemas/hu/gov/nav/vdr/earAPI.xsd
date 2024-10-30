@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2016 sp1 (x64) (http://www.altova.com) by NAV (Hungarian Tax Authority) -->
 <!--
 # Project: NAV Elektronikus ÁFA rendszer earAPI XML séma
 # Author: NAV Informatikai Intézet
 
-# Version: v1.0 2024/06/02
+# Version: v1.1 2024/07/04
 -->
 <xs:schema xmlns="http://schemas.nav.gov.hu/EAR/1.0/api" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://schemas.nav.gov.hu/NTCA/1.0/common" xmlns:earbase="http://schemas.nav.gov.hu/EAR/1.0/base" xmlns:eardata="http://schemas.nav.gov.hu/EAR/1.0/data" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/api" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common" schemaLocation="common.xsd"/>
-	<xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/base" schemaLocation="earBase.xsd"/>
-	<xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/data" schemaLocation="earData.xsd"/>
+	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common"/>
+	<xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/base"/>
+	<xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/data"/>
 	<xs:simpleType name="DeclarationDirectionType">
 		<xs:annotation>
 			<xs:documentation xml:lang="hu">Importőri vagy közvetett vámjogi képviselői keresés paramétere</xs:documentation>
@@ -795,12 +794,20 @@
 			<xs:documentation xml:lang="en">Declaration data</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="declarationInfo" type="earbase:DeclarationInfoType">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">A bevallás fejadatai</xs:documentation>
-					<xs:documentation xml:lang="en">Header data of the declaration</xs:documentation>
-				</xs:annotation>
-			</xs:element>
+			<xs:choice>
+				<xs:element name="declarationInfo" type="earbase:DeclarationInfoType">
+					<xs:annotation>
+						<xs:documentation xml:lang="hu">A bevallás fejadatai</xs:documentation>
+						<xs:documentation xml:lang="en">Header data of the declaration</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="formInfo" type="earbase:FormInfoType">
+					<xs:annotation>
+						<xs:documentation xml:lang="hu">A nyilatkozat fejadatai</xs:documentation>
+						<xs:documentation xml:lang="en">Header data of the statement</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
 			<xs:element name="contentHash" type="common:CryptoType">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">A feltöltött állományra számított hash algoritmus neve és értéke</xs:documentation>
@@ -813,7 +820,7 @@
 					<xs:documentation xml:lang="en">Declaration schema of the uploaded content</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="declarationSummary" type="eardata:DeclarationSummaryType">
+			<xs:element name="declarationSummary" type="eardata:DeclarationSummaryType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">A bevallás összegző adatai</xs:documentation>
 					<xs:documentation xml:lang="en">Summary data of the declaration</xs:documentation>
@@ -947,7 +954,7 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="DeclarationListItemType">
+	<xs:complexType name="AnalyticsListItemType">
 		<xs:annotation>
 			<xs:documentation xml:lang="hu">Bevallási lista elem</xs:documentation>
 			<xs:documentation xml:lang="en">Declaration list item</xs:documentation>
@@ -965,12 +972,20 @@
 					<xs:documentation xml:lang="en">Declaration schema of the uploaded content</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="declarationInfo" type="earbase:DeclarationInfoType">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">A bevallás fejadatai</xs:documentation>
-					<xs:documentation xml:lang="en">Header data of the declaration</xs:documentation>
-				</xs:annotation>
-			</xs:element>
+			<xs:choice>
+				<xs:element name="declarationInfo" type="earbase:DeclarationInfoType">
+					<xs:annotation>
+						<xs:documentation xml:lang="hu">A bevallás fejadatai</xs:documentation>
+						<xs:documentation xml:lang="en">Header data of the declaration</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="formInfo" type="earbase:FormInfoType">
+					<xs:annotation>
+						<xs:documentation xml:lang="hu">A nyilatkozat fejadatai</xs:documentation>
+						<xs:documentation xml:lang="en">Header data of the statement</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
 			<xs:element name="originalRequestVersion" type="common:AtomicStringType15">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">A bevallás requestVersion értéke</xs:documentation>
@@ -985,10 +1000,24 @@
 			<xs:documentation xml:lang="en">List of declarations</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="declarationListItem" type="DeclarationListItemType" maxOccurs="unbounded">
+			<xs:element name="declarationListItem" type="AnalyticsListItemType" maxOccurs="unbounded">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Bevallási lista elem</xs:documentation>
 					<xs:documentation xml:lang="en">Declaration list item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FormListType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Nyilatkozatok listája</xs:documentation>
+			<xs:documentation xml:lang="en">List of statements</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="formListItem" type="AnalyticsListItemType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Nyilatkozat lista elem</xs:documentation>
+					<xs:documentation xml:lang="en">Statement list item</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -999,12 +1028,20 @@
 			<xs:documentation xml:lang="en">Declaration processing status</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="declarationInfo" type="earbase:DeclarationInfoType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">A bevallás fejadatai</xs:documentation>
-					<xs:documentation xml:lang="en">Header data of the declaration</xs:documentation>
-				</xs:annotation>
-			</xs:element>
+			<xs:choice minOccurs="0">
+				<xs:element name="declarationInfo" type="earbase:DeclarationInfoType">
+					<xs:annotation>
+						<xs:documentation xml:lang="hu">A bevallás fejadatai</xs:documentation>
+						<xs:documentation xml:lang="en">Header data of the declaration</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="formInfo" type="earbase:FormInfoType">
+					<xs:annotation>
+						<xs:documentation xml:lang="hu">A nyilatkozat fejadatai</xs:documentation>
+						<xs:documentation xml:lang="en">Header data of the statement</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
 			<xs:element name="declarationStatus" type="DeclarationStatusType">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">A bevallás feldolgozási státusza</xs:documentation>
@@ -1549,6 +1586,12 @@
 							<xs:documentation xml:lang="en">Processing identifier</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+					<xs:element name="declarationSchema" type="DeclarationSchemaType">
+						<xs:annotation>
+							<xs:documentation xml:lang="hu">A bevallás sémájának típusa</xs:documentation>
+							<xs:documentation xml:lang="en">Type of declaration schema</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -1567,7 +1610,7 @@
 							<xs:documentation xml:lang="en">Name and value of the hash algorithm calculated for the uploaded content</xs:documentation>
 						</xs:annotation>
 					</xs:element>
-					<xs:element name="declarationSummary" type="eardata:DeclarationSummaryType">
+					<xs:element name="declarationSummary" type="eardata:DeclarationSummaryType" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation xml:lang="hu">A bevallás összegző adatai</xs:documentation>
 							<xs:documentation xml:lang="en">Summary data of the declaration</xs:documentation>
@@ -1901,6 +1944,12 @@
 							<xs:documentation xml:lang="en">Processing identifier</xs:documentation>
 						</xs:annotation>
 					</xs:element>
+					<xs:element name="declarationSchema" type="DeclarationSchemaType">
+						<xs:annotation>
+							<xs:documentation xml:lang="hu">A bevallás sémájának típusa</xs:documentation>
+							<xs:documentation xml:lang="en">Type of declaration schema</xs:documentation>
+						</xs:annotation>
+					</xs:element>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>
@@ -1954,14 +2003,22 @@
 		</xs:annotation>
 		<xs:complexContent>
 			<xs:extension base="common:BasicResponseType">
-				<xs:sequence>
-					<xs:element name="declarationList" type="DeclarationListType" minOccurs="0">
-						<xs:annotation>
-							<xs:documentation xml:lang="hu">Bevallások listája</xs:documentation>
-							<xs:documentation xml:lang="en">List of declarations</xs:documentation>
-						</xs:annotation>
-					</xs:element>
-				</xs:sequence>
+				<xs:choice minOccurs="0">
+					<xs:sequence>
+						<xs:element name="declarationList" type="DeclarationListType">
+							<xs:annotation>
+								<xs:documentation xml:lang="hu">Bevallások listája</xs:documentation>
+								<xs:documentation xml:lang="en">List of declarations</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="formList" type="FormListType">
+							<xs:annotation>
+								<xs:documentation xml:lang="hu">Nyilatkozatok listája</xs:documentation>
+								<xs:documentation xml:lang="en">List of statements</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:choice>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -1977,6 +2034,12 @@
 						<xs:annotation>
 							<xs:documentation xml:lang="hu">Feldolgozási azonosító</xs:documentation>
 							<xs:documentation xml:lang="en">Processing identifier</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="declarationSchema" type="DeclarationSchemaType">
+						<xs:annotation>
+							<xs:documentation xml:lang="hu">A bevallás sémájának típusa</xs:documentation>
+							<xs:documentation xml:lang="en">Type of declaration schema</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>
@@ -2181,6 +2244,12 @@
 						<xs:annotation>
 							<xs:documentation xml:lang="hu">Feldolgozási azonosító</xs:documentation>
 							<xs:documentation xml:lang="en">Processing identifier</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="declarationSchema" type="DeclarationSchemaType">
+						<xs:annotation>
+							<xs:documentation xml:lang="hu">A bevallás sémájának típusa</xs:documentation>
+							<xs:documentation xml:lang="en">Type of declaration schema</xs:documentation>
 						</xs:annotation>
 					</xs:element>
 				</xs:sequence>

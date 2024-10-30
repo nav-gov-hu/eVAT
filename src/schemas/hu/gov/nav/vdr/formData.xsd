@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Project: NAV Elektronikus ÁFA rendszer formData XML séma
+# Author: NAV Informatikai Intézet
+
+# Version: v1.1 2024/07/04
+-->
+<xs:schema xmlns="http://schemas.nav.gov.hu/EAR/1.0/form" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:common="http://schemas.nav.gov.hu/NTCA/1.0/common" xmlns:earbase="http://schemas.nav.gov.hu/EAR/1.0/base"
+           targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/form" elementFormDefault="qualified">
+    <xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common"/>
+    <xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/base"/>
+    <xs:simpleType name="PageNameType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">A nyomtatvány oldalának neve típus</xs:documentation>
+            <xs:documentation xml:lang="en">Name of statement page type</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="common:AtomicStringType32">
+            <xs:enumeration value="A60_01">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">A60-01</xs:documentation>
+                    <xs:documentation xml:lang="en">A60-01</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="A60_02">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">A60-02</xs:documentation>
+                    <xs:documentation xml:lang="en">A60-02</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="A60_03">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">A60-03</xs:documentation>
+                    <xs:documentation xml:lang="en">A60-03</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="A60_04">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">A60-04</xs:documentation>
+                    <xs:documentation xml:lang="en">A60-04</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="A60_05">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">A60-05</xs:documentation>
+                    <xs:documentation xml:lang="en">A60-05</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="PageFieldType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Nyomtatvány oldal mezőinek típusa</xs:documentation>
+            <xs:documentation xml:lang="en">Type of statement page fields</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="pageFieldName" type="earbase:FieldNameType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Nyomtatvány oldalakon szereplő BEVFELD mező azonosítója</xs:documentation>
+                    <xs:documentation xml:lang="en">BEVFELD field identifier on the page of statement</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="pageFieldValue" type="common:SimpleText512NotBlankType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Nyomtatvány oldalakon szereplő BEVFELD mező értéke</xs:documentation>
+                    <xs:documentation xml:lang="en">BEVFELD field value on the page of the statement</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PageListType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Nyomtatvány oldalak listájának típusa</xs:documentation>
+            <xs:documentation xml:lang="en">Type of statement page list</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="page" type="PageType" maxOccurs="5">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Nyomtatvány oldal</xs:documentation>
+                    <xs:documentation xml:lang="en">Statement page</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PageType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Nyomtatvány oldal típusa</xs:documentation>
+            <xs:documentation xml:lang="en">Statement page type</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="pageName" type="PageNameType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">A nyomtatvány oldalának neve</xs:documentation>
+                    <xs:documentation xml:lang="en">Name of statement page</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="pageField" type="PageFieldType" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">A nyomtatvány oldalának mezői</xs:documentation>
+                    <xs:documentation xml:lang="en">Fields of statement page</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="FormDataType">
+        <xs:sequence>
+            <xs:element name="formInfo" type="earbase:FormInfoType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">A nyomtatvány fejadatai</xs:documentation>
+                    <xs:documentation xml:lang="en">Header data of the statement</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="pageList" type="PageListType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">A nyomtatvány oldalainak listája</xs:documentation>
+                    <xs:documentation xml:lang="en">Page list of the statement</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="formData">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">XML root element</xs:documentation>
+            <xs:documentation xml:lang="en">XML root element</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="FormDataType"/>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

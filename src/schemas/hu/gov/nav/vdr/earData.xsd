@@ -3,11 +3,11 @@
 # Project: NAV Elektronikus ÁFA rendszer earData XML séma
 # Author: NAV Informatikai Intézet
 
-# Version: v1.0 2023/06/02
+# Version: v1.1 2024/07/04
 -->
 <xs:schema xmlns="http://schemas.nav.gov.hu/EAR/1.0/data" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://schemas.nav.gov.hu/NTCA/1.0/common" xmlns:earbase="http://schemas.nav.gov.hu/EAR/1.0/base" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/data" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common" schemaLocation="common.xsd"/>
-	<xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/base" schemaLocation="earBase.xsd"/>
+	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common" schemaLocation="file:///Z:/work/repos/evat-m2m/evat-m2m-xsd/src/main/resources/xsd/hu/gov/nav/schemas/NTCA/common.xsd"/>
+	<xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/base" schemaLocation="file:///Z:/work/repos/evat-m2m/evat-m2m-xsd/src/main/resources/xsd/hu/gov/nav/schemas/EAR/earBase.xsd"/>
 	<xs:simpleType name="AttachmentCategoryType">
 		<xs:annotation>
 			<xs:documentation xml:lang="hu">Csatolmány típus</xs:documentation>
@@ -162,17 +162,6 @@
 					<xs:documentation xml:lang="en">Request for transfer to a tax account</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="SheetFieldNameType">
-		<xs:annotation>
-			<xs:documentation xml:lang="hu">Melléklapon szereplő BEVFELD mező azonosítója</xs:documentation>
-			<xs:documentation xml:lang="en">BEVFELD field identifier on the sheet</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:maxLength value="13"/>
-			<xs:minLength value="4"/>
-			<xs:pattern value="[A-Z0-9]{4,13}"/>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="SheetNameType">
@@ -833,7 +822,7 @@
 			<xs:documentation xml:lang="en">Sheet fields</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="sheetFieldName" type="SheetFieldNameType">
+			<xs:element name="sheetFieldName" type="earbase:FieldNameType">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">A melléklapon szereplő BEVFELD mező azonosítója</xs:documentation>
 					<xs:documentation xml:lang="en">BEVFELD field identifier on the sheet</xs:documentation>
