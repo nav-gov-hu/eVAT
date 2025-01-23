@@ -6,7 +6,7 @@
 # Version: v1.1 2024/07/04
 -->
 <xs:schema xmlns="http://schemas.nav.gov.hu/EAR/1.0/base" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://schemas.nav.gov.hu/NTCA/1.0/common" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/base" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common" schemaLocation="file:///Z:/work/repos/evat-m2m/evat-m2m-xsd/src/main/resources/xsd/hu/gov/nav/schemas/NTCA/common.xsd"/>
+	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common"/>
 	<xs:simpleType name="BarCodeType">
 		<xs:annotation>
 			<xs:documentation xml:lang="hu">Bárkód típus</xs:documentation>
@@ -128,7 +128,7 @@
 			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:simpleType name="DeclarationMethodType">
+<xs:simpleType name="DeclarationMethodType">
 		<xs:annotation>
 			<xs:documentation xml:lang="hu">Bevallás jellegének típusa</xs:documentation>
 			<xs:documentation xml:lang="en">Type of declartion method</xs:documentation>

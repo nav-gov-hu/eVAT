@@ -6,8 +6,8 @@
 # Version: v1.1 2024/07/04
 -->
 <xs:schema xmlns="http://schemas.nav.gov.hu/EAR/1.0/data" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://schemas.nav.gov.hu/NTCA/1.0/common" xmlns:earbase="http://schemas.nav.gov.hu/EAR/1.0/base" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/data" elementFormDefault="qualified" attributeFormDefault="unqualified">
-	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common" schemaLocation="file:///Z:/work/repos/evat-m2m/evat-m2m-xsd/src/main/resources/xsd/hu/gov/nav/schemas/NTCA/common.xsd"/>
-	<xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/base" schemaLocation="file:///Z:/work/repos/evat-m2m/evat-m2m-xsd/src/main/resources/xsd/hu/gov/nav/schemas/EAR/earBase.xsd"/>
+	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common"/>
+	<xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/base"/>
 	<xs:simpleType name="AttachmentCategoryType">
 		<xs:annotation>
 			<xs:documentation xml:lang="hu">Csatolmány típus</xs:documentation>
@@ -1065,6 +1065,44 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="DeclarationAdditionalDataType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">A bevallás kiegészítő adatai</xs:documentation>
+			<xs:documentation xml:lang="en">Additional data of the declaration</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="totalIncreasePaymentCorrectedTax" type="TaxMonetaryType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Az ÁFA tv. 153/c alapján fizetendő adót növelő tétel összesen / számlakorrekcióval érintett adó</xs:documentation>
+					<xs:documentation xml:lang="en">Total tax increase payable under VAT Act 153/c / tax affected by invoice correction</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="domesticAcquisitionOfFivePercentReverseDeductedTax" type="TaxMonetaryType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">5% kulcs alá tartozó belföldi termékbeszerzés, szolgáltatás után / számlakorrekcióval érintett adó</xs:documentation>
+					<xs:documentation xml:lang="en">Domestic acquisition of goods and services subject to the 5% VAT rate / tax affected by invoice correction</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="domesticAcquisitionOfTenPercentReverseDeductedTax" type="TaxMonetaryType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">10% kulcs alá tartozó belföldi termékbeszerzés, szolgáltatás után / számlakorrekcióval érintett adó</xs:documentation>
+					<xs:documentation xml:lang="en">Domestic acquisition of goods and services subject to the 10% VAT rate / tax affected by invoice correction</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="domesticAcquisitionOfEighteenPercentReverseDeductedTax" type="TaxMonetaryType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">18% kulcs alá tartozó belföldi termékbeszerzés, szolgáltatás után / számlakorrekcióval érintett adó</xs:documentation>
+					<xs:documentation xml:lang="en">Domestic acquisition of goods and services subject to the 18% VAT rate / tax affected by invoice correction</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="domesticAcquisitionOfTwentySevenPercentReverseDeductedTax" type="TaxMonetaryType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">27% kulcs alá tartozó belföldi termékbeszerzés, szolgáltatás után / számlakorrekcióval érintett adó</xs:documentation>
+					<xs:documentation xml:lang="en">Domestic acquisition of goods and services subject to the 27% VAT rate / tax affected by invoice correction</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="VatDeclarationDataType">
 		<xs:annotation>
 			<xs:documentation xml:lang="hu">Az ÁFA bevallás adatai</xs:documentation>
@@ -1099,6 +1137,12 @@
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">A bevallás összegző adatai</xs:documentation>
 					<xs:documentation xml:lang="en">Summary data of the declaration</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="declarationAdditionalData" type="DeclarationAdditionalDataType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">A bevallás kiegészítő adatai</xs:documentation>
+					<xs:documentation xml:lang="en">Additional data of the declaration</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="sheetList" type="SheetListType" minOccurs="0">
