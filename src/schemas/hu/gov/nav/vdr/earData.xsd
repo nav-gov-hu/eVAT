@@ -176,6 +176,12 @@
 					<xs:documentation xml:lang="en">Request for payment deferral because of compensation due to epidemiological measures related to animal diseases</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
+			<xs:enumeration value="VAT_SHEET_3">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Közvetett vámjogi képviselő importonkénti nyilatkozata engedményezett adólevonási jog érvényesítése esetén</xs:documentation>
+					<xs:documentation xml:lang="en">Declaration of the indirect customs representative per import in case of the enforcement of the assigned tax deduction right</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 			<xs:enumeration value="VAT_SHEET_6">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">A behajthatatlan követelés elszámolásával összefüggő nyilatkozatok</xs:documentation>
@@ -842,7 +848,7 @@
 			<xs:documentation xml:lang="en">Sheets</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="sheet" type="SheetType" maxOccurs="9">
+			<xs:element name="sheet" type="SheetType" maxOccurs="10">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Melléklap</xs:documentation>
 					<xs:documentation xml:lang="en">Sheet</xs:documentation>
@@ -1079,26 +1085,38 @@
 			</xs:element>
 			<xs:element name="domesticAcquisitionOfFivePercentReverseDeductedTax" type="TaxMonetaryType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation xml:lang="hu">5% kulcs alá tartozó belföldi termékbeszerzés, szolgáltatás után / számlakorrekcióval érintett adó</xs:documentation>
-					<xs:documentation xml:lang="en">Domestic acquisition of goods and services subject to the 5% VAT rate / tax affected by invoice correction</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="domesticAcquisitionOfTenPercentReverseDeductedTax" type="TaxMonetaryType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">10% kulcs alá tartozó belföldi termékbeszerzés, szolgáltatás után / számlakorrekcióval érintett adó</xs:documentation>
-					<xs:documentation xml:lang="en">Domestic acquisition of goods and services subject to the 10% VAT rate / tax affected by invoice correction</xs:documentation>
+					<xs:documentation xml:lang="hu">5% kulcs alá tartozó belföldi termékbeszerzés, szolgáltatás után / fordított adózás alá eső ügylet után levont adó</xs:documentation>
+					<xs:documentation xml:lang="en">Domestic acquisition of goods and services subject to the 5% VAT rate / deducted tax on transactions under reverse charge mechanism</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="domesticAcquisitionOfEighteenPercentReverseDeductedTax" type="TaxMonetaryType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation xml:lang="hu">18% kulcs alá tartozó belföldi termékbeszerzés, szolgáltatás után / számlakorrekcióval érintett adó</xs:documentation>
-					<xs:documentation xml:lang="en">Domestic acquisition of goods and services subject to the 18% VAT rate / tax affected by invoice correction</xs:documentation>
+					<xs:documentation xml:lang="hu">18% kulcs alá tartozó belföldi termékbeszerzés, szolgáltatás után / fordított adózás alá eső ügylet után levont adó</xs:documentation>
+					<xs:documentation xml:lang="en">Domestic acquisition of goods and services subject to the 18% VAT rate / deducted tax on transactions under reverse charge mechanism</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="domesticAcquisitionOfTwentySevenPercentReverseDeductedTax" type="TaxMonetaryType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation xml:lang="hu">27% kulcs alá tartozó belföldi termékbeszerzés, szolgáltatás után / számlakorrekcióval érintett adó</xs:documentation>
-					<xs:documentation xml:lang="en">Domestic acquisition of goods and services subject to the 27% VAT rate / tax affected by invoice correction</xs:documentation>
+					<xs:documentation xml:lang="hu">27% kulcs alá tartozó belföldi termékbeszerzés, szolgáltatás után / fordított adózás alá eső ügylet után levont adó</xs:documentation>
+					<xs:documentation xml:lang="en">Domestic acquisition of goods and services subject to the 27% VAT rate / deducted tax on transactions under reverse charge mechanism</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="proportionalDeductibleAmountReverseDeductedTax" type="TaxMonetaryType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Arányosítás alkalmazásával levonható adórész (Eredeti adóalap, arányosított adó) / fordított adózás alá eső ügylet után levont adó</xs:documentation>
+					<xs:documentation xml:lang="en">Proportional deductible tax amount (original tax base, proportioned tax) / deducted tax on transactions under reverse charge mechanism</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="importedTaxDeductAssessed" type="TaxMonetaryType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Importált termék után (kivetéssel) megfizetett adó levonható része / közvetett vámjogi képviselő által érvényesített, engedményezett adólevonás összege</xs:documentation>
+					<xs:documentation xml:lang="en">The deductible portion of the tax paid  (with assessment) on imported goods / amount of tax deduction enforced and assigned by an indirect customs representative</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="importedTaxDeductSelfAssessed" type="TaxMonetaryType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Importált termék után (önadózással) megfizetett adó levonható része / közvetett vámjogi képviselő által érvényesített, engedményezett adólevonás összege</xs:documentation>
+					<xs:documentation xml:lang="en">The deductible portion of the tax paid (via self-assessment) on imported goods / amount of tax deduction enforced and assigned by an indirect customs representative</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>

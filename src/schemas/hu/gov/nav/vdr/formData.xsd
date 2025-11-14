@@ -5,7 +5,9 @@
 
 # Version: v1.1 2024/07/04
 -->
-<xs:schema xmlns="http://schemas.nav.gov.hu/EAR/1.0/form" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://schemas.nav.gov.hu/NTCA/1.0/common" xmlns:earbase="http://schemas.nav.gov.hu/EAR/1.0/base" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/form" elementFormDefault="qualified">
+<xs:schema xmlns="http://schemas.nav.gov.hu/EAR/1.0/form" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:common="http://schemas.nav.gov.hu/NTCA/1.0/common" xmlns:earbase="http://schemas.nav.gov.hu/EAR/1.0/base"
+           targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/form" elementFormDefault="qualified">
     <xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common"/>
     <xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/base"/>
     <xs:simpleType name="PageNameType">

@@ -61,6 +61,12 @@
 					<xs:documentation xml:lang="en">VAT declaration</xs:documentation>
 				</xs:annotation>
 			</xs:enumeration>
+			<xs:enumeration value="A60">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">A60 nyomtatvány</xs:documentation>
+					<xs:documentation xml:lang="en">A60 statement</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:simpleType name="DeclarationStatusCodeType">
