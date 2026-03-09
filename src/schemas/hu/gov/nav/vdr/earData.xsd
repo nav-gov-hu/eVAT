@@ -3,341 +3,11 @@
 # Project: NAV Elektronikus ÁFA rendszer earData XML séma
 # Author: NAV Informatikai Intézet
 
-# Version: v1.1 2024/07/04
+# # Version: v2.0 2026/03/01
 -->
 <xs:schema xmlns="http://schemas.nav.gov.hu/EAR/1.0/data" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:common="http://schemas.nav.gov.hu/NTCA/1.0/common" xmlns:earbase="http://schemas.nav.gov.hu/EAR/1.0/base" targetNamespace="http://schemas.nav.gov.hu/EAR/1.0/data" elementFormDefault="qualified" attributeFormDefault="unqualified">
 	<xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common"/>
 	<xs:import namespace="http://schemas.nav.gov.hu/EAR/1.0/base"/>
-	<xs:simpleType name="AttachmentCategoryType">
-		<xs:annotation>
-			<xs:documentation xml:lang="hu">Csatolmány típus</xs:documentation>
-			<xs:documentation xml:lang="en">Attachment type</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="FACTORING_CONTRACT">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Faktorálási szerződés</xs:documentation>
-					<xs:documentation xml:lang="en">Factoring contract</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="FactoringTaxCodeType">
-		<xs:annotation>
-			<xs:documentation xml:lang="hu">Faktorálási szerződéshez kapcsolódó adókód</xs:documentation>
-			<xs:documentation xml:lang="en">Tax code related to the factoring contract</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="VAT_104">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">104-es adónemkód ÁFÁ-hoz</xs:documentation>
-					<xs:documentation xml:lang="en">104 tax code for VAT</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="SELF_CHECK_ALLOWANCE_215">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">215-ös adókód önellenőrzési pótlékhoz</xs:documentation>
-					<xs:documentation xml:lang="en">215 tax code for self check allowance</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="OutOfTurnDeclarationCodeType">
-		<xs:annotation>
-			<xs:documentation xml:lang="hu">Soron kívüli bevallás kódja</xs:documentation>
-			<xs:documentation xml:lang="en">Out-of-turn declaration's code</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="PRE_COMPANY_PERIOD_CLOSURE">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Előtársasági időszak lezárása</xs:documentation>
-					<xs:documentation xml:lang="en">Closing of the pre-company period</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="FOREIGN_CURRENCY_CHANGE">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Devizanem váltása</xs:documentation>
-					<xs:documentation xml:lang="en">Change currency</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="OTHER_INCORPORATION_CHANGE">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Egyéb gazdálkodó átalakulása</xs:documentation>
-					<xs:documentation xml:lang="en">Transformation of other incorporation</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="PRE_COMPANY_PERIOD_DECLARATION">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Előtársasági időszakot tartalmazó teljes bevallási időszak</xs:documentation>
-					<xs:documentation xml:lang="en">Complete declaration period including pre-company period</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="TAX_WAREHOUSE_OUT_OF_TURN_DECLARATION">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Adóraktár képviselője által beadott soron kívüli bevallás az ÁFA törvény 89/A.§ szerint</xs:documentation>
-					<xs:documentation xml:lang="en">Out-of-turn declaration submitted by a tax warehouse representative according to § 89/A of the VAT Act</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="PartnerStatusType">
-		<xs:annotation>
-			<xs:documentation xml:lang="hu">Partner áfa szerinti státusza</xs:documentation>
-			<xs:documentation xml:lang="en">Partner's VAT-related status</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="NOT_AVAILABLE">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Nem ismert az ügyviteli program számára</xs:documentation>
-					<xs:documentation xml:lang="en">Not available for the management software</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="PRIVATE_PERSON">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Nem áfaalany, külföldi vagy belföldi természetes személy</xs:documentation>
-					<xs:documentation xml:lang="en">Non-VAT subject (domestic or foreign) natural person</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="DOMESTIC">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Belföldi áfaalany</xs:documentation>
-					<xs:documentation xml:lang="en">Domestic VAT subject</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="OTHER">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Egyéb (belföldi nem áfaalany, nem természetes személy, külföldi áfaalany és külföldi nem áfaalany, nem természetes személy)</xs:documentation>
-					<xs:documentation xml:lang="en">Other (domestic non-VAT subject, non-natural person, foreign VAT subject and foreign non-VAT subject, non-natural person)</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="PositionTypeType">
-		<xs:annotation>
-			<xs:documentation xml:lang="hu">Áfa pozíció jelölése</xs:documentation>
-			<xs:documentation xml:lang="en">VAT position type</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="PAYABLE">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Fizetendő áfa</xs:documentation>
-					<xs:documentation xml:lang="en">Payable VAT</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="DEDUCTIBLE">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Levonható áfa</xs:documentation>
-					<xs:documentation xml:lang="en">Deductible VAT</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="OTHER">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Egyéb</xs:documentation>
-					<xs:documentation xml:lang="en">Other</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="ReturnDecisionType">
-		<xs:annotation>
-			<xs:documentation xml:lang="hu">Visszautalási döntés</xs:documentation>
-			<xs:documentation xml:lang="en">Return decision</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="NO_RETURN">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Nem kér kiutalást</xs:documentation>
-					<xs:documentation xml:lang="en">No request for return</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="FULL_RETURN">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Teljes összeg kiutalása</xs:documentation>
-					<xs:documentation xml:lang="en">Return of the full amount</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="TAX_ACCOUNT_TRANSFER">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Adószámlára átvezetési kérelem</xs:documentation>
-					<xs:documentation xml:lang="en">Request for transfer to a tax account</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="SheetNameType">
-		<xs:annotation>
-			<xs:documentation xml:lang="hu">Melléklap neve</xs:documentation>
-			<xs:documentation xml:lang="en">Name of the sheet</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="VAT_SHEET_2">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Állatbetegséggel összefüggő járványügyi intézkedés miatti kártalanítás okán fizetési halasztás kérése</xs:documentation>
-					<xs:documentation xml:lang="en">Request for payment deferral because of compensation due to epidemiological measures related to animal diseases</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="VAT_SHEET_3">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Közvetett vámjogi képviselő importonkénti nyilatkozata engedményezett adólevonási jog érvényesítése esetén</xs:documentation>
-					<xs:documentation xml:lang="en">Declaration of the indirect customs representative per import in case of the enforcement of the assigned tax deduction right</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="VAT_SHEET_6">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">A behajthatatlan követelés elszámolásával összefüggő nyilatkozatok</xs:documentation>
-					<xs:documentation xml:lang="en">Statements relating to the settlement of an irrecoverable debt</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="VAT_SHEET_7">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Az Áfa tv. 6/A., 6/B. és a 6/C. számú mellékletei szerint a fordított adózás keretében történt értékesítésre vonatkozó nyilatkozat</xs:documentation>
-					<xs:documentation xml:lang="en">Statement for reverse charge sales according to Annexes 6/A, 6/B and 6/C of the VAT Act</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="VAT_SHEET_8">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Az Áfa tv. 6/A., 6/B. és a 6/C. számú mellékletei szerint a fordított adózás keretében történt beszerzésre vonatkozó nyilatkozat</xs:documentation>
-					<xs:documentation xml:lang="en">Statement for reverse charge purchases according to Annexes 6/A, 6/B and 6/C of the VAT Act</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="VAT_SHEET_9">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Az Áfa tv. 4/A. számú melléklet II. pont szerinti adatszolgáltatás a személygépkocsi alvázszámáról</xs:documentation>
-					<xs:documentation xml:lang="en">Data report on the chassis number of passenger car according to Annex 4/A, point II of the VAT Act</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="VAT_SHEET_A88">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Adatszolgáltatás új közlekedési eszköz értékesítéséről</xs:documentation>
-					<xs:documentation xml:lang="en">Data report on the sale of new means of transport</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="VAT_SHEET_170">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Átvezetési és kiutalási kérelem a pénzforgalmat lebonyolító bizonylatokhoz</xs:documentation>
-					<xs:documentation xml:lang="en">Transfer and assignment request for receipts handling cash flow</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="VAT_SHEET_4">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Önellenőrzési melléklet</xs:documentation>
-					<xs:documentation xml:lang="en">Self-audit attachment</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="VAT_SHEET_EUNY">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Nyilatkozat az önellenőrzés indokáról, ha az adókötelezettséget megállapító jogszabály alaptörvény-ellenes vagy az Európai Unió kötelező jogi aktusába ütközik</xs:documentation>
-					<xs:documentation xml:lang="en">Statement on the reason for the self-audit, if the legislation establishing tax liability is unconstitutional or conflicts with a mandatory legal act of the European Union</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="SheetPageCountType">
-		<xs:annotation>
-			<xs:documentation xml:lang="hu">Melléklap oldalainak száma</xs:documentation>
-			<xs:documentation xml:lang="en">Number of pages of a sheet</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:integer">
-			<xs:totalDigits value="3"/>
-			<xs:minInclusive value="1"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="VpidType">
-		<xs:annotation>
-			<xs:documentation xml:lang="hu">VPID szám</xs:documentation>
-			<xs:documentation xml:lang="en">EORI number</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:maxLength value="12"/>
-			<xs:pattern value="[0-9]{12}"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="SourceDocumentTypeType">
-		<xs:annotation>
-			<xs:documentation xml:lang="hu">Forrás dokumentum bizonylat típusa</xs:documentation>
-			<xs:documentation xml:lang="en">Type of the source document</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="INVOICE">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Számla</xs:documentation>
-					<xs:documentation xml:lang="en">Invoice</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="RECEIPT">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Nyugta</xs:documentation>
-					<xs:documentation xml:lang="en">Receipt</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="CUSTOMS_DECLARATION">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Vámáru határozat</xs:documentation>
-					<xs:documentation xml:lang="en">Customs declaration</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="OTHER">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Egyéb bizonylat</xs:documentation>
-					<xs:documentation xml:lang="en">Other document</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="TaxMonetaryType">
-		<xs:annotation>
-			<xs:documentation xml:lang="hu">Adó összeg típusa</xs:documentation>
-			<xs:documentation xml:lang="en">Tax amount type</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:decimal">
-			<xs:totalDigits value="18"/>
-			<xs:fractionDigits value="2"/>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="TaxpayerStatusCodeType">
-		<xs:annotation>
-			<xs:documentation xml:lang="hu">Adózói státusz kódja</xs:documentation>
-			<xs:documentation xml:lang="en">Taxpayer status code</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="CODE_1">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Közösségi adószámmal rendelkező, áfaalanynak nem minősülő adófizetésre kötelezett jogi személy</xs:documentation>
-					<xs:documentation xml:lang="en">Legal person with Community tax number who is not a VAT subject but obligated to pay VAT</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="CODE_3">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Közösségi adószámmal nem rendelkező, áfaalanynak nem minősülő természetes személy</xs:documentation>
-					<xs:documentation xml:lang="en">Natural person without Community tax number who is not a VAT subject</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="CODE_4">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Közösségi adószámmal nem rendelkező, áfaalanynak nem minősülő egyéb szervezet</xs:documentation>
-					<xs:documentation xml:lang="en">Other organization without Community tax number that is not a VAT subject</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-			<xs:enumeration value="CODE_5">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Közösségi adószámmal nem rendelkező, áfaalanynak nem minősülő jogi személy</xs:documentation>
-					<xs:documentation xml:lang="en">Legal person without Community tax number who is not a VAT subject</xs:documentation>
-				</xs:annotation>
-			</xs:enumeration>
-		</xs:restriction>
-	</xs:simpleType>
-	<xs:simpleType name="TaxRateType">
-		<xs:annotation>
-			<xs:documentation xml:lang="hu">Hányados típusa</xs:documentation>
-			<xs:documentation xml:lang="en">Rate type</xs:documentation>
-		</xs:annotation>
-		<xs:restriction base="xs:decimal">
-			<xs:fractionDigits value="4"/>
-			<xs:totalDigits value="5"/>
-			<xs:minExclusive value="0"/>
-			<xs:maxExclusive value="1"/>
-		</xs:restriction>
-	</xs:simpleType>
 	<xs:complexType name="AdditionalAttachmentInfoType">
 		<xs:annotation>
 			<xs:documentation xml:lang="hu">Csatolmány egyéb adatai</xs:documentation>
@@ -384,7 +54,7 @@
 					<xs:documentation xml:lang="en">Identifier received when uploading the attachment</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="attachmentCategory" type="AttachmentCategoryType">
+			<xs:element name="attachmentCategory" type="earbase:AttachmentCategoryType">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Csatolmány típus</xs:documentation>
 					<xs:documentation xml:lang="en">Attachment type</xs:documentation>
@@ -404,13 +74,13 @@
 			<xs:documentation xml:lang="en">Statements</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="returnDecision" type="ReturnDecisionType" minOccurs="0">
+			<xs:element name="returnDecision" type="earbase:ReturnDecisionType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Visszautalási döntés</xs:documentation>
 					<xs:documentation xml:lang="en">Return decision</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="taxpayerStatusCode" type="TaxpayerStatusCodeType" minOccurs="0">
+			<xs:element name="taxpayerStatusCode" type="earbase:TaxpayerStatusCodeType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Adózói státusz</xs:documentation>
 					<xs:documentation xml:lang="en">Taxpayer status</xs:documentation>
@@ -440,7 +110,8 @@
 				<xs:sequence>
 					<xs:element name="lapsedResidualTaxIndicator" type="xs:boolean" minOccurs="0">
 						<xs:annotation>
-							<xs:documentation xml:lang="hu">Előző időszakról beszámítható csökkentő tétel összege elévült követelést tartalmaz</xs:documentation>
+							<xs:documentation xml:lang="hu">Előző időszakról beszámítható csökkentő tétel összege elévült követelést tartalmaz
+							</xs:documentation>
 							<xs:documentation xml:lang="en">Amount of deduction from previous period includes lapsed receivables</xs:documentation>
 						</xs:annotation>
 					</xs:element>
@@ -454,13 +125,13 @@
 			<xs:documentation xml:lang="en">Deduction data</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="deductionRate" type="TaxRateType" minOccurs="0">
+			<xs:element name="deductionRate" type="earbase:TaxRateType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Levonási hányados</xs:documentation>
 					<xs:documentation xml:lang="en">Deduction rate</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="deductionAmount" type="TaxMonetaryType">
+			<xs:element name="deductionAmount" type="earbase:TaxMonetaryType">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Levonási összeg</xs:documentation>
 					<xs:documentation xml:lang="en">Deduction amount</xs:documentation>
@@ -526,13 +197,13 @@
 					<xs:documentation xml:lang="en">Factoring contract date</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="factoringTaxCode" type="FactoringTaxCodeType">
+			<xs:element name="factoringTaxCode" type="earbase:FactoringTaxCodeType">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Adónem</xs:documentation>
 					<xs:documentation xml:lang="en">Tax code</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="factoringAmount" type="TaxMonetaryType">
+			<xs:element name="factoringAmount" type="earbase:TaxMonetaryType">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Faktorált összeg</xs:documentation>
 					<xs:documentation xml:lang="en">Factoring amount</xs:documentation>
@@ -642,7 +313,7 @@
 			<xs:documentation xml:lang="en">Partner data</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="partnerStatus" type="PartnerStatusType">
+			<xs:element name="partnerStatus" type="earbase:PartnerStatusType">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Partner ÁFA szerinti státusza</xs:documentation>
 					<xs:documentation xml:lang="en">Partner's VAT-related status</xs:documentation>
@@ -740,11 +411,14 @@
 			</xs:element>
 			<xs:element name="midYearCommunityTaxNumberIndicator" type="xs:boolean">
 				<xs:annotation>
-					<xs:documentation xml:lang="hu">Közösségi adószám évközi megállapítása miatt törtidőszaki bevallás jelölése éves adózó esetén</xs:documentation>
-					<xs:documentation xml:lang="en">Indication of fractional declaration period because of mid-year assessment of Community tax number for annual taxpayer</xs:documentation>
+					<xs:documentation xml:lang="hu">Közösségi adószám évközi megállapítása miatt törtidőszaki bevallás jelölése éves adózó esetén
+					</xs:documentation>
+					<xs:documentation xml:lang="en">Indication of fractional declaration period because of mid-year assessment of Community tax number
+						for annual taxpayer
+					</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="outOfTurnDeclarationCode" type="OutOfTurnDeclarationCodeType" minOccurs="0">
+			<xs:element name="outOfTurnDeclarationCode" type="earbase:OutOfTurnDeclarationCodeType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Soron kívüli bevallás kódja</xs:documentation>
 					<xs:documentation xml:lang="en">Out-of-turn declaration's code</xs:documentation>
@@ -758,8 +432,12 @@
 			</xs:element>
 			<xs:element name="animalDiseaseDefermentIndicator" type="xs:boolean">
 				<xs:annotation>
-					<xs:documentation xml:lang="hu">Állatbetegséggel összefüggő járványügyi intézkedés miatti kártalanítás okán fizetési halasztás kérése</xs:documentation>
-					<xs:documentation xml:lang="en">Request for payment deferral because of compensation due to epidemiological measures related to animal diseases</xs:documentation>
+					<xs:documentation xml:lang="hu">Állatbetegséggel összefüggő járványügyi intézkedés miatti kártalanítás okán fizetési halasztás
+						kérése
+					</xs:documentation>
+					<xs:documentation xml:lang="en">Request for payment deferral because of compensation due to epidemiological measures related to
+						animal diseases
+					</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="taxLiabilityBesideExemptmentIndicator" type="xs:boolean">
@@ -822,22 +500,740 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="SheetFieldType">
+	<xs:complexType name="AnimalDiseaseType">
 		<xs:annotation>
-			<xs:documentation xml:lang="hu">Melléklap mezői</xs:documentation>
-			<xs:documentation xml:lang="en">Sheet fields</xs:documentation>
+			<xs:documentation xml:lang="hu">Állatbetegség - 02-es melléklap típus</xs:documentation>
+			<xs:documentation xml:lang="en">Animal disease - sheet 02 type</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="sheetFieldName" type="earbase:FieldNameType">
+			<xs:element name="animalDiseaseItem" type="AnimalDiseaseItemType" maxOccurs="unbounded">
 				<xs:annotation>
-					<xs:documentation xml:lang="hu">A melléklapon szereplő BEVFELD mező azonosítója</xs:documentation>
-					<xs:documentation xml:lang="en">BEVFELD field identifier on the sheet</xs:documentation>
+					<xs:documentation xml:lang="hu">Állatbetegség elem</xs:documentation>
+					<xs:documentation xml:lang="en">Animal disease item</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="sheetFieldValue" type="common:SimpleText512NotBlankType">
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AnimalDiseaseItemType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Állatbetegség elem típus</xs:documentation>
+			<xs:documentation xml:lang="en">Animal disease item type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="decisionNumber" type="earbase:AtomicStringType50">
 				<xs:annotation>
-					<xs:documentation xml:lang="hu">A melléklapon szereplő BEVFELD mező értéke</xs:documentation>
-					<xs:documentation xml:lang="en">BEVFELD field value on the sheet</xs:documentation>
+					<xs:documentation xml:lang="hu">Határozatszám</xs:documentation>
+					<xs:documentation xml:lang="en">Resolution number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="finalityDateOfDecision" type="earbase:TaxpointDateType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Határozat véglegessé válás dátuma</xs:documentation>
+					<xs:documentation xml:lang="en">Resolution finality date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="compensationVatAmount" type="earbase:IntMax20DigitsType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Kártalanítás ÁFA tartalmának összege</xs:documentation>
+					<xs:documentation xml:lang="en">Compensation VAT amount</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="compensationType" type="earbase:CompensationTypeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Korrekció típusa</xs:documentation>
+					<xs:documentation xml:lang="en">Compensation type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="previousDeferredAmount" type="earbase:IntMax20DigitsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Előzmény bevallásban érvényesített fizetési halasztás összege</xs:documentation>
+					<xs:documentation xml:lang="en">Amount of payment deferral validated in previous tax return</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="claimableDeferralAmount" type="earbase:IntMax20DigitsType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Érvényesíthető fizetési halasztás összege</xs:documentation>
+					<xs:documentation xml:lang="en">Validable payment deferral amount</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LiabilityChangeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Kötelezettség változás típus</xs:documentation>
+			<xs:documentation xml:lang="en">Liability change type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="liabilityGrowth" type="earbase:IntMax20DigitsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Önellenőrzés eredményeképp kimutatott kötelezettségnövekedés</xs:documentation>
+					<xs:documentation xml:lang="en">Liability growth</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="liabilityReduction" type="earbase:IntMax20DigitsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Önellenőrzés eredményeképp kimutatott kötelezettségcsökkenés</xs:documentation>
+					<xs:documentation xml:lang="en">Liability reduction</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CurrentSelfCheckType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Aktuális bevallás önellenőrzési adatai</xs:documentation>
+			<xs:documentation xml:lang="en">Current declaration self-check data</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="nonStandardAllowanceCalcReason" type="earbase:NonStandardAllowanceCalcReasonType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Általánostól eltérő számítási ok</xs:documentation>
+					<xs:documentation xml:lang="en">Non standard allowance calc reason</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="allowanceBase" type="earbase:IntMax12DigitsType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Felszámolt önellenőrzési pótlék alapja</xs:documentation>
+					<xs:documentation xml:lang="en">Allowance base</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="allowanceAmount" type="earbase:IntMax12DigitsType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Felszámolt önellenőrzési pótlék összege</xs:documentation>
+					<xs:documentation xml:lang="en">Allowance amount</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="liabilityChange" type="LiabilityChangeType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Kötelezettség változás</xs:documentation>
+					<xs:documentation xml:lang="en">Liability change</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PreviousSelfCheckAllowanceAmountType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Korábbi önellenőrzési pótlék összege típus</xs:documentation>
+			<xs:documentation xml:lang="en">Previous selfcheck allowance amount type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="originalAmount" type="earbase:IntMax12DigitsType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Eredeti összeg</xs:documentation>
+					<xs:documentation xml:lang="en">Original Amount</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="modifiedAmount" type="earbase:IntMax12DigitsType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Módosított összeg</xs:documentation>
+					<xs:documentation xml:lang="en">Modified amount</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PreviousSelfCheckAllowanceModificationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Korábbi önellenőrzési pótlék módosítás</xs:documentation>
+			<xs:documentation xml:lang="en">Previous self-check allowance modification</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="previousSelfCheckAllowanceBase" type="earbase:IntMax12DigitsType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Korábbi önellenőrzési pótlék alap</xs:documentation>
+					<xs:documentation xml:lang="en">Previous selfcheck allowance base</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="previousSelfCheckAllowanceAmount" type="PreviousSelfCheckAllowanceAmountType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Korábbi önellenőrzési pótlék összege</xs:documentation>
+					<xs:documentation xml:lang="en">Previous selfcheck allowance amount</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="previousSelfCheckAllowanceAmountModification" type="PreviousSelfCheckAllowanceAmountModificationType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Önellenőrzési pótlék módosított összege</xs:documentation>
+					<xs:documentation xml:lang="en">Previous selfcheck allowance amount modification</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PreviousSelfCheckAllowanceAmountModificationType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Önellenőrzési pótlék módosított összege</xs:documentation>
+			<xs:documentation xml:lang="en">Self-check attachment type</xs:documentation>
+		</xs:annotation>
+		<xs:choice>
+			<xs:element name="previousSelfCheckAllowanceGrowth" type="earbase:IntMax12DigitsType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Korábbi önellenőrzési pótlék növekedés</xs:documentation>
+					<xs:documentation xml:lang="en">Previous selfcheck allowance growth</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="previousSelfCheckAllowanceReduction" type="earbase:IntMax12DigitsType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Korábbi önellenőrzési pótlék csökkenés</xs:documentation>
+					<xs:documentation xml:lang="en">Previous selfcheck allowance reduction</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="SelfCheckAttachmentType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Önellenőrzés melléklet típus</xs:documentation>
+			<xs:documentation xml:lang="en">Self-check attachment type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="repeatedSelfCheck" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Ismételt önellenőrzés</xs:documentation>
+					<xs:documentation xml:lang="en">Repeated self-check</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="currentSelfCheck" type="CurrentSelfCheckType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Aktuális bevallás önellenőrzési adatai</xs:documentation>
+					<xs:documentation xml:lang="en">Current declaration self-check data</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="previousSelfCheckAllowanceModification" type="PreviousSelfCheckAllowanceModificationType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Korábbi önellenőrzési pótlék módosítás</xs:documentation>
+					<xs:documentation xml:lang="en">Previous self-check allowance modification</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PartnerDataType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Termékbeszerző, szolgáltatást igénybevevő adata típus</xs:documentation>
+			<xs:documentation xml:lang="en">Partner data type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="partnerName" type="earbase:AtomicStringType80">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Termékbeszerző, szolgáltatást igénybevevő neve</xs:documentation>
+					<xs:documentation xml:lang="en">Partner name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="partnerTaxNumber" type="earbase:AtomicStringType50">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Termékbeszerző, szolgáltatást igénybevevő adószáma</xs:documentation>
+					<xs:documentation xml:lang="en">Partner taxnumber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TaxpayerDataType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Az adóalap-csökkentést elszámoló adózó adata típus</xs:documentation>
+			<xs:documentation xml:lang="en">Taxpayer data type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="taxpayerName" type="earbase:AtomicStringType80">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Az adóalap-csökkentést elszámoló adózó neve</xs:documentation>
+					<xs:documentation xml:lang="en">Taxpayer name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="taxpayerTaxNumber" type="common:TaxpayerIdType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Az adóalap-csökkentést elszámoló adózó adószáma</xs:documentation>
+					<xs:documentation xml:lang="en">Taxpayer taxnumber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BadDebtItemType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Behajthatatlan követelés elem típus</xs:documentation>
+			<xs:documentation xml:lang="en">Bad debt item type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="statementType" type="earbase:StatementTypeType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Nyilatkozat típus</xs:documentation>
+					<xs:documentation xml:lang="en">Statement type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="settlementReason" type="earbase:SettlementReasonType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Elszámolás oka</xs:documentation>
+					<xs:documentation xml:lang="en">Settlement reason</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="conditionFulfillment" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Feltétel teljesülése</xs:documentation>
+					<xs:documentation xml:lang="en">Condition fulfillment</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="invoiceNumber" type="earbase:AtomicStringType25">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Számla sorszáma</xs:documentation>
+					<xs:documentation xml:lang="en">Invoice number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="invoiceDeliveryDate" type="earbase:TaxpointDateType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Teljesítés időpontja</xs:documentation>
+					<xs:documentation xml:lang="en">Invoice delivery date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="partnerData" type="PartnerDataType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Termékbeszerző, szolgáltatást igénybevevő adata</xs:documentation>
+					<xs:documentation xml:lang="en">Partner data</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="settlementAmount" type="earbase:IntMax25DigitsType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Elszámolás összege</xs:documentation>
+					<xs:documentation xml:lang="en">Settlement amount</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="taxpayerData" type="TaxpayerDataType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Az adóalap-csökkentést elszámoló adózó adata</xs:documentation>
+					<xs:documentation xml:lang="en">Taxpayer data</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="BadDebtType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Behajthatatlan követelés típus</xs:documentation>
+			<xs:documentation xml:lang="en">Bad debt type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="badDebtItem" type="BadDebtItemType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Behajthatatlan követelés elem</xs:documentation>
+					<xs:documentation xml:lang="en">Bad debt item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ChassisNumberOfTheCarType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Személygépkocsi alvázszám típus</xs:documentation>
+			<xs:documentation xml:lang="en">Chassis number of the car type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="chassisNumberOfTheCarItem" type="ChassisNumberOfTheCarItemType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Személygépkocsi alvázszám elem</xs:documentation>
+					<xs:documentation xml:lang="en">Chassis number of the car item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ChassisNumberOfTheCarItemType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Személygépkocsi alvázszám elem típus</xs:documentation>
+			<xs:documentation xml:lang="en">Chassis number of the car item type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="chassisNumber" type="earbase:AtomicStringType20">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Alvázszám</xs:documentation>
+					<xs:documentation xml:lang="en">Chassis number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dataAsIndirectCustomsRepresentative" type="earbase:AtomicStringType20" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Közvetett vámjogi képviselőként teljesített adatszolgáltatás</xs:documentation>
+					<xs:documentation xml:lang="en">Data provision performed as an indirect customs representative</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NewMeansOfTransportType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Új közlekedési eszköz típus</xs:documentation>
+			<xs:documentation xml:lang="en">New means of transport type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="newMeansOfTransportItem" type="NewMeansOfTransportItemType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Új közlekedési eszköz elem</xs:documentation>
+					<xs:documentation xml:lang="en">New means of transport item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RequestForTransferAndRefundType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Átvezetési és kiutalási kérelem típus</xs:documentation>
+			<xs:documentation xml:lang="en">Request for transfer and refund type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="requestForTransferAndRefundItem" type="RequestForTransferAndRefundItemType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Átvezetési és kiutalási kérelem elem</xs:documentation>
+					<xs:documentation xml:lang="en">Request for transfer and refund item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ToBeChargedType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Terhelendő típus</xs:documentation>
+			<xs:documentation xml:lang="en">To be charged type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="taxTypeDeclarationRowNumber" type="earbase:TaxTypeDeclarationRowNumberType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Adónem főbizonylati sorszáma</xs:documentation>
+					<xs:documentation xml:lang="en">Tax type main document number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="chargedTaxType" type="earbase:ChargedTaxTypeType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Terhelendő adónemkód</xs:documentation>
+					<xs:documentation xml:lang="en">Charged tax type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="chargedAmount" type="earbase:IntMax15DigitsType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Terhelendő összeg</xs:documentation>
+					<xs:documentation xml:lang="en">Charged amount</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ToBeCreditedType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Jóváírandó</xs:documentation>
+			<xs:documentation xml:lang="en">To be credited</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="creditedTaxType" type="earbase:AtomicStringType3">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Jóváírandó adónemkód</xs:documentation>
+					<xs:documentation xml:lang="en">Credited tax type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="resolutionNumber" type="earbase:AtomicStringType14" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Határozatszám</xs:documentation>
+					<xs:documentation xml:lang="en">Resolution number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="creditedAmount" type="earbase:IntMax15DigitsType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Jóváírandó összeg</xs:documentation>
+					<xs:documentation xml:lang="en">Credited amount</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ToBeTransferedType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Kiutalandó</xs:documentation>
+			<xs:documentation xml:lang="en">To be transfered</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="allocatedAmount" type="earbase:IntMax15DigitsType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Kiutalandó összeg</xs:documentation>
+					<xs:documentation xml:lang="en">Allopcated Amount</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RequestForTransferAndRefundItemType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Átvezetési és kiutalási kérelem elem típus</xs:documentation>
+			<xs:documentation xml:lang="en">Request for transfer and refund item type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="toBeCharged" type="ToBeChargedType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Terhelendő</xs:documentation>
+					<xs:documentation xml:lang="en">To be charged</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="toBeCredited" type="ToBeCreditedType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Jóváírandó</xs:documentation>
+					<xs:documentation xml:lang="en">To be credited</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="toBeTransfered" type="ToBeTransferedType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Kiutalandó</xs:documentation>
+					<xs:documentation xml:lang="en">To be transfered</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CustomerAddressType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Vevő címe típus</xs:documentation>
+			<xs:documentation xml:lang="en">Customer address type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="customerCountryCode" type="earbase:CustomerCountryCodeType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Vevő országkód</xs:documentation>
+					<xs:documentation xml:lang="en">Customer country code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="customerPostalCode" type="earbase:IntMax9DigitsType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Vevő irányítószám</xs:documentation>
+					<xs:documentation xml:lang="en">Customer postal code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="customerOtherAddressDetail" type="earbase:AtomicStringType75">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Vevő további cím adata</xs:documentation>
+					<xs:documentation xml:lang="en">Customer other address detail</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MeansOfTransportDataType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Közlekedési eszköz adat típus</xs:documentation>
+			<xs:documentation xml:lang="en">Means of transport data type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="typeOfMeansOfTransport" type="earbase:TypeOfMeansOfTransportType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Közlekedési eszköz fajtája</xs:documentation>
+					<xs:documentation xml:lang="en">Type of means of transport</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="brand" type="earbase:AtomicStringType20">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Gyártmány/típus</xs:documentation>
+					<xs:documentation xml:lang="en">Brand</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="chassisOrSerialNumber" type="earbase:AtomicStringType20">
+					<xs:annotation>
+						<xs:documentation xml:lang="hu">Alvázsszám vagy gyártási szám</xs:documentation>
+						<xs:documentation xml:lang="en">Chassis or serial number</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="engineNumber" type="earbase:AtomicStringType20">
+					<xs:annotation>
+						<xs:documentation xml:lang="hu">Motorszám</xs:documentation>
+						<xs:documentation xml:lang="en">Engine number</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="enginePower" type="xs:integer">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Hengerűrtartalom vagy főgép teljesítménye</xs:documentation>
+					<xs:documentation xml:lang="en">Engine power</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="enginePowerUnit" type="earbase:EnginePowerUnitType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Hengerűrtartalom vagy főgép teljesítménye mértékegysége</xs:documentation>
+					<xs:documentation xml:lang="en">Engine power unit</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="mileage" type="earbase:IntMax20DigitsType">
+					<xs:annotation>
+						<xs:documentation xml:lang="hu">Futott kilométerek száma</xs:documentation>
+						<xs:documentation xml:lang="en">Mileage</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="sailedOrOperationHours" type="earbase:IntMax20DigitsType">
+					<xs:annotation>
+						<xs:documentation xml:lang="hu">Hajózott vagy repült órák száma</xs:documentation>
+						<xs:documentation xml:lang="en">Sailed or operation hours</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:choice>
+			<xs:element name="newMeansOfTransportNetAmount" type="earbase:IntMax12DigitsType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Új közlekedési eszköz áfa nélkül számított ellenértéke</xs:documentation>
+					<xs:documentation xml:lang="en">New means of transport net amount</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="invoiceIssueDate" type="earbase:TaxpointDateType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Számlakiállítás időpontja</xs:documentation>
+					<xs:documentation xml:lang="en">Invoice issue date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="firstEntryIntoService" type="earbase:TaxpointDateType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Első forgalomba helyezés időpontja</xs:documentation>
+					<xs:documentation xml:lang="en">First entry into service</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CustomerDataType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Vevő adatai típus</xs:documentation>
+			<xs:documentation xml:lang="en">Customer data type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="customerName" type="earbase:AtomicStringType75">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Vevő neve</xs:documentation>
+					<xs:documentation xml:lang="en">Customer name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="customerAddress" type="CustomerAddressType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Vevő címe</xs:documentation>
+					<xs:documentation xml:lang="en">Customer address</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NewMeansOfTransportItemType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Új közlekedési eszköz elem típus</xs:documentation>
+			<xs:documentation xml:lang="en">New means of transport item type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="customerData" type="CustomerDataType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Vevő adatai</xs:documentation>
+					<xs:documentation xml:lang="en">Customer data</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="meansOfTransportData" type="MeansOfTransportDataType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Közlekedési eszköz adat</xs:documentation>
+					<xs:documentation xml:lang="en">Means of transport data</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ReverseChargeSupplyItemType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Fordított adózás értékesítés elem típus</xs:documentation>
+			<xs:documentation xml:lang="en">Reverse charge supply item type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="buyerTaxNumber" type="earbase:DomesticPartnerTaxNumberType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Vevő adószáma</xs:documentation>
+					<xs:documentation xml:lang="en">Partner taxnumber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="taxpointDate" type="earbase:TaxpointDateType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Teljesítés napja</xs:documentation>
+					<xs:documentation xml:lang="en">Taxpoint date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productName" type="earbase:ProductNameType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Termék megnevezése</xs:documentation>
+					<xs:documentation xml:lang="en">Product name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="quantity" type="earbase:IntMax21DigitsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Mennyiség</xs:documentation>
+					<xs:documentation xml:lang="en">Quantity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hybridSeed" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Hibrid vetőmag</xs:documentation>
+					<xs:documentation xml:lang="en">Hybrid seed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="unitOfMeasure" type="earbase:UnitOfMeasureType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Mértékegység</xs:documentation>
+					<xs:documentation xml:lang="en">Unit of measure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="reverseChargeSupplyTaxBase" type="earbase:IntMax15DigitsType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Fordított adózás keretében történt értékesítés adóalap</xs:documentation>
+					<xs:documentation xml:lang="en">Reverse charge supply tax base</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ReverseChargeServiceItemType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Fordított adózás beszerzés elem típus</xs:documentation>
+			<xs:documentation xml:lang="en">Reverse charge service item type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="supplierTaxNumber" type="earbase:DomesticPartnerTaxNumberType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Eladó adószáma</xs:documentation>
+					<xs:documentation xml:lang="en">Supplier taxnumber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="taxpointDate" type="earbase:TaxpointDateType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Teljesítés napja</xs:documentation>
+					<xs:documentation xml:lang="en">Taxpoint date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productName" type="earbase:ProductNameType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Termék megnevezése</xs:documentation>
+					<xs:documentation xml:lang="en">Product name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="quantity" type="earbase:IntMax21DigitsType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Mennyiség</xs:documentation>
+					<xs:documentation xml:lang="en">Quantity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hybridSeed" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Hibrid vetőmag</xs:documentation>
+					<xs:documentation xml:lang="en">Hybrid seed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="unitOfMeasure" type="earbase:UnitOfMeasureType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Mértékegység</xs:documentation>
+					<xs:documentation xml:lang="en">Unit of measure</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="reverseChargeServiceTaxBase" type="earbase:IntMax15DigitsType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Fordított adózás keretében történt beszerzés adóalap</xs:documentation>
+					<xs:documentation xml:lang="en">Reverse charge service tax base</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ReverseChargeSupplyType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Fordított adózás értékesítés típus</xs:documentation>
+			<xs:documentation xml:lang="en">Reverse charge supply type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="reverseChargeSupplyItem" type="ReverseChargeSupplyItemType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Fordított adózás értékesítés elem</xs:documentation>
+					<xs:documentation xml:lang="en">Reverse charge supply item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ReverseChargeServiceType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Fordított adózás beszerzés típus</xs:documentation>
+			<xs:documentation xml:lang="en">Reverse charge service type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="reverseChargeServiceItem" type="ReverseChargeServiceItemType" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Fordított adózás beszerzés elem</xs:documentation>
+					<xs:documentation xml:lang="en">Reverse charge service item</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -848,42 +1244,52 @@
 			<xs:documentation xml:lang="en">Sheets</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="sheet" type="SheetType" maxOccurs="10">
+			<xs:element name="animalDisease" type="AnimalDiseaseType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation xml:lang="hu">Melléklap</xs:documentation>
-					<xs:documentation xml:lang="en">Sheet</xs:documentation>
+					<xs:documentation xml:lang="hu">Állatbetegség - 02-es melléklap</xs:documentation>
+					<xs:documentation xml:lang="en">Animal disease - sheet 02</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
-	<xs:complexType name="SheetType">
-		<xs:annotation>
-			<xs:documentation xml:lang="hu">Melléklap</xs:documentation>
-			<xs:documentation xml:lang="en">Sheet</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="sheetName" type="SheetNameType">
+			<xs:element name="selfCheckAttachment" type="SelfCheckAttachmentType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation xml:lang="hu">Melléklap neve</xs:documentation>
-					<xs:documentation xml:lang="en">Sheet name</xs:documentation>
+					<xs:documentation xml:lang="hu">Önellenőrzés melléklet - 04-es melléklap</xs:documentation>
+					<xs:documentation xml:lang="en">Self-check attachment - shett 04</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="sheetPageCount" type="SheetPageCountType">
+			<xs:element name="badDebt" type="BadDebtType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation xml:lang="hu">Melléklap oldalainak száma</xs:documentation>
-					<xs:documentation xml:lang="en">Number of pages of a sheet</xs:documentation>
+					<xs:documentation xml:lang="hu">Behajthatatlan követelés - 06-os melléklap</xs:documentation>
+					<xs:documentation xml:lang="en">Bad debt - sheet 06</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="vpid" type="VpidType" minOccurs="0">
+			<xs:element name="chassisNumberOfTheCar" type="ChassisNumberOfTheCarType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation xml:lang="hu">VPID szám</xs:documentation>
-					<xs:documentation xml:lang="en">EORI number</xs:documentation>
+					<xs:documentation xml:lang="hu">Személygépkocsi alvázszám - 09-es melléklap</xs:documentation>
+					<xs:documentation xml:lang="en">Chassis number of the car - sheet 09</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="sheetField" type="SheetFieldType" maxOccurs="unbounded">
+			<xs:element name="newMeansOfTransport" type="NewMeansOfTransportType" minOccurs="0">
 				<xs:annotation>
-					<xs:documentation xml:lang="hu">Melléklap mezői</xs:documentation>
-					<xs:documentation xml:lang="en">Sheet fields</xs:documentation>
+					<xs:documentation xml:lang="hu">Új közlekedési eszköz - A88-as melléklap</xs:documentation>
+					<xs:documentation xml:lang="en">New means of transport - sheet A88</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="requestForTransferAndRefund" type="RequestForTransferAndRefundType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Átvezetési és kiutalási kérelem - 170-es melléklap</xs:documentation>
+					<xs:documentation xml:lang="en">Request for transfer and refund - sheet 170</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="reverseChargeSupply" type="ReverseChargeSupplyType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Fordított adózás értékesítés - 07-es melléklap</xs:documentation>
+					<xs:documentation xml:lang="en">Reverse charge supply - sheet 07</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="reverseChargeService" type="ReverseChargeServiceType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Fordított adózás beszerzés - 08-as melléklap</xs:documentation>
+					<xs:documentation xml:lang="en">Reverse charge service - sheet 08</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -894,31 +1300,35 @@
 			<xs:documentation xml:lang="en">Summary data base type of the declaration</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="sumResidualTax" type="TaxMonetaryType" minOccurs="0">
+			<xs:element name="sumResidualTax" type="earbase:TaxMonetaryType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Előző időszakról beszámítható csökkentő tétel összege</xs:documentation>
 					<xs:documentation xml:lang="en">Amount of deduction from previous period</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="sumAccountedTax" type="TaxMonetaryType">
+			<xs:element name="sumAccountedTax" type="earbase:TaxMonetaryType">
 				<xs:annotation>
-					<xs:documentation xml:lang="hu">Tárgyidőszakban megállapított fizetendő adó együttes összegének és a levonható előzetesen felszámított adónak a különbözete</xs:documentation>
-					<xs:documentation xml:lang="en">The difference between the total amount of payable tax stated in the relevant period and the prepaid deductible tax</xs:documentation>
+					<xs:documentation xml:lang="hu">Tárgyidőszakban megállapított fizetendő adó együttes összegének és a levonható előzetesen
+						felszámított adónak a különbözete
+					</xs:documentation>
+					<xs:documentation xml:lang="en">The difference between the total amount of payable tax stated in the relevant period and the
+						prepaid deductible tax
+					</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="sumPayableTax" type="TaxMonetaryType" minOccurs="0">
+			<xs:element name="sumPayableTax" type="earbase:TaxMonetaryType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Befizetendő adó összege</xs:documentation>
 					<xs:documentation xml:lang="en">Amount of payable tax</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="sumDeductibleTax" type="TaxMonetaryType" minOccurs="0">
+			<xs:element name="sumDeductibleTax" type="earbase:TaxMonetaryType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Visszaigényelhető adó összege</xs:documentation>
 					<xs:documentation xml:lang="en">Amount of deductible tax</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="sumTransferableTax" type="TaxMonetaryType" minOccurs="0">
+			<xs:element name="sumTransferableTax" type="earbase:TaxMonetaryType" minOccurs="0">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Következő időszakra átvihető követelés összege</xs:documentation>
 					<xs:documentation xml:lang="en">Amount of receivables that can be carried over to the next period</xs:documentation>
@@ -944,10 +1354,30 @@
 					<xs:documentation xml:lang="en">Corporate tax code of the item</xs:documentation>
 				</xs:annotation>
 			</xs:element>
+			<xs:element name="indirectCustomsRepresentative" type="IndirectCustomsRepresentativeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Közvetett vámjogi képviselő jelölő</xs:documentation>
+					<xs:documentation xml:lang="en">Indirect customs representative marker</xs:documentation>
+				</xs:annotation>
+			</xs:element>
 			<xs:element name="taxPosition" type="TaxPositionType" maxOccurs="2">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">A tétel adózási pozíciója</xs:documentation>
 					<xs:documentation xml:lang="en">Tax position of the item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="IndirectCustomsRepresentativeType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Közvetett vámjogi képviselő jelölő típus</xs:documentation>
+			<xs:documentation xml:lang="en">Indirect customs representative marker type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="importerTaxNumber" type="common:TaxpayerIdType">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Importőr adószám</xs:documentation>
+					<xs:documentation xml:lang="en">Importer taxnumber</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 		</xs:sequence>
@@ -958,19 +1388,19 @@
 			<xs:documentation xml:lang="en">Tax position of the item</xs:documentation>
 		</xs:annotation>
 		<xs:sequence>
-			<xs:element name="positionType" type="PositionTypeType">
+			<xs:element name="positionType" type="earbase:PositionTypeType">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Adózási pozíció</xs:documentation>
 					<xs:documentation xml:lang="en">Tax position</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="taxBase" type="TaxMonetaryType">
+			<xs:element name="taxBase" type="earbase:TaxMonetaryType">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Adó alapja</xs:documentation>
 					<xs:documentation xml:lang="en">Tax base</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="taxAmount" type="TaxMonetaryType">
+			<xs:element name="taxAmount" type="earbase:TaxMonetaryType">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Adó összege</xs:documentation>
 					<xs:documentation xml:lang="en">Tax amount</xs:documentation>
@@ -1014,7 +1444,7 @@
 					<xs:documentation xml:lang="en">Source document issue date</xs:documentation>
 				</xs:annotation>
 			</xs:element>
-			<xs:element name="sourceDocumentType" type="SourceDocumentTypeType">
+			<xs:element name="sourceDocumentType" type="earbase:SourceDocumentTypeType">
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Forrás dokumentum bizonylat típusa</xs:documentation>
 					<xs:documentation xml:lang="en">Type of the source document</xs:documentation>
@@ -1024,6 +1454,12 @@
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">Adó esedékességi napja</xs:documentation>
 					<xs:documentation xml:lang="en">Taxpoint date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="invoiceModificationOrCancellation" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Számla módosítás vagy sztornó jellegű jelölő</xs:documentation>
+					<xs:documentation xml:lang="en">Invoice modification or cancellation marker</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="partnerInfo" type="PartnerInfoType">
@@ -1071,56 +1507,6 @@
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
-	<xs:complexType name="DeclarationAdditionalDataType">
-		<xs:annotation>
-			<xs:documentation xml:lang="hu">A bevallás kiegészítő adatai</xs:documentation>
-			<xs:documentation xml:lang="en">Additional data of the declaration</xs:documentation>
-		</xs:annotation>
-		<xs:sequence>
-			<xs:element name="totalIncreasePaymentCorrectedTax" type="TaxMonetaryType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Az ÁFA tv. 153/c alapján fizetendő adót növelő tétel összesen / számlakorrekcióval érintett adó</xs:documentation>
-					<xs:documentation xml:lang="en">Total tax increase payable under VAT Act 153/c / tax affected by invoice correction</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="domesticAcquisitionOfFivePercentReverseDeductedTax" type="TaxMonetaryType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">5% kulcs alá tartozó belföldi termékbeszerzés, szolgáltatás után / fordított adózás alá eső ügylet után levont adó</xs:documentation>
-					<xs:documentation xml:lang="en">Domestic acquisition of goods and services subject to the 5% VAT rate / deducted tax on transactions under reverse charge mechanism</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="domesticAcquisitionOfEighteenPercentReverseDeductedTax" type="TaxMonetaryType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">18% kulcs alá tartozó belföldi termékbeszerzés, szolgáltatás után / fordított adózás alá eső ügylet után levont adó</xs:documentation>
-					<xs:documentation xml:lang="en">Domestic acquisition of goods and services subject to the 18% VAT rate / deducted tax on transactions under reverse charge mechanism</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="domesticAcquisitionOfTwentySevenPercentReverseDeductedTax" type="TaxMonetaryType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">27% kulcs alá tartozó belföldi termékbeszerzés, szolgáltatás után / fordított adózás alá eső ügylet után levont adó</xs:documentation>
-					<xs:documentation xml:lang="en">Domestic acquisition of goods and services subject to the 27% VAT rate / deducted tax on transactions under reverse charge mechanism</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="proportionalDeductibleAmountReverseDeductedTax" type="TaxMonetaryType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Arányosítás alkalmazásával levonható adórész (Eredeti adóalap, arányosított adó) / fordított adózás alá eső ügylet után levont adó</xs:documentation>
-					<xs:documentation xml:lang="en">Proportional deductible tax amount (original tax base, proportioned tax) / deducted tax on transactions under reverse charge mechanism</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="importedTaxDeductAssessed" type="TaxMonetaryType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Importált termék után (kivetéssel) megfizetett adó levonható része / közvetett vámjogi képviselő által érvényesített, engedményezett adólevonás összege</xs:documentation>
-					<xs:documentation xml:lang="en">The deductible portion of the tax paid  (with assessment) on imported goods / amount of tax deduction enforced and assigned by an indirect customs representative</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="importedTaxDeductSelfAssessed" type="TaxMonetaryType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">Importált termék után (önadózással) megfizetett adó levonható része / közvetett vámjogi képviselő által érvényesített, engedményezett adólevonás összege</xs:documentation>
-					<xs:documentation xml:lang="en">The deductible portion of the tax paid (via self-assessment) on imported goods / amount of tax deduction enforced and assigned by an indirect customs representative</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-		</xs:sequence>
-	</xs:complexType>
 	<xs:complexType name="VatDeclarationDataType">
 		<xs:annotation>
 			<xs:documentation xml:lang="hu">Az ÁFA bevallás adatai</xs:documentation>
@@ -1155,12 +1541,6 @@
 				<xs:annotation>
 					<xs:documentation xml:lang="hu">A bevallás összegző adatai</xs:documentation>
 					<xs:documentation xml:lang="en">Summary data of the declaration</xs:documentation>
-				</xs:annotation>
-			</xs:element>
-			<xs:element name="declarationAdditionalData" type="DeclarationAdditionalDataType" minOccurs="0">
-				<xs:annotation>
-					<xs:documentation xml:lang="hu">A bevallás kiegészítő adatai</xs:documentation>
-					<xs:documentation xml:lang="en">Additional data of the declaration</xs:documentation>
 				</xs:annotation>
 			</xs:element>
 			<xs:element name="sheetList" type="SheetListType" minOccurs="0">
