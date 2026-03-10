@@ -416,6 +416,69 @@
 			<xs:minInclusive value="0"/>
 		</xs:restriction>
 	</xs:simpleType>
+	
+	<xs:simpleType name="SheetNameType">
+		<xs:annotation>
+			<xs:documentation xml:lang="hu">Melléklap neve</xs:documentation>
+			<xs:documentation xml:lang="en">Name of the sheet</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="VAT_SHEET_2">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Állatbetegséggel összefüggő járványügyi intézkedés miatti kártalanítás okán fizetési halasztás kérése</xs:documentation>
+					<xs:documentation xml:lang="en">Request for payment deferral because of compensation due to epidemiological measures related to animal diseases</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VAT_SHEET_6">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">A behajthatatlan követelés elszámolásával összefüggő nyilatkozatok</xs:documentation>
+					<xs:documentation xml:lang="en">Statements relating to the settlement of an irrecoverable debt</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VAT_SHEET_7">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Az Áfa tv. 6/A., 6/B. és a 6/C. számú mellékletei szerint a fordított adózás keretében történt értékesítésre vonatkozó nyilatkozat</xs:documentation>
+					<xs:documentation xml:lang="en">Statement for reverse charge sales according to Annexes 6/A, 6/B and 6/C of the VAT Act</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VAT_SHEET_8">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Az Áfa tv. 6/A., 6/B. és a 6/C. számú mellékletei szerint a fordított adózás keretében történt beszerzésre vonatkozó nyilatkozat</xs:documentation>
+					<xs:documentation xml:lang="en">Statement for reverse charge purchases according to Annexes 6/A, 6/B and 6/C of the VAT Act</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VAT_SHEET_9">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Az Áfa tv. 4/A. számú melléklet II. pont szerinti adatszolgáltatás a személygépkocsi alvázszámáról</xs:documentation>
+					<xs:documentation xml:lang="en">Data report on the chassis number of passenger car according to Annex 4/A, point II of the VAT Act</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VAT_SHEET_A88">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Adatszolgáltatás új közlekedési eszköz értékesítéséről</xs:documentation>
+					<xs:documentation xml:lang="en">Data report on the sale of new means of transport</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VAT_SHEET_170">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Átvezetési és kiutalási kérelem a pénzforgalmat lebonyolító bizonylatokhoz</xs:documentation>
+					<xs:documentation xml:lang="en">Transfer and assignment request for receipts handling cash flow</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VAT_SHEET_4">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Önellenőrzési melléklet</xs:documentation>
+					<xs:documentation xml:lang="en">Self-audit attachment</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+			<xs:enumeration value="VAT_SHEET_EUNY">
+				<xs:annotation>
+					<xs:documentation xml:lang="hu">Nyilatkozat az önellenőrzés indokáról, ha az adókötelezettséget megállapító jogszabály alaptörvény-ellenes vagy az Európai Unió kötelező jogi aktusába ütközik</xs:documentation>
+					<xs:documentation xml:lang="en">Statement on the reason for the self-audit, if the legislation establishing tax liability is unconstitutional or conflicts with a mandatory legal act of the European Union</xs:documentation>
+				</xs:annotation>
+			</xs:enumeration>
+		</xs:restriction>
+	</xs:simpleType>
 
 	<xs:simpleType name="TaxMonetaryType">
 		<xs:annotation>
