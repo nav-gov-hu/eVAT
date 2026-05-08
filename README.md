@@ -14,7 +14,7 @@ A tárhelyet a meghirdetett véleményezési időszakokon kívül is fenntartjuk
 
 Kérjük figyelembe venni, hogy bár a tárhely publikusan elérhető, a véleményezéshez illetve  és a fejlesztéshez hozzájáruláshoz GitHub userre van szükség. A felhasználó ingyenesen, pár perc alatt létrehozható. A felmerült kérdéseket, javaslatokat a https://github.com/nav-gov-hu/eVAT/discussions oldalon kérjük megtenni az alábbiak szerint:
 -	Ötletek: a koncepcióval kapcsolatban felmerült olyan új ötlet, javaslat, amelyet a koncepció jelenleg nem tartalmaz, vagy nem megfelelően tartalmaz. A NAV minden ötletre nem feltétlenül ad választ, ugyanakkor figyelembe veszi a koncepció véglegesítése során.
--	Kérdések és válaszok: amennyiben a koncepció egyes elemeinél további információra van szükség a NAV-tól, akkor ebben a részben lehetséges ezeket feltenni.
+-	Kérdések és válaszok: amennyiben a koncepció egyes elemeinél további információra van szükség a NAV-tól, akkor ebben a részben lehetséges ezeket feltenni. Amennyiben kérdése elsősorban az általános forgalmi adóval kapcsolatos jogértelmezésre vonatkozik a rendszerre vonatkoztatva, akkor azt a következő elérhetőségen „az eÁFA felület használatával kapcsolatos jogi kérdések” tárgy kiválasztásával szíveskedjen feltenni: https://nav.gov.hu/ugyfeliranytu/keressen_minket/levelkuldes
 -	Általános: az előző két részbe nem tartozó megjegyzéseket, véleményeket lehet megtenni.
 
 ## Moderálás
