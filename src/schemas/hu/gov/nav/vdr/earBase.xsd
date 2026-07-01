@@ -863,7 +863,7 @@
                     <xs:documentation xml:lang="en">Delete</xs:documentation>
                 </xs:annotation>
             </xs:enumeration>
-            <xs:enumeration value="CORECCTION">
+            <xs:enumeration value="CORRECTION">
                 <xs:annotation>
                     <xs:documentation xml:lang="hu">Javítás</xs:documentation>
                     <xs:documentation xml:lang="en">Correction</xs:documentation>
@@ -1897,12 +1897,6 @@
                 <xs:annotation>
                     <xs:documentation xml:lang="hu">Módosítás adatai</xs:documentation>
                     <xs:documentation xml:lang="en">Modification reference data</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            <xs:element name="statementName" type="StatementNameType">
-                <xs:annotation>
-                    <xs:documentation xml:lang="hu">Nyilatkozat megnevezése</xs:documentation>
-                    <xs:documentation xml:lang="en">Statement name</xs:documentation>
                 </xs:annotation>
             </xs:element>
             <xs:element name="taxIdentificationNumber" type="common:TaxIdentificationNumberType" minOccurs="0">

@@ -841,33 +841,53 @@
             <xs:documentation xml:lang="hu">Személygépkocsi alvázszám típus</xs:documentation>
             <xs:documentation xml:lang="en">Chassis number of the car type</xs:documentation>
         </xs:annotation>
-        <xs:sequence>
-            <xs:element name="chassisNumberOfTheCarItem" type="ChassisNumberOfTheCarItemType" maxOccurs="unbounded">
+        <xs:choice>
+            <xs:sequence>
+                <xs:element name="chassisNumberList" type="ChassisNumberListType">
+                    <xs:annotation>
+                        <xs:documentation xml:lang="hu">Személygépkocsi alvázszám lista</xs:documentation>
+                        <xs:documentation xml:lang="en">Chassis number of the car list</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="dataAsIndirectCustomsRepresentativeList" type="DataAsIndirectCustomsRepresentativeListType" minOccurs='0'>
+                    <xs:annotation>
+                        <xs:documentation xml:lang="hu">Közvetett vámjogi képviselőként teljesített adatszolgáltatás lista</xs:documentation>
+                        <xs:documentation xml:lang="en">Data provision performed as an indirect customs representative list</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:element name="dataAsIndirectCustomsRepresentativeList" type="DataAsIndirectCustomsRepresentativeListType">
                 <xs:annotation>
-                    <xs:documentation xml:lang="hu">Személygépkocsi alvázszám elem</xs:documentation>
-                    <xs:documentation xml:lang="en">Chassis number of the car item</xs:documentation>
+                    <xs:documentation xml:lang="hu">Közvetett vámjogi képviselőként teljesített adatszolgáltatás lista</xs:documentation>
+                    <xs:documentation xml:lang="en">Data provision performed as an indirect customs representative list</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="DataAsIndirectCustomsRepresentativeListType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Közvetett vámjogi képviselőként teljesített adatszolgáltatás lista típus</xs:documentation>
+            <xs:documentation xml:lang="en">Data provision performed as an indirect customs representative list type</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="dataAsIndirectCustomsRepresentative" type="earbase:AtomicStringType20" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Közvetett vámjogi képviselőként teljesített adatszolgáltatás</xs:documentation>
+                    <xs:documentation xml:lang="en">Data provision performed as an indirect customs representative</xs:documentation>
                 </xs:annotation>
             </xs:element>
         </xs:sequence>
     </xs:complexType>
-    <xs:complexType name="ChassisNumberOfTheCarItemType">
+    <xs:complexType name="ChassisNumberListType">
         <xs:annotation>
-            <xs:documentation xml:lang="hu">Személygépkocsi alvázszám elem típus</xs:documentation>
-            <xs:documentation xml:lang="en">Chassis number of the car item type</xs:documentation>
+            <xs:documentation xml:lang="hu">Személygépkocsi alvázszám lista típus</xs:documentation>
+            <xs:documentation xml:lang="en">Chassis number of the car list type</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="chassisNumber" type="earbase:AtomicStringType20">
+            <xs:element name="chassisNumber" type="earbase:AtomicStringType20" maxOccurs="unbounded">
                 <xs:annotation>
                     <xs:documentation xml:lang="hu">Alvázszám</xs:documentation>
                     <xs:documentation xml:lang="en">Chassis number</xs:documentation>
-                </xs:annotation>
-            </xs:element>
-            <xs:element name="dataAsIndirectCustomsRepresentative" type="earbase:AtomicStringType20" minOccurs="0">
-                <xs:annotation>
-                    <xs:documentation xml:lang="hu">Közvetett vámjogi képviselőként teljesített adatszolgáltatás
-                    </xs:documentation>
-                    <xs:documentation xml:lang="en">Data provision performed as an indirect customs representative
-                    </xs:documentation>
                 </xs:annotation>
             </xs:element>
         </xs:sequence>
