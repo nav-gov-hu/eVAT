@@ -1074,7 +1074,7 @@
             <xs:documentation xml:lang="en">List of declarations</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="declarationListItem" type="AnalyticsListItemType" maxOccurs="unbounded">
+            <xs:element name="declarationListItem" type="AnalyticsListItemType" minOccurs="0" maxOccurs="unbounded">
                 <xs:annotation>
                     <xs:documentation xml:lang="hu">Bevallási lista elem</xs:documentation>
                     <xs:documentation xml:lang="en">Declaration list item</xs:documentation>
@@ -1088,7 +1088,7 @@
             <xs:documentation xml:lang="en">List of statements</xs:documentation>
         </xs:annotation>
         <xs:sequence>
-            <xs:element name="statementListItem" type="AnalyticsListItemType" maxOccurs="unbounded">
+            <xs:element name="statementListItem" type="AnalyticsListItemType" minOccurs="0" maxOccurs="unbounded">
                 <xs:annotation>
                     <xs:documentation xml:lang="hu">Nyilatkozat lista elem</xs:documentation>
                     <xs:documentation xml:lang="en">Statement list item</xs:documentation>
@@ -2195,22 +2195,20 @@
         </xs:annotation>
         <xs:complexContent>
             <xs:extension base="common:BasicResponseType">
-                <xs:choice minOccurs="0">
-                    <xs:sequence>
-                        <xs:element name="declarationList" type="DeclarationListType">
-                            <xs:annotation>
-                                <xs:documentation xml:lang="hu">Bevallások listája</xs:documentation>
-                                <xs:documentation xml:lang="en">List of declarations</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                        <xs:element name="statementList" type="StatementListType">
-                            <xs:annotation>
-                                <xs:documentation xml:lang="hu">Nyilatkozatok listája</xs:documentation>
-                                <xs:documentation xml:lang="en">List of statements</xs:documentation>
-                            </xs:annotation>
-                        </xs:element>
-                    </xs:sequence>
-                </xs:choice>
+                <xs:sequence minOccurs="0">
+                    <xs:element name="declarationList" type="DeclarationListType">
+                        <xs:annotation>
+                            <xs:documentation xml:lang="hu">Bevallások listája</xs:documentation>
+                            <xs:documentation xml:lang="en">List of declarations</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="statementList" type="StatementListType">
+                        <xs:annotation>
+                            <xs:documentation xml:lang="hu">Nyilatkozatok listája</xs:documentation>
+                            <xs:documentation xml:lang="en">List of statements</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
             </xs:extension>
         </xs:complexContent>
     </xs:complexType>
@@ -3206,6 +3204,315 @@
         <xs:complexType>
             <xs:complexContent>
                 <xs:extension base="QueryVatDeclarationDataResponseType"/>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- QueryDeclarationVersion endpoint types -->
+    <xs:complexType name="QueryDeclarationVersionRequestType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">A POST /queryDeclarationVersion REST operáció kérés típusa</xs:documentation>
+            <xs:documentation xml:lang="en">Request type of the POST /queryDeclarationVersion REST operation
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="BasicEVatRequestType">
+                <xs:sequence>
+                    <xs:element name="declarationSchema" type="DeclarationSchemaType">
+                        <xs:annotation>
+                            <xs:documentation xml:lang="hu">A bevallás sémájának típusa</xs:documentation>
+                            <xs:documentation xml:lang="en">Type of declaration schema</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:choice>
+                        <xs:element name="declarationVersionQueryParams" type="DeclarationVersionQueryParamsType">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="hu">Áfaanalitika legmagasabb verzió lekérdezéshez szükséges paraméterek
+                                </xs:documentation>
+                                <xs:documentation xml:lang="en">Parameters required for the highest version of VAT declaration query
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="statementVersionQueryParams" type="StatementVersionQueryParamsType">
+                            <xs:annotation>
+                                <xs:documentation xml:lang="hu">A60 nyilatkozat legmagasabb verzió lekérdezéshez szükséges paraméterek
+                                </xs:documentation>
+                                <xs:documentation xml:lang="en">Parameters required for the highest version of A60 statement query
+                                </xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:choice>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="QueryDeclarationVersionResponseType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">A POST /queryDeclarationVersion REST operáció válasz típusa</xs:documentation>
+            <xs:documentation xml:lang="en">Response type of the POST /queryDeclarationVersion REST operation
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="common:BasicResponseType">
+                <xs:choice minOccurs="0">
+                    <xs:element name="declarationVersion" type="DeclarationVersionType">
+                        <xs:annotation>
+                            <xs:documentation xml:lang="hu">Áfabevallás verziója</xs:documentation>
+                            <xs:documentation xml:lang="en">Version of declaration</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="statementVersion" type="StatementVersionType">
+                        <xs:annotation>
+                            <xs:documentation xml:lang="hu">Nyilatkozat verziója</xs:documentation>
+                            <xs:documentation xml:lang="en">Version of statement</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:complexType name="DeclarationVersionType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Áfaanalitika adott időszakra vonatkozó legmagasabb verziójának adatait tartalmazó típus</xs:documentation>
+            <xs:documentation xml:lang="en">Type containing data from the highest version of VAT analytics for a given period</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="declarationPeriodStart" type="earbase:TaxpointDateType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Bevallási időszak kezdete</xs:documentation>
+                    <xs:documentation xml:lang="en">Declaration period start</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="declarationPeriodEnd" type="earbase:TaxpointDateType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Bevallási időszak vége</xs:documentation>
+                    <xs:documentation xml:lang="en">Declaration period end</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="declarationMethod" type="earbase:DeclarationMethodType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Bevallás jellege</xs:documentation>
+                    <xs:documentation xml:lang="en">Method of declaration</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="declarationFrequency" type="earbase:DeclarationFrequencyType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Bevallási gyakoriság</xs:documentation>
+                    <xs:documentation xml:lang="en">Declaration frequency</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="navCorrection" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">NAV kiértesítés szerinti javítás</xs:documentation>
+                    <xs:documentation xml:lang="en">Correction according to NAV notification</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="version" type="common:GenericUnsignedIntegerType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">A benyújtott bevallás verziószáma</xs:documentation>
+                    <xs:documentation xml:lang="en">Version of the submitted declaration</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="declarationReferenceIndex" type="common:GenericUnsignedIntegerType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">A módosítás sorrendiségének jelzése</xs:documentation>
+                    <xs:documentation xml:lang="en">The unique sequence number referring to the original declaration
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="declarationReferenceId" type="common:EntityIdType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">A módosítással érintett bevallás feldolgozási azonosítója
+                    </xs:documentation>
+                    <xs:documentation xml:lang="en">Processing identifier of the declaration on which the modification
+                        occurs
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="declarationProcessingId" type="common:EntityIdType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Feldolgozási azonosító</xs:documentation>
+                    <xs:documentation xml:lang="en">Processing identifier</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="StatementVersionType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">A60 nyilatkozat adott időszakra vonatkozó legmagasabb verziójának adatait tartalmazó típus</xs:documentation>
+            <xs:documentation xml:lang="en">Type containing data from the highest version of A60 statement for a given period</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="statementPeriodStart" type="earbase:TaxpointDateType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Nyomtatvány időszak kezdete</xs:documentation>
+                    <xs:documentation xml:lang="en">Statement period start</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="statementPeriodEnd" type="earbase:TaxpointDateType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Nyomtatvány időszak vége</xs:documentation>
+                    <xs:documentation xml:lang="en">Statement period end</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="statementMethod" type="earbase:StatementMethodType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Nyilatkozat jellege</xs:documentation>
+                    <xs:documentation xml:lang="en">Statement method</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="statementFrequency" type="earbase:StatementFrequencyType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Nyilatkozat gyakorisága</xs:documentation>
+                    <xs:documentation xml:lang="en">Statement frequency</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="navCorrection" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">NAV kiértesítés szerinti javítás</xs:documentation>
+                    <xs:documentation xml:lang="en">Correction according to NAV notification</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="version" type="common:GenericUnsignedIntegerType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">A benyújtott nyomtatvány verziószáma</xs:documentation>
+                    <xs:documentation xml:lang="en">Version of the submitted statement</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="statementReferenceIndex" type="common:GenericUnsignedIntegerType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">A módosítás sorrendiségének jelzése</xs:documentation>
+                    <xs:documentation xml:lang="en">The unique sequence number referring to the original declaration
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="statementReferenceId" type="common:EntityIdType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">A módosítással érintett nyomtatvány feldolgozási azonosítója
+                    </xs:documentation>
+                    <xs:documentation xml:lang="en">Processing identifier of the statement on which the modification
+                        occurs
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="declarationProcessingId" type="common:EntityIdType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Feldolgozási azonosító</xs:documentation>
+                    <xs:documentation xml:lang="en">Processing identifier</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="DeclarationVersionQueryParamsType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Áfaanalitika legmagasabb verzió lekérdezéshez szükséges paraméterek típusa
+            </xs:documentation>
+            <xs:documentation xml:lang="en">Type of parameters required for the highest version of VAT declaraton query
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="declarationPeriodStart" type="earbase:TaxpointDateType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Bevallási időszak kezdete</xs:documentation>
+                    <xs:documentation xml:lang="en">Declaration period start</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="declarationPeriodEnd" type="earbase:TaxpointDateType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Bevallási időszak vége</xs:documentation>
+                    <xs:documentation xml:lang="en">Declaration period end</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="declarationMethod" type="earbase:DeclarationMethodType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Bevallás jellege</xs:documentation>
+                    <xs:documentation xml:lang="en">Method of declaration</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="declarationFrequency" type="earbase:DeclarationFrequencyType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Bevallási gyakoriság</xs:documentation>
+                    <xs:documentation xml:lang="en">Declaration frequency</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="navCorrection" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">NAV kiértesítés szerinti javítás</xs:documentation>
+                    <xs:documentation xml:lang="en">Correction according to NAV notification</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="StatementVersionQueryParamsType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">A60 nyilatkozat legmagasabb verzió lekérdezéshez szükséges paraméterek típusa
+            </xs:documentation>
+            <xs:documentation xml:lang="en">Type of parameters required for the highest version of A60 statement query
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="statementPeriodStart" type="earbase:TaxpointDateType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Nyomtatvány időszak kezdete</xs:documentation>
+                    <xs:documentation xml:lang="en">Statement period start</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="statementPeriodEnd" type="earbase:TaxpointDateType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Nyomtatvány időszak vége</xs:documentation>
+                    <xs:documentation xml:lang="en">Statement period end</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="statementMethod" type="earbase:StatementMethodType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Nyilatkozat jellege</xs:documentation>
+                    <xs:documentation xml:lang="en">Statement method</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="statementFrequency" type="earbase:StatementFrequencyType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Nyilatkozat gyakorisága</xs:documentation>
+                    <xs:documentation xml:lang="en">Statement frequency</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="navCorrection" type="xs:boolean">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">NAV kiértesítés szerinti javítás</xs:documentation>
+                    <xs:documentation xml:lang="en">Correction according to NAV notification</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Root elements for QueryDeclarationVersion endpoint -->
+    <xs:element name="QueryDeclarationVersionRequest">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">A POST /analyticsService/declaration/version REST operáció kérésének root elementje
+            </xs:documentation>
+            <xs:documentation xml:lang="en">Request root element of the POST /analyticsService/declaration/version REST operation
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="QueryDeclarationVersionRequestType"/>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="QueryDeclarationVersionResponse">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">A POST /analyticsService/declaration/version REST operáció válaszának root elementje
+            </xs:documentation>
+            <xs:documentation xml:lang="en">Response root element of the POST /analyticsService/declaration/version REST operation
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="QueryDeclarationVersionResponseType"/>
             </xs:complexContent>
         </xs:complexType>
     </xs:element>

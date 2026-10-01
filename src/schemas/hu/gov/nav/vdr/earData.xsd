@@ -1183,7 +1183,7 @@
                     <xs:documentation xml:lang="en">Customs tariff number</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="quantity" type="earbase:IntMax21DigitsType" minOccurs="0">
+            <xs:element name="quantity" type="earbase:IntMax21DigitsSignedType" minOccurs="0">
                 <xs:annotation>
                     <xs:documentation xml:lang="hu">Mennyiség</xs:documentation>
                     <xs:documentation xml:lang="en">Quantity</xs:documentation>
@@ -1201,7 +1201,7 @@
                     <xs:documentation xml:lang="en">Unit of measure</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="reverseChargeSupplyTaxBase" type="earbase:IntMax15DigitsType">
+            <xs:element name="reverseChargeSupplyTaxBase" type="earbase:IntMax15DigitsSignedType">
                 <xs:annotation>
                     <xs:documentation xml:lang="hu">Fordított adózás keretében történt értékesítés adóalap
                     </xs:documentation>
@@ -1234,7 +1234,7 @@
                     <xs:documentation xml:lang="en">Customs tariff number</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="quantity" type="earbase:IntMax21DigitsType" minOccurs="0">
+            <xs:element name="quantity" type="earbase:IntMax21DigitsSignedType" minOccurs="0">
                 <xs:annotation>
                     <xs:documentation xml:lang="hu">Mennyiség</xs:documentation>
                     <xs:documentation xml:lang="en">Quantity</xs:documentation>
@@ -1252,7 +1252,7 @@
                     <xs:documentation xml:lang="en">Unit of measure</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="reverseChargeServiceTaxBase" type="earbase:IntMax15DigitsType">
+            <xs:element name="reverseChargeServiceTaxBase" type="earbase:IntMax15DigitsSignedType">
                 <xs:annotation>
                     <xs:documentation xml:lang="hu">Fordított adózás keretében történt beszerzés adóalap
                     </xs:documentation>
@@ -1488,7 +1488,7 @@
                     <xs:documentation xml:lang="en">General ledger data</xs:documentation>
                 </xs:annotation>
             </xs:element>
-            <xs:element name="sourceDocumentId" type="common:SimpleText50NotBlankType">
+            <xs:element name="sourceDocumentId" type="earbase:SimpleText50NoLeadingTrailingWhitespaceType">
                 <xs:annotation>
                     <xs:documentation xml:lang="hu">Forrás dokumentum egyedi azonosítója</xs:documentation>
                     <xs:documentation xml:lang="en">Source document unique identifier</xs:documentation>

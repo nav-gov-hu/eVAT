@@ -1,0 +1,844 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+# Project: NAV Elektronikus ÁFA rendszer statement XML séma
+# Author: NAV Informatikai Intézet
+
+# Version: v1.1 2024/07/04
+-->
+<xs:schema xmlns="http://schemas.nav.gov.hu/EAR/2.0/statement"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:common="http://schemas.nav.gov.hu/NTCA/1.0/common"
+           xmlns:earbase="http://schemas.nav.gov.hu/EAR/2.0/base"
+           targetNamespace="http://schemas.nav.gov.hu/EAR/2.0/statement" elementFormDefault="qualified">
+
+    <xs:import namespace="http://schemas.nav.gov.hu/NTCA/1.0/common"/>
+    <xs:import namespace="http://schemas.nav.gov.hu/EAR/2.0/base"/>
+
+    <!-- SIMPLE TYPES -->
+
+    <xs:simpleType name="StatementValueType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Ellenérték típusa</xs:documentation>
+            <xs:documentation xml:lang="en">Type of consideration</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="12"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="UniqueMarkingForAcquisitionsOfGoodsType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Egyedi jelölés típus</xs:documentation>
+            <xs:documentation xml:lang="en">Unique marking type</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="INTERMEDIATE_BUYER">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Közbenső vevő</xs:documentation>
+                    <xs:documentation xml:lang="en">Intermediate buyer</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="INDIRECT_CUSTOMS_REPRESENTATIVE">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Közvetett vámjogi képviselő</xs:documentation>
+                    <xs:documentation xml:lang="en">Indirect customs representative</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="FINAL_BUYER">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Adóraktár üzemeltetője</xs:documentation>
+                    <xs:documentation xml:lang="en">Final buyer</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="MOVEMENT_OF_OWN_GOODS">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Vagyonáthelyezés</xs:documentation>
+                    <xs:documentation xml:lang="en">Movement of own goods</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="UniqueMarkingType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Egyedi jelölés típus</xs:documentation>
+            <xs:documentation xml:lang="en">Unique marking type</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="INTERMEDIATE_BUYER">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Közbenső vevő</xs:documentation>
+                    <xs:documentation xml:lang="en">Intermediate buyer</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="INDIRECT_CUSTOMS_REPRESENTATIVE">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Közvetett vámjogi képviselő</xs:documentation>
+                    <xs:documentation xml:lang="en">Indirect customs representative</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="TAX_WAREHOUSE_OPERATOR">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Adóraktár üzemeltetője</xs:documentation>
+                    <xs:documentation xml:lang="en">Tax warehouse operator</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CategoryType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Kategória típus</xs:documentation>
+            <xs:documentation xml:lang="en">Category type</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="DELETE">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Törlés</xs:documentation>
+                    <xs:documentation xml:lang="en">Delete</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NEW">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Új</xs:documentation>
+                    <xs:documentation xml:lang="en">New</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TransferCategoryType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Átmozgatás kategória típus</xs:documentation>
+            <xs:documentation xml:lang="en">Transfer category type</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="DELETE">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Törlés</xs:documentation>
+                    <xs:documentation xml:lang="en">Delete</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NEW">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Új</xs:documentation>
+                    <xs:documentation xml:lang="en">New</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="RELOCATION">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Áthelyezés</xs:documentation>
+                    <xs:documentation xml:lang="en">RELOCATION</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TransactionTypeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Ügylet típusa típus</xs:documentation>
+            <xs:documentation xml:lang="en">Transaction type type</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="EXPORT_OF_CALL_OF_STOCK">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Vevői készlet kivitel</xs:documentation>
+                    <xs:documentation xml:lang="en">Export of call of stock</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="IMPORT_TO_CALL_OF_STOCK">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Vevői készlet behozatal</xs:documentation>
+                    <xs:documentation xml:lang="en">Import to call of stock</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="StatementCountryCodeType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Nyilatkozat országkód lista típus</xs:documentation>
+            <xs:documentation xml:lang="en">Statement country code type</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="AT">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Ausztria</xs:documentation>
+                    <xs:documentation xml:lang="en">Austria</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="PL">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Lengyelország</xs:documentation>
+                    <xs:documentation xml:lang="en">Poland</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="BE">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Belgium</xs:documentation>
+                    <xs:documentation xml:lang="en">Belgium</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="LV">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Lettország</xs:documentation>
+                    <xs:documentation xml:lang="en">Latvia</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="BG">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Bulgária</xs:documentation>
+                    <xs:documentation xml:lang="en">Bulgaria</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="LT">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Litvánia</xs:documentation>
+                    <xs:documentation xml:lang="en">Lithuania</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="CY">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Ciprus</xs:documentation>
+                    <xs:documentation xml:lang="en">Cyprus</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="LU">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Luxemburg</xs:documentation>
+                    <xs:documentation xml:lang="en">Luxembourg</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="CZ">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Cseh Köztársaság</xs:documentation>
+                    <xs:documentation xml:lang="en">Czech Republic</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="MT">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Málta</xs:documentation>
+                    <xs:documentation xml:lang="en">Malta</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="DK">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Dánia</xs:documentation>
+                    <xs:documentation xml:lang="en">Denmark</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="DE">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Németország</xs:documentation>
+                    <xs:documentation xml:lang="en">Germany</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="GB">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Egyesült Királyság</xs:documentation>
+                    <xs:documentation xml:lang="en">United Kingdom</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="XI">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Észak-Írország</xs:documentation>
+                    <xs:documentation xml:lang="en">Northern Ireland</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="IT">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Olaszország</xs:documentation>
+                    <xs:documentation xml:lang="en">Italy</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="PT">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Portugália</xs:documentation>
+                    <xs:documentation xml:lang="en">Portugal</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="EE">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Észtország</xs:documentation>
+                    <xs:documentation xml:lang="en">Estonia</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="RO">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Románia</xs:documentation>
+                    <xs:documentation xml:lang="en">Romania</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="FI">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Finnország</xs:documentation>
+                    <xs:documentation xml:lang="en">Finland</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="ES">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Spanyolország</xs:documentation>
+                    <xs:documentation xml:lang="en">Spain</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="FR">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Franciaország</xs:documentation>
+                    <xs:documentation xml:lang="en">France</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SE">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Svédország</xs:documentation>
+                    <xs:documentation xml:lang="en">Sweden</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="EL">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Görögország</xs:documentation>
+                    <xs:documentation xml:lang="en">Greece</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SK">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Szlovákia</xs:documentation>
+                    <xs:documentation xml:lang="en">Slovakia</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="NL">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Hollandia</xs:documentation>
+                    <xs:documentation xml:lang="en">Netherlands</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="SI">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Szlovénia</xs:documentation>
+                    <xs:documentation xml:lang="en">Slovenia</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="HR">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Horvát Köztársaság</xs:documentation>
+                    <xs:documentation xml:lang="en">Croatia</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="IE">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Írország</xs:documentation>
+                    <xs:documentation xml:lang="en">Ireland</xs:documentation>
+                </xs:annotation>
+            </xs:enumeration>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- COMPLEX TYPES -->
+
+    <xs:complexType name="ReasonsForCorrectionForSupplyAndAcquisitionsOfServicesType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Helyesbítés oka lista típus szolgáltatásnyújtáshoz és szolgáltatás igénybevételhez</xs:documentation>
+            <xs:documentation xml:lang="en">Reason for correction list for supply and acquisitions of services type</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="taxIdentificationNumberOrCountryCodeCorrection" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Adószám helytelensége miatti javítás, ideértve az országkód elírása miatti javítást is</xs:documentation>
+                    <xs:documentation xml:lang="en">Correction of incorrect tax number, including correction of misspelled country code</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="amountDataCorrection" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Összegadat helytelensége miatti javítás</xs:documentation>
+                    <xs:documentation xml:lang="en">Correction of incorrect amount data</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="periodDateCorrection" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Hibás időszak miatti javítás</xs:documentation>
+                    <xs:documentation xml:lang="en">Correction of incorrect period data</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="ReasonsForCorrectionForSupplyAndAcquisitionsOfIntraCommunityType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Helyesbítés oka lista közösségi termékértékesítéshez és termékbeszerzéshez</xs:documentation>
+            <xs:documentation xml:lang="en">Reason for correction for supply and acquisitions of intra community list</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="taxIdentificationNumberOrCountryCodeCorrection" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Adószám helytelensége miatti javítás, ideértve az országkód elírása miatti javítást is</xs:documentation>
+                    <xs:documentation xml:lang="en">Correction of incorrect tax number, including correction of misspelled country code</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="amountDataCorrection" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Összegadat helytelensége miatti javítás</xs:documentation>
+                    <xs:documentation xml:lang="en">Correction of incorrect amount data</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="periodDateCorrection" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Hibás időszak miatti javítás</xs:documentation>
+                    <xs:documentation xml:lang="en">Correction of incorrect period data</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="triangularTransactionNotMarked" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Háromszögügylet, de ezt nem jelölte</xs:documentation>
+                    <xs:documentation xml:lang="en">Triangular transaction not marked</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="notTriangularTransactionMarked" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Nem háromszögügylet, de annak jelölte</xs:documentation>
+                    <xs:documentation xml:lang="en">Not triangular transaction but marked</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="SourceDocumentItemType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Forrás dokumentum elem típus</xs:documentation>
+            <xs:documentation xml:lang="en">Source document item type</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="sourceDocumentId" type="earbase:SimpleText50NoLeadingTrailingWhitespaceType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Forrás dokumentum egyedi azonosítója</xs:documentation>
+                    <xs:documentation xml:lang="en">Source document unique identifier</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="standardTaxCode" type="common:SimpleText50NotBlankType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">A tétel standard adókódja</xs:documentation>
+                    <xs:documentation xml:lang="en">Standard tax code of the item</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="taxBase" type="earbase:TaxMonetaryType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Adó alapja</xs:documentation>
+                    <xs:documentation xml:lang="en">Tax base</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="taxBaseInInvoiceCurrency" type="earbase:TaxMonetaryType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Adó alapja számla pénznemében</xs:documentation>
+                    <xs:documentation xml:lang="en">Tax base in invoice currency</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="currency" type="common:CurrencyType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Pénznem (ISO 4217 szabvány szerinti 3 hosszú pénznem kód)</xs:documentation>
+                    <xs:documentation xml:lang="en">Currency (three digit ISO 4217 currency code)</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SourceDocumentListType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Forrás dokumentumok listája típus</xs:documentation>
+            <xs:documentation xml:lang="en">Source document list type</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="sourceDocumentItem" type="SourceDocumentItemType" minOccurs="1" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Forrás dokumentum elem</xs:documentation>
+                    <xs:documentation xml:lang="en">Source document item</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="TransferSourceDocumentItemType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Átmozgatás forrás dokumentum elem typus</xs:documentation>
+            <xs:documentation xml:lang="en">Transfer source document item type</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="sourceDocumentId" type="earbase:SimpleText50NoLeadingTrailingWhitespaceType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Forrás dokumentum egyedi azonosítója</xs:documentation>
+                    <xs:documentation xml:lang="en">Source document unique identifier</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TransferSourceDocumentListType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Átmozgatás forrás dokumentumok listája típus</xs:documentation>
+            <xs:documentation xml:lang="en">Transfer source document list type</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="transferSourceDocumentItem" type="TransferSourceDocumentItemType" minOccurs="1" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Átmozgatás forrás dokumentum elem</xs:documentation>
+                    <xs:documentation xml:lang="en">Transfer source document item</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="MovementOfCallOfStockItemType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Közösségi vevői készlet átmozgatás elem típus</xs:documentation>
+            <xs:documentation xml:lang="en">Movement of call of stock item type</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="countryCode" type="StatementCountryCodeType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Az országkód ISO 3166 alpha-2 szabvány szerint</xs:documentation>
+                    <xs:documentation xml:lang="en">ISO 3166 alpha-2 country code</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="partnerCommunityTaxNumber" type="common:AtomicStringType15">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Partner közösségi adószáma</xs:documentation>
+                    <xs:documentation xml:lang="en">Partner community taxnumber</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="transferCategory" type="TransferCategoryType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Átmozgatás kategória</xs:documentation>
+                    <xs:documentation xml:lang="en">Transfer category</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="newPartnerCommunityTaxNumber" type="common:AtomicStringType15" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Új partner közösségi adószáma</xs:documentation>
+                    <xs:documentation xml:lang="en">New partner community taxnumber</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="transactionType" type="TransactionTypeType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Ügylet típusa</xs:documentation>
+                    <xs:documentation xml:lang="en">Transaction type</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="transferSourceDocumentList" type="TransferSourceDocumentListType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Átmozgatás forrás dokumentumok listája</xs:documentation>
+                    <xs:documentation xml:lang="en">Transfer source document list</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="MovementOfCallOfStockListType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Közösségi vevői készlet átmozgatás listája típus</xs:documentation>
+            <xs:documentation xml:lang="en">Movement of call of stock list type</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="movementOfCallOfStockItem" type="MovementOfCallOfStockItemType" minOccurs="1" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Közösségi vevői készlet átmozgatás elem</xs:documentation>
+                    <xs:documentation xml:lang="en">Movement of call of stock item</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="IntraCommunityAcquisitionsOfServicesItemType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Közösségi szolgáltatás igénybevételek elem típus</xs:documentation>
+            <xs:documentation xml:lang="en">Intracommunity acquisitions of services item type</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="countryCode" type="StatementCountryCodeType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Az országkód ISO 3166 alpha-2 szabvány szerint</xs:documentation>
+                    <xs:documentation xml:lang="en">ISO 3166 alpha-2 country code</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="serviceProviderVatIdentificationNumber" type="common:AtomicStringType15">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Szolgáltatást nyújtó közösségi adószáma</xs:documentation>
+                    <xs:documentation xml:lang="en">Community VAT registration number of the service provider</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="valueOfAcquisitionsOfServicesWithoutVAT" type="StatementValueType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">A közösség területén belül történt szolgáltatásigénybevétel áfa nélkül számított ellenértéke</xs:documentation>
+                    <xs:documentation xml:lang="en">The value of the service provided within the territory of the community, calculated without VAT</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="category" type="CategoryType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Kategória</xs:documentation>
+                    <xs:documentation xml:lang="en">Category</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="reasonsForCorrectionForSupplyAndAcquisitionsOfServices" type="ReasonsForCorrectionForSupplyAndAcquisitionsOfServicesType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Helyesbítés oka lista szolgáltatásnyújtáshoz és szolgáltatás igénybevételhez</xs:documentation>
+                    <xs:documentation xml:lang="en">Reason for correction list for supply and acquisitions of services</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="sourceDocumentList" type="SourceDocumentListType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Forrás dokumentumok listája</xs:documentation>
+                    <xs:documentation xml:lang="en">Source document list</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="IntraCommunityAcquisitionsOfServicesListType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Közösségi szolgáltatás igénybevételek listája típus</xs:documentation>
+            <xs:documentation xml:lang="en">Intracommunity acquisitions of services list type</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="intraCommunityAcquisitionsOfServicesItem" type="IntraCommunityAcquisitionsOfServicesItemType" minOccurs="1" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Közösségi szolgáltatás igénybevételek elem</xs:documentation>
+                    <xs:documentation xml:lang="en">Intracommunity acquisitions of services item</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="IntraCommunitySupplyOfServicesItemType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Közösségi szolgáltatásnyújtások elem típus</xs:documentation>
+            <xs:documentation xml:lang="en">Intracommunity supply of services item type</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="countryCode" type="StatementCountryCodeType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Az országkód ISO 3166 alpha-2 szabvány szerint</xs:documentation>
+                    <xs:documentation xml:lang="en">ISO 3166 alpha-2 country code</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="customerVatIdentificationNumber" type="common:AtomicStringType15">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Szolgáltatás igénybe vevő közösségi adószáma</xs:documentation>
+                    <xs:documentation xml:lang="en">Community VAT registration number of the customer</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="valueOfSupplyOfServicesWithoutVAT" type="StatementValueType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">A közösség területén belül történt szolgáltatásnyújtás áfa nélkül számított ellenértéke</xs:documentation>
+                    <xs:documentation xml:lang="en">The value of the supply of services within the territory of the Community, calculated excluding VAT</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="category" type="CategoryType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Kategória</xs:documentation>
+                    <xs:documentation xml:lang="en">Category</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="reasonsForCorrectionForSupplyAndAcquisitionsOfServices" type="ReasonsForCorrectionForSupplyAndAcquisitionsOfServicesType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Helyesbítés oka lista szolgáltatásnyújtáshoz és szolgáltatás igénybevételhez</xs:documentation>
+                    <xs:documentation xml:lang="en">Reason for correction list for supply and acquisitions of services</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="sourceDocumentList" type="SourceDocumentListType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Forrás dokumentumok listája</xs:documentation>
+                    <xs:documentation xml:lang="en">Source document list</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="IntraCommunitySupplyOfServicesListType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Közösségi szolgáltatásnyújtások listája típus</xs:documentation>
+            <xs:documentation xml:lang="en">Intracommunity supply of services list type</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="intraCommunitySupplyOfServicesItem" type="IntraCommunitySupplyOfServicesItemType" minOccurs="1" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Közösségi szolgáltatásnyújtások elem</xs:documentation>
+                    <xs:documentation xml:lang="en">Intracommunity supply of services item</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="IntraCommunityAcquisitionsOfGoodsItemType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Közösségi termékértékbeszerzés elem típus</xs:documentation>
+            <xs:documentation xml:lang="en">Intracommunity acquisitions of goods item type</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="countryCode" type="StatementCountryCodeType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Az országkód ISO 3166 alpha-2 szabvány szerint</xs:documentation>
+                    <xs:documentation xml:lang="en">ISO 3166 alpha-2 country code</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="customerVatIdentificationNumber" type="common:AtomicStringType15">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Eladó közösségi adószáma</xs:documentation>
+                    <xs:documentation xml:lang="en">Community VAT registration number of the customer</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="valueOfAcquisitionsOfGoodsWithoutVAT" type="StatementValueType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">A közösség területén belül történt termékbeszerzés áfa nélkül számított ellenértéke</xs:documentation>
+                    <xs:documentation xml:lang="en">The value of a product purchased within the territory of the Community, calculated excluding VAT</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="uniqueMarkingForAcquisitionsOfGoods" type="UniqueMarkingForAcquisitionsOfGoodsType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Egyedi jelölés termékbeszerzésekhez</xs:documentation>
+                    <xs:documentation xml:lang="en">Unique marking for acquisitions of goods</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="category" type="CategoryType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Kategória</xs:documentation>
+                    <xs:documentation xml:lang="en">Category</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="reasonsForCorrectionForSupplyAndAcquisitionsOfIntraCommunity" type="ReasonsForCorrectionForSupplyAndAcquisitionsOfIntraCommunityType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Helyesbítés oka lista közösségi termékértékesítéshez és termékbeszerzéshez</xs:documentation>
+                    <xs:documentation xml:lang="en">Reason for correction for supply and acquisitions of intra community list</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="sourceDocumentList" type="SourceDocumentListType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Forrás dokumentumok listája</xs:documentation>
+                    <xs:documentation xml:lang="en">Source document list</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="IntraCommunityAcquisitionsOfGoodsListType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Közösségi termékértékbeszerzések listája típus</xs:documentation>
+            <xs:documentation xml:lang="en">Intracommunity procurement list type</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="intraCommunityAcquisitionsOfGoodsItem" type="IntraCommunityAcquisitionsOfGoodsItemType" minOccurs="1" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Közösségi termékértékbeszerzés elem</xs:documentation>
+                    <xs:documentation xml:lang="en">ntracommunity acquisitions of goods item</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="IntraCommunitySupplyItemType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Közösségi termékértékesítés elem típus</xs:documentation>
+            <xs:documentation xml:lang="en">Intracommunity supply item type</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="countryCode" type="StatementCountryCodeType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Az országkód ISO 3166 alpha-2 szabvány szerint</xs:documentation>
+                    <xs:documentation xml:lang="en">ISO 3166 alpha-2 country code</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="buyerVatIdentificationNumber" type="common:AtomicStringType15">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Vevő közösségi adószáma</xs:documentation>
+                    <xs:documentation xml:lang="en">Community VAT registration number of the buyer</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="valueOfSupplyOfGoodsWithoutVAT" type="StatementValueType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">A közösség területén belül történt termékértékesítés áfa nélkül számított ellenértéke</xs:documentation>
+                    <xs:documentation xml:lang="en">The value of supply of goods within the territory of the Community, calculated excluding VAT</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="uniqueMarking" type="UniqueMarkingType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Egyedi jelölés</xs:documentation>
+                    <xs:documentation xml:lang="en">Unique marking</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="category" type="CategoryType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Kategória</xs:documentation>
+                    <xs:documentation xml:lang="en">Category</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="reasonsForCorrectionForSupplyAndAcquisitionsOfIntraCommunity" type="ReasonsForCorrectionForSupplyAndAcquisitionsOfIntraCommunityType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Helyesbítés oka lista közösségi termékértékesítéshez és termékbeszerzéshez</xs:documentation>
+                    <xs:documentation xml:lang="en">Reason for correction for supply and acquisitions of intra community list</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="sourceDocumentList" type="SourceDocumentListType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Forrás dokumentumok listája</xs:documentation>
+                    <xs:documentation xml:lang="en">Source document list</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="IntraCommunitySupplyListType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Közösségi termékértékesítések listája típus</xs:documentation>
+            <xs:documentation xml:lang="en">Intracommunity supply list type</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="intraCommunitySupplyItem" type="IntraCommunitySupplyItemType" minOccurs="1" maxOccurs="unbounded">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Közösségi termékértékesítés elem</xs:documentation>
+                    <xs:documentation xml:lang="en">Intracommunity supply item</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <!-- REQUEST/RESPONSE COMPLEX TYPES -->
+
+    <xs:complexType name="StatementDataType">
+        <xs:sequence>
+            <xs:element name="statementInfo" type="earbase:StatementInfoType">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">A nyilatkozat fejadatai</xs:documentation>
+                    <xs:documentation xml:lang="en">Header data of the statement</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="intraCommunitySupplyList" type="IntraCommunitySupplyListType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Közösségi termékértékesítések listája</xs:documentation>
+                    <xs:documentation xml:lang="en">Intracommunity supply list</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="intraCommunityAcquisitionsOfGoodsList" type="IntraCommunityAcquisitionsOfGoodsListType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Közösségi termékértékbeszerzések listája</xs:documentation>
+                    <xs:documentation xml:lang="en">Intracommunity acquisitions of good list</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="intraCommunitySupplyOfServicesList" type="IntraCommunitySupplyOfServicesListType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Közösségi szolgáltatásnyújtások listája</xs:documentation>
+                    <xs:documentation xml:lang="en">Intracommunity supply of services list</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="intraCommunityAcquisitionsOfServicesList" type="IntraCommunityAcquisitionsOfServicesListType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Közösségi szolgáltatás igénybevételek listája</xs:documentation>
+                    <xs:documentation xml:lang="en">Intracommunity acquisitions of services list</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="movementOfCallOfStockList" type="MovementOfCallOfStockListType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation xml:lang="hu">Közösségi vevői készlet átmozgatás listája</xs:documentation>
+                    <xs:documentation xml:lang="en">Movement of call of stock list</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <!-- REQUEST/RESPONSE ELEMENTS -->
+
+    <xs:element name="statementData">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">XML root element</xs:documentation>
+            <xs:documentation xml:lang="en">XML root element</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="StatementDataType"/>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

@@ -399,22 +399,35 @@
             <xs:minInclusive value="0"/>
         </xs:restriction>
     </xs:simpleType>
+    <xs:simpleType name="IntMax15DigitsSignedType">
+        <xs:restriction base="xs:integer">
+            <xs:totalDigits value="15"/>
+        </xs:restriction>
+    </xs:simpleType>
     <xs:simpleType name="IntMax20DigitsType">
         <xs:restriction base="xs:integer">
             <xs:totalDigits value="20"/>
             <xs:minInclusive value="0"/>
         </xs:restriction>
     </xs:simpleType>
-    <xs:simpleType name="IntMax21DigitsType">
+    <xs:simpleType name="IntMax21DigitsSignedType">
         <xs:restriction base="xs:integer">
             <xs:totalDigits value="21"/>
-            <xs:minInclusive value="0"/>
         </xs:restriction>
     </xs:simpleType>
     <xs:simpleType name="IntMax25DigitsType">
         <xs:restriction base="xs:integer">
             <xs:totalDigits value="25"/>
             <xs:minInclusive value="0"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="SimpleText50NoLeadingTrailingWhitespaceType">
+        <xs:annotation>
+            <xs:documentation xml:lang="hu">Legfeljebb 50 karakteres szöveg, amelynek elején vagy végén nem lehet whitespace karakter</xs:documentation>
+            <xs:documentation xml:lang="en">String of maximum 50 characters without leading or trailing whitespace</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="AtomicStringType50">
+            <xs:pattern value="\S|\S.*\S"/>
         </xs:restriction>
     </xs:simpleType>
 
