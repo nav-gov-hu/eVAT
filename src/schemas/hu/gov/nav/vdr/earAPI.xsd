@@ -3,7 +3,7 @@
 # Project: NAV Elektronikus ÁFA rendszer earAPI XML séma
 # Author: NAV Informatikai Intézet
 
-# Version: v1.1 2026/04/01
+# File Version: v2.1 2026/10/01
 -->
 <xs:schema xmlns="http://schemas.nav.gov.hu/EAR/2.0/api"
            xmlns:xs="http://www.w3.org/2001/XMLSchema"

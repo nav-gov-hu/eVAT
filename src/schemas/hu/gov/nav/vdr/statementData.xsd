@@ -3,7 +3,7 @@
 # Project: NAV Elektronikus ÁFA rendszer statement XML séma
 # Author: NAV Informatikai Intézet
 
-# Version: v1.1 2024/07/04
+# Version: v1.1 2026/10/01
 -->
 <xs:schema xmlns="http://schemas.nav.gov.hu/EAR/2.0/statement"
            xmlns:xs="http://www.w3.org/2001/XMLSchema"
