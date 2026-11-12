@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<n1:statementData xmlns:earBase="http://schemas.nav.gov.hu/EAR/2.0/base" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:n1="http://schemas.nav.gov.hu/EAR/2.0/statement" xsi:schemaLocation="http://schemas.nav.gov.hu/EAR/2.0/statement">
+	<n1:statementInfo>
+		<earBase:modificationReference>
+			<earBase:statementReferenceId>5KMCSXU9ND1SB44E</earBase:statementReferenceId> <!--Alapnyilatkozat declarationProcessingId-->
+			<earBase:statementReferenceIndex>1</earBase:statementReferenceIndex>
+		</earBase:modificationReference>
+		<earBase:vatIdentificationNumber>33333333</earBase:vatIdentificationNumber>
+		<earBase:statementMethod>CORRECTION</earBase:statementMethod>
+		<earBase:statementFrequency>MONTHLY</earBase:statementFrequency>
+		<earBase:statementPeriodStart>2026-08-01</earBase:statementPeriodStart>
+		<earBase:statementPeriodEnd>2026-08-31</earBase:statementPeriodEnd>
+		<earBase:version>1</earBase:version>
+	</n1:statementInfo>
+	<n1:intraCommunitySupplyList>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>AT</n1:countryCode><!--Közösségen belüli értékesítés, adószám módosítása, törlés-->
+			<n1:buyerVatIdentificationNumber>U14900000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>26468</n1:valueOfSupplyOfGoodsWithoutVAT>
+			<n1:category>DELETE</n1:category>
+			<n1:reasonsForCorrectionForSupplyAndAcquisitionsOfIntraCommunity>
+				<n1:taxIdentificationNumberOrCountryCodeCorrection>true</n1:taxIdentificationNumberOrCountryCodeCorrection>
+			</n1:reasonsForCorrectionForSupplyAndAcquisitionsOfIntraCommunity>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>AT</n1:countryCode><!--Közösségen belüli értékesítés, adószám módosítása, javított érték-->
+			<n1:buyerVatIdentificationNumber>U45900000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>26468</n1:valueOfSupplyOfGoodsWithoutVAT>
+			<n1:category>NEW</n1:category>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>AT</n1:countryCode><!--Közösségen belüli értékesítés, adószám és érték módosítása, törlés-->
+			<n1:buyerVatIdentificationNumber>U63000000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>11468</n1:valueOfSupplyOfGoodsWithoutVAT>
+			<n1:category>DELETE</n1:category>
+			<n1:reasonsForCorrectionForSupplyAndAcquisitionsOfIntraCommunity>
+				<n1:taxIdentificationNumberOrCountryCodeCorrection>true</n1:taxIdentificationNumberOrCountryCodeCorrection>
+				<n1:amountDataCorrection>true</n1:amountDataCorrection>
+			</n1:reasonsForCorrectionForSupplyAndAcquisitionsOfIntraCommunity>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>AT</n1:countryCode><!--Közösségen belüli értékesítés, adószám és érték módosítása, javított érték-->
+			<n1:buyerVatIdentificationNumber>U44900000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>10468</n1:valueOfSupplyOfGoodsWithoutVAT>
+			<n1:category>NEW</n1:category>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>BE</n1:countryCode><!--Közösségen belüli értékesítés, törlés, másik periódusba tartozik a tétel-->
+			<n1:buyerVatIdentificationNumber>0780000000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>2238</n1:valueOfSupplyOfGoodsWithoutVAT>
+			<n1:category>DELETE</n1:category>
+			<n1:reasonsForCorrectionForSupplyAndAcquisitionsOfIntraCommunity>
+				<n1:periodDateCorrection>true</n1:periodDateCorrection>
+			</n1:reasonsForCorrectionForSupplyAndAcquisitionsOfIntraCommunity>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>BE</n1:countryCode><!--Közösségen belüli értékesítés, törlés, mert valójában háromszögügylet-->
+			<n1:buyerVatIdentificationNumber>0870000000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>760</n1:valueOfSupplyOfGoodsWithoutVAT>
+			<n1:category>DELETE</n1:category>
+			<n1:reasonsForCorrectionForSupplyAndAcquisitionsOfIntraCommunity>
+				<n1:triangularTransactionNotMarked>true</n1:triangularTransactionNotMarked>
+			</n1:reasonsForCorrectionForSupplyAndAcquisitionsOfIntraCommunity>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>BE</n1:countryCode><!--Közösségen belüli értékesítés, javított adatsor háromszögügylet miatt-->
+			<n1:buyerVatIdentificationNumber>0870000000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>760</n1:valueOfSupplyOfGoodsWithoutVAT>
+			<n1:uniqueMarking>INTERMEDIATE_BUYER</n1:uniqueMarking>
+			<n1:category>NEW</n1:category>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>BE</n1:countryCode><!--Közösségen belüli értékesítés, új tételsor felvétele-->
+			<n1:buyerVatIdentificationNumber>0400000000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>765</n1:valueOfSupplyOfGoodsWithoutVAT>
+			<n1:category>NEW</n1:category>
+		</n1:intraCommunitySupplyItem>
+	</n1:intraCommunitySupplyList>
+	<n1:intraCommunityAcquisitionsOfGoodsList>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>AT</n1:countryCode><!--Háromszögügylet végső beszerző, törlés, mégsem háromszögügylet-->
+			<n1:customerVatIdentificationNumber>U44900000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>3158</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+			<n1:uniqueMarkingForAcquisitionsOfGoods>FINAL_BUYER</n1:uniqueMarkingForAcquisitionsOfGoods>
+			<n1:category>DELETE</n1:category>
+			<n1:reasonsForCorrectionForSupplyAndAcquisitionsOfIntraCommunity>
+				<n1:notTriangularTransactionMarked>true</n1:notTriangularTransactionMarked>
+			</n1:reasonsForCorrectionForSupplyAndAcquisitionsOfIntraCommunity>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>AT</n1:countryCode><!--Háromszögügylet végső beszerző mégsem háromszögügylet, módosított tételsor-->
+			<n1:customerVatIdentificationNumber>U44900000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>3158</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+			<n1:category>NEW</n1:category>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>DE</n1:countryCode><!--Közösségen belüli beszerzés háromszögügylet, rossz értékadat miatt törlés-->
+			<n1:customerVatIdentificationNumber>118000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>910</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+			<n1:uniqueMarkingForAcquisitionsOfGoods>FINAL_BUYER</n1:uniqueMarkingForAcquisitionsOfGoods>
+			<n1:category>DELETE</n1:category>
+			<n1:reasonsForCorrectionForSupplyAndAcquisitionsOfIntraCommunity>
+				<n1:amountDataCorrection>true</n1:amountDataCorrection>
+			</n1:reasonsForCorrectionForSupplyAndAcquisitionsOfIntraCommunity>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>DE</n1:countryCode><!--Közösségen belüli beszerzés háromszögügylet, tétel megadása helyes értékadattal-->
+			<n1:customerVatIdentificationNumber>118000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>810</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+			<n1:uniqueMarkingForAcquisitionsOfGoods>FINAL_BUYER</n1:uniqueMarkingForAcquisitionsOfGoods>
+			<n1:category>NEW</n1:category>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>LV</n1:countryCode><!--Közösségen belüli beszerzés háromszögügylet, korábban nem szereplő tétel felvétele-->
+			<n1:customerVatIdentificationNumber>40000000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>760</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+			<n1:uniqueMarkingForAcquisitionsOfGoods>INTERMEDIATE_BUYER</n1:uniqueMarkingForAcquisitionsOfGoods>
+			<n1:category>NEW</n1:category>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+	</n1:intraCommunityAcquisitionsOfGoodsList>
+	<n1:intraCommunitySupplyOfServicesList>
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>PL</n1:countryCode><!--Közösségen belüli szolgáltatásnyújtás, törlés, mert ez az ügylet másik partner felé teljesült (PL6130000000)-->
+			<n1:customerVatIdentificationNumber>5220000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>245</n1:valueOfSupplyOfServicesWithoutVAT>
+			<n1:category>DELETE</n1:category>
+			<n1:reasonsForCorrectionForSupplyAndAcquisitionsOfServices>
+				<n1:taxIdentificationNumberOrCountryCodeCorrection>true</n1:taxIdentificationNumberOrCountryCodeCorrection>
+				<n1:amountDataCorrection>true</n1:amountDataCorrection>
+			</n1:reasonsForCorrectionForSupplyAndAcquisitionsOfServices>
+		</n1:intraCommunitySupplyOfServicesItem>
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>PL</n1:countryCode><!--Közösségen belüli szolgáltatásnyújtás, törlés, mert ez az ügylet másik partner felé teljesült (PL6130000000)-->
+			<n1:customerVatIdentificationNumber>6120000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>178</n1:valueOfSupplyOfServicesWithoutVAT>
+			<n1:category>DELETE</n1:category>
+			<n1:reasonsForCorrectionForSupplyAndAcquisitionsOfServices>
+				<n1:taxIdentificationNumberOrCountryCodeCorrection>true</n1:taxIdentificationNumberOrCountryCodeCorrection>
+				<n1:amountDataCorrection>true</n1:amountDataCorrection>
+			</n1:reasonsForCorrectionForSupplyAndAcquisitionsOfServices>
+		</n1:intraCommunitySupplyOfServicesItem>
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>PL</n1:countryCode><!--Közösségen belüli szolgáltatásnyújtás, javított tétel, az előző kettő törölt tételsor helyett-->
+			<n1:customerVatIdentificationNumber>6130000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>432</n1:valueOfSupplyOfServicesWithoutVAT>
+			<n1:category>NEW</n1:category>
+		</n1:intraCommunitySupplyOfServicesItem>
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>PL</n1:countryCode><!--Közösségen belüli szolgáltatásnyújtás, törlés, az ügylet másik periódusba tartozik-->
+			<n1:customerVatIdentificationNumber>5920000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>379</n1:valueOfSupplyOfServicesWithoutVAT>
+			<n1:category>DELETE</n1:category>
+			<n1:reasonsForCorrectionForSupplyAndAcquisitionsOfServices>
+				<n1:periodDateCorrection>true</n1:periodDateCorrection>
+			</n1:reasonsForCorrectionForSupplyAndAcquisitionsOfServices>
+		</n1:intraCommunitySupplyOfServicesItem>
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>HR</n1:countryCode><!--Közösségen belüli szolgáltatásnyújtás, új tételsor felvétele-->
+			<n1:customerVatIdentificationNumber>20900000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>832</n1:valueOfSupplyOfServicesWithoutVAT>
+			<n1:category>NEW</n1:category>
+		</n1:intraCommunitySupplyOfServicesItem>
+	</n1:intraCommunitySupplyOfServicesList>
+	<n1:intraCommunityAcquisitionsOfServicesList>
+		<n1:intraCommunityAcquisitionsOfServicesItem>
+			<n1:countryCode>RO</n1:countryCode><!--Közösségen belüli szolgáltatás igénybevétel adószám nem ismert, téves országkód miatt törlés-->
+			<n1:serviceProviderVatIdentificationNumber>0</n1:serviceProviderVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfServicesWithoutVAT>795</n1:valueOfAcquisitionsOfServicesWithoutVAT>
+			<n1:category>DELETE</n1:category>
+			<n1:reasonsForCorrectionForSupplyAndAcquisitionsOfServices>
+				<n1:taxIdentificationNumberOrCountryCodeCorrection>true</n1:taxIdentificationNumberOrCountryCodeCorrection>
+			</n1:reasonsForCorrectionForSupplyAndAcquisitionsOfServices>
+		</n1:intraCommunityAcquisitionsOfServicesItem>
+		<n1:intraCommunityAcquisitionsOfServicesItem>
+			<n1:countryCode>FI</n1:countryCode><!--Közösségen belüli szolgáltatás igénybevétel adószám nem ismert, helyes országkód megadása-->
+			<n1:serviceProviderVatIdentificationNumber>0</n1:serviceProviderVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfServicesWithoutVAT>795</n1:valueOfAcquisitionsOfServicesWithoutVAT>
+			<n1:category>NEW</n1:category>
+		</n1:intraCommunityAcquisitionsOfServicesItem>
+	</n1:intraCommunityAcquisitionsOfServicesList>
+</n1:statementData>

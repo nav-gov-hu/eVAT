@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<n1:statementData xmlns:earBase="http://schemas.nav.gov.hu/EAR/2.0/base" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:n1="http://schemas.nav.gov.hu/EAR/2.0/statement" xsi:schemaLocation="http://schemas.nav.gov.hu/EAR/2.0/statement">
+	<n1:statementInfo>
+		<earBase:modificationReference>
+			<earBase:statementReferenceId>5E9LXLBI8BD8MGAS</earBase:statementReferenceId> <!--Alapnyilatkozat declarationProcessingId-->
+			<earBase:statementReferenceIndex>1</earBase:statementReferenceIndex>
+		</earBase:modificationReference>
+		<earBase:vatIdentificationNumber>33333333</earBase:vatIdentificationNumber>
+		<earBase:statementMethod>CORRECTION</earBase:statementMethod>
+		<earBase:statementFrequency>MONTHLY</earBase:statementFrequency>
+		<earBase:statementPeriodStart>2026-01-01</earBase:statementPeriodStart>
+		<earBase:statementPeriodEnd>2026-01-31</earBase:statementPeriodEnd>
+		<earBase:version>18</earBase:version>
+	</n1:statementInfo>
+	<n1:intraCommunitySupplyList> <!--Közösségi termékértékesítések listája-->
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>AT</n1:countryCode>
+			<n1:buyerVatIdentificationNumber>U14199000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>840</n1:valueOfSupplyOfGoodsWithoutVAT>
+			<n1:category>DELETE</n1:category>
+			<n1:reasonsForCorrectionForSupplyAndAcquisitionsOfIntraCommunity>
+				<n1:taxIdentificationNumberOrCountryCodeCorrection>true</n1:taxIdentificationNumberOrCountryCodeCorrection>
+			</n1:reasonsForCorrectionForSupplyAndAcquisitionsOfIntraCommunity>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>BE</n1:countryCode>
+			<n1:buyerVatIdentificationNumber>0670670000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>840</n1:valueOfSupplyOfGoodsWithoutVAT>
+			<n1:category>NEW</n1:category>
+		</n1:intraCommunitySupplyItem>
+	</n1:intraCommunitySupplyList>
+	<n1:intraCommunityAcquisitionsOfGoodsList> <!--Közösségi termékbeszerzések listája-->
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>DE</n1:countryCode>
+			<n1:customerVatIdentificationNumber>114138000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>1150</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+			<n1:category>DELETE</n1:category>
+			<n1:reasonsForCorrectionForSupplyAndAcquisitionsOfIntraCommunity>
+				<n1:taxIdentificationNumberOrCountryCodeCorrection>true</n1:taxIdentificationNumberOrCountryCodeCorrection>
+			</n1:reasonsForCorrectionForSupplyAndAcquisitionsOfIntraCommunity>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>IT</n1:countryCode>
+			<n1:customerVatIdentificationNumber>05006600000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>1150</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+			<n1:category>NEW</n1:category>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+	</n1:intraCommunityAcquisitionsOfGoodsList>
+</n1:statementData>

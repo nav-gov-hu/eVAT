@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<n1:statementData xmlns:earBase="http://schemas.nav.gov.hu/EAR/2.0/base" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:n1="http://schemas.nav.gov.hu/EAR/2.0/statement" xsi:schemaLocation="http://schemas.nav.gov.hu/EAR/2.0/statement">
+	<n1:statementInfo>
+		<earBase:vatIdentificationNumber>33333333</earBase:vatIdentificationNumber>
+		<earBase:statementMethod>BASE</earBase:statementMethod>
+		<earBase:statementFrequency>MONTHLY</earBase:statementFrequency>
+		<earBase:statementPeriodStart>2026-08-01</earBase:statementPeriodStart>
+		<earBase:statementPeriodEnd>2026-08-31</earBase:statementPeriodEnd>
+		<earBase:version>1</earBase:version>
+	</n1:statementInfo>
+	<n1:intraCommunitySupplyList>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>AT</n1:countryCode><!--Közösségen belüli értékesítés-->
+			<n1:buyerVatIdentificationNumber>U14900000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>26468</n1:valueOfSupplyOfGoodsWithoutVAT>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>AT</n1:countryCode><!--Közösségen belüli értékesítés-->
+			<n1:buyerVatIdentificationNumber>U63000000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>11468</n1:valueOfSupplyOfGoodsWithoutVAT>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>BG</n1:countryCode><!--Közösségen belüli értékesítés közvetett vámjogi képviselő-->
+			<n1:buyerVatIdentificationNumber>175000000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>5990</n1:valueOfSupplyOfGoodsWithoutVAT>
+			<n1:uniqueMarking>INDIRECT_CUSTOMS_REPRESENTATIVE</n1:uniqueMarking>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>CZ</n1:countryCode><!--Közösségen belüli értékesítés adóraktár-->
+			<n1:buyerVatIdentificationNumber>45000000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>4337</n1:valueOfSupplyOfGoodsWithoutVAT>
+			<n1:uniqueMarking>TAX_WAREHOUSE_OPERATOR</n1:uniqueMarking>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>CZ</n1:countryCode><!--Háromszögügylet közbenső vevő értékesít-->
+			<n1:buyerVatIdentificationNumber>14700000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>1257</n1:valueOfSupplyOfGoodsWithoutVAT>
+			<n1:uniqueMarking>INTERMEDIATE_BUYER</n1:uniqueMarking>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>BE</n1:countryCode><!--Közösségen belüli értékesítés-->
+			<n1:buyerVatIdentificationNumber>0780000000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>2238</n1:valueOfSupplyOfGoodsWithoutVAT>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>BE</n1:countryCode><!--Közösségen belüli értékesítés-->
+			<n1:buyerVatIdentificationNumber>0870000000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>760</n1:valueOfSupplyOfGoodsWithoutVAT>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>BE</n1:countryCode><!--Közösségen belüli értékesítés-->
+			<n1:buyerVatIdentificationNumber>0420000000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>1260</n1:valueOfSupplyOfGoodsWithoutVAT>
+		</n1:intraCommunitySupplyItem>
+	</n1:intraCommunitySupplyList>
+	<n1:intraCommunityAcquisitionsOfGoodsList>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>IE</n1:countryCode><!--Harmadik országból másik tagállamba importál más tagállami (közösségi) adószám nélkül-->
+			<n1:customerVatIdentificationNumber>1</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>2258</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>BE</n1:countryCode><!--Háromszögügylet közbenső vevője beszerzi a terméket-->
+			<n1:customerVatIdentificationNumber>0770000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>1257</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+			<n1:uniqueMarkingForAcquisitionsOfGoods>INTERMEDIATE_BUYER</n1:uniqueMarkingForAcquisitionsOfGoods>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>AT</n1:countryCode><!--Háromszögügylet végső beszerző-->
+			<n1:customerVatIdentificationNumber>U44900000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>3158</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+			<n1:uniqueMarkingForAcquisitionsOfGoods>FINAL_BUYER</n1:uniqueMarkingForAcquisitionsOfGoods>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>BE</n1:countryCode><!--Közösségen belüli termékbeszerzés közvetett vámjogi képviselő-->
+			<n1:customerVatIdentificationNumber>0760000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>265</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+			<n1:uniqueMarkingForAcquisitionsOfGoods>INDIRECT_CUSTOMS_REPRESENTATIVE</n1:uniqueMarkingForAcquisitionsOfGoods>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>AT</n1:countryCode><!--Közösségen belüli vagyonáthelyezés-->
+			<n1:customerVatIdentificationNumber>U19500000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>1179</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+			<n1:uniqueMarkingForAcquisitionsOfGoods>MOVEMENT_OF_OWN_GOODS</n1:uniqueMarkingForAcquisitionsOfGoods>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>DE</n1:countryCode><!--Közösségen belüli beszerzés háromszögügylet végső vevő-->
+			<n1:customerVatIdentificationNumber>118000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>910</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+			<n1:uniqueMarkingForAcquisitionsOfGoods>FINAL_BUYER</n1:uniqueMarkingForAcquisitionsOfGoods>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>DE</n1:countryCode><!--Közösségen belüli beszerzés-->
+			<n1:customerVatIdentificationNumber>118000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>91</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>DE</n1:countryCode><!--Közösségen belüli beszerzés-->
+			<n1:customerVatIdentificationNumber>159000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>650</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>BE</n1:countryCode><!--Közösségen belüli beszerzés adószám nem ismert-->
+			<n1:customerVatIdentificationNumber>0</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>2785</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+	</n1:intraCommunityAcquisitionsOfGoodsList>
+	<n1:intraCommunitySupplyOfServicesList>
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>PL</n1:countryCode><!--Közösségen belüli szolgáltatásnyújtás-->
+			<n1:customerVatIdentificationNumber>5220000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>245</n1:valueOfSupplyOfServicesWithoutVAT>
+		</n1:intraCommunitySupplyOfServicesItem>
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>PL</n1:countryCode><!--Közösségen belüli szolgáltatásnyújtás-->
+			<n1:customerVatIdentificationNumber>6120000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>178</n1:valueOfSupplyOfServicesWithoutVAT>
+		</n1:intraCommunitySupplyOfServicesItem>
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>PL</n1:countryCode><!--Közösségen belüli szolgáltatásnyújtás-->
+			<n1:customerVatIdentificationNumber>5920000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>379</n1:valueOfSupplyOfServicesWithoutVAT>
+		</n1:intraCommunitySupplyOfServicesItem>
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>PL</n1:countryCode><!--Közösségen belüli szolgáltatásnyújtás-->
+			<n1:customerVatIdentificationNumber>5250000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>872</n1:valueOfSupplyOfServicesWithoutVAT>
+		</n1:intraCommunitySupplyOfServicesItem>
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>NL</n1:countryCode><!--Közösségen belüli szolgáltatásnyújtás-->
+			<n1:customerVatIdentificationNumber>009000000B01</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>1135</n1:valueOfSupplyOfServicesWithoutVAT>
+		</n1:intraCommunitySupplyOfServicesItem>
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>NL</n1:countryCode><!--Közösségen belüli szolgáltatásnyújtás-->
+			<n1:customerVatIdentificationNumber>808000000B01</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>5630</n1:valueOfSupplyOfServicesWithoutVAT>
+		</n1:intraCommunitySupplyOfServicesItem>
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>NL</n1:countryCode><!--Közösségen belüli szolgáltatásnyújtás-->
+			<n1:customerVatIdentificationNumber>817000000B01</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>110</n1:valueOfSupplyOfServicesWithoutVAT>
+		</n1:intraCommunitySupplyOfServicesItem>
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>NL</n1:countryCode><!--Közösségen belüli szolgáltatásnyújtás-->
+			<n1:customerVatIdentificationNumber>005000000B01</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>475</n1:valueOfSupplyOfServicesWithoutVAT>
+		</n1:intraCommunitySupplyOfServicesItem>
+	</n1:intraCommunitySupplyOfServicesList>
+	<n1:intraCommunityAcquisitionsOfServicesList>
+		<n1:intraCommunityAcquisitionsOfServicesItem>
+			<n1:countryCode>RO</n1:countryCode><!--Közösségen belüli szolgáltatás igénybevétel-->
+			<n1:serviceProviderVatIdentificationNumber>19000000</n1:serviceProviderVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfServicesWithoutVAT>1308</n1:valueOfAcquisitionsOfServicesWithoutVAT>
+		</n1:intraCommunityAcquisitionsOfServicesItem>
+		<n1:intraCommunityAcquisitionsOfServicesItem>
+			<n1:countryCode>RO</n1:countryCode><!--Közösségen belüli szolgáltatás igénybevétel adószám nem ismert-->
+			<n1:serviceProviderVatIdentificationNumber>0</n1:serviceProviderVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfServicesWithoutVAT>795</n1:valueOfAcquisitionsOfServicesWithoutVAT>
+		</n1:intraCommunityAcquisitionsOfServicesItem>
+		<n1:intraCommunityAcquisitionsOfServicesItem>
+			<n1:countryCode>FR</n1:countryCode><!--Közösségen belüli szolgáltatás igénybevétel-->
+			<n1:serviceProviderVatIdentificationNumber>64400000000</n1:serviceProviderVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfServicesWithoutVAT>1978</n1:valueOfAcquisitionsOfServicesWithoutVAT>
+		</n1:intraCommunityAcquisitionsOfServicesItem>
+		<n1:intraCommunityAcquisitionsOfServicesItem>
+			<n1:countryCode>FR</n1:countryCode><!--Közösségen belüli szolgáltatás igénybevétel-->
+			<n1:serviceProviderVatIdentificationNumber>70400000000</n1:serviceProviderVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfServicesWithoutVAT>692</n1:valueOfAcquisitionsOfServicesWithoutVAT>
+		</n1:intraCommunityAcquisitionsOfServicesItem>
+		<n1:intraCommunityAcquisitionsOfServicesItem>
+			<n1:countryCode>FR</n1:countryCode><!--Közösségen belüli szolgáltatás igénybevétel-->
+			<n1:serviceProviderVatIdentificationNumber>19400000000</n1:serviceProviderVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfServicesWithoutVAT>155</n1:valueOfAcquisitionsOfServicesWithoutVAT>
+		</n1:intraCommunityAcquisitionsOfServicesItem>
+		<n1:intraCommunityAcquisitionsOfServicesItem>
+			<n1:countryCode>FR</n1:countryCode><!--Közösségen belüli szolgáltatás igénybevétel adószám nem ismert-->
+			<n1:serviceProviderVatIdentificationNumber>0</n1:serviceProviderVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfServicesWithoutVAT>255</n1:valueOfAcquisitionsOfServicesWithoutVAT>
+		</n1:intraCommunityAcquisitionsOfServicesItem>
+	</n1:intraCommunityAcquisitionsOfServicesList>
+	<n1:movementOfCallOfStockList>
+		<n1:movementOfCallOfStockItem>
+			<n1:countryCode>SK</n1:countryCode><!--Vevői készletre történő kivitel-->
+			<n1:partnerCommunityTaxNumber>2020000000</n1:partnerCommunityTaxNumber>
+			<n1:transferCategory>NEW</n1:transferCategory>
+			<n1:transactionType>EXPORT_OF_CALL_OF_STOCK</n1:transactionType>
+		</n1:movementOfCallOfStockItem>
+		<n1:movementOfCallOfStockItem>
+			<n1:countryCode>ES</n1:countryCode><!--Vevői készletre történő kivitel-->
+			<n1:partnerCommunityTaxNumber>A08000000</n1:partnerCommunityTaxNumber>
+			<n1:transferCategory>NEW</n1:transferCategory>
+			<n1:transactionType>EXPORT_OF_CALL_OF_STOCK</n1:transactionType>
+		</n1:movementOfCallOfStockItem>
+		<n1:movementOfCallOfStockItem>
+			<n1:countryCode>ES</n1:countryCode><!--Vevői készletre történő kivitel-->
+			<n1:partnerCommunityTaxNumber>A08200000</n1:partnerCommunityTaxNumber>
+			<n1:transferCategory>NEW</n1:transferCategory>
+			<n1:transactionType>EXPORT_OF_CALL_OF_STOCK</n1:transactionType>
+		</n1:movementOfCallOfStockItem>
+		<n1:movementOfCallOfStockItem>
+			<n1:countryCode>ES</n1:countryCode><!--Vevői készletre történő kivitel-->
+			<n1:partnerCommunityTaxNumber>A08400000</n1:partnerCommunityTaxNumber>
+			<n1:transferCategory>NEW</n1:transferCategory>
+			<n1:transactionType>EXPORT_OF_CALL_OF_STOCK</n1:transactionType>
+		</n1:movementOfCallOfStockItem>
+		<n1:movementOfCallOfStockItem>
+			<n1:countryCode>CZ</n1:countryCode><!--Vevői készletre történő behozatal-->
+			<n1:partnerCommunityTaxNumber>63900000</n1:partnerCommunityTaxNumber>
+			<n1:transferCategory>NEW</n1:transferCategory>
+			<n1:transactionType>IMPORT_TO_CALL_OF_STOCK</n1:transactionType>
+		</n1:movementOfCallOfStockItem>
+		<n1:movementOfCallOfStockItem>
+			<n1:countryCode>BE</n1:countryCode><!--Korábbi kivitel törlése-->
+			<n1:partnerCommunityTaxNumber>0420000000</n1:partnerCommunityTaxNumber>
+			<n1:transferCategory>DELETE</n1:transferCategory>
+			<n1:transactionType>EXPORT_OF_CALL_OF_STOCK</n1:transactionType>
+		</n1:movementOfCallOfStockItem>
+		<n1:movementOfCallOfStockItem>
+			<n1:countryCode>DE</n1:countryCode><!--Korábbi behozatal törlése-->
+			<n1:partnerCommunityTaxNumber>159000000</n1:partnerCommunityTaxNumber>
+			<n1:transferCategory>DELETE</n1:transferCategory>
+			<n1:transactionType>IMPORT_TO_CALL_OF_STOCK</n1:transactionType>
+		</n1:movementOfCallOfStockItem>
+	</n1:movementOfCallOfStockList>
+</n1:statementData>

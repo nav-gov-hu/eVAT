@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<n1:statementData xmlns:earBase="http://schemas.nav.gov.hu/EAR/2.0/base" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:n1="http://schemas.nav.gov.hu/EAR/2.0/statement" xsi:schemaLocation="http://schemas.nav.gov.hu/EAR/2.0/statement">
+	<n1:statementInfo>
+		<earBase:modificationReference>
+            <earBase:statementReferenceId>5CEAI85T7XF3NSWY</earBase:statementReferenceId> <!--Alapnyilatkozat declarationProcessingId-->
+            <earBase:statementReferenceIndex>1</earBase:statementReferenceIndex>
+			<earBase:barCodeReference>1100002857</earBase:barCodeReference>
+        </earBase:modificationReference>
+		<earBase:vatIdentificationNumber>33333333</earBase:vatIdentificationNumber>
+		<earBase:statementMethod>BASE</earBase:statementMethod>
+		<earBase:statementFrequency>MONTHLY</earBase:statementFrequency>
+		<earBase:statementPeriodStart>2026-02-01</earBase:statementPeriodStart>
+		<earBase:statementPeriodEnd>2026-02-28</earBase:statementPeriodEnd>
+		<earBase:version>6</earBase:version>
+	</n1:statementInfo>
+	<n1:intraCommunitySupplyList> <!--Közösségi termékértékesítések listája-->
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>AT</n1:countryCode>
+			<n1:buyerVatIdentificationNumber>U14199000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>750</n1:valueOfSupplyOfGoodsWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>Számla01</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP02</n1:standardTaxCode>
+					<n1:taxBase>749990</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>BE</n1:countryCode>
+			<n1:buyerVatIdentificationNumber>0418956000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>235</n1:valueOfSupplyOfGoodsWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>Számla02</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP02</n1:standardTaxCode>
+					<n1:taxBase>235000</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunitySupplyItem>
+	</n1:intraCommunitySupplyList>
+	<n1:intraCommunityAcquisitionsOfGoodsList> <!--Közösségi termékbeszerzések listája-->
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>DE</n1:countryCode>
+			<n1:customerVatIdentificationNumber>114138000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>542</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>Inv-03</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP14</n1:standardTaxCode>
+					<n1:taxBase>542190</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>ES</n1:countryCode>
+			<n1:customerVatIdentificationNumber>A08460000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>233</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>Inv-04</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP14</n1:standardTaxCode>
+					<n1:taxBase>233000</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+	</n1:intraCommunityAcquisitionsOfGoodsList>
+	<n1:intraCommunitySupplyOfServicesList>  <!--Közösségi szolgáltatásnyújtások listája-->
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>IT</n1:countryCode>
+			<n1:customerVatIdentificationNumber>00688460000</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>1254</n1:valueOfSupplyOfServicesWithoutVAT>
+				<n1:sourceDocumentList>
+					<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>Számla05</n1:sourceDocumentId>
+					<n1:standardTaxCode>DH91 DH92</n1:standardTaxCode>
+					<n1:taxBase>1254050</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunitySupplyOfServicesItem>
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>FR</n1:countryCode>
+			<n1:customerVatIdentificationNumber>19400290000</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>675</n1:valueOfSupplyOfServicesWithoutVAT>
+				<n1:sourceDocumentList>
+					<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>Számla06</n1:sourceDocumentId>
+					<n1:standardTaxCode>DH91 DH92</n1:standardTaxCode>
+					<n1:taxBase>674990</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunitySupplyOfServicesItem>
+	</n1:intraCommunitySupplyOfServicesList>
+</n1:statementData>

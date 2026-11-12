@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<n1:statementData xmlns:earBase="http://schemas.nav.gov.hu/EAR/2.0/base" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:n1="http://schemas.nav.gov.hu/EAR/2.0/statement" xsi:schemaLocation="http://schemas.nav.gov.hu/EAR/2.0/statement">
+	<n1:statementInfo>
+		<earBase:modificationReference>
+			<earBase:statementReferenceId>5K3EMO0868510LFD</earBase:statementReferenceId> <!--Alapnyilatkozat declarationProcessingId-->
+			<earBase:statementReferenceIndex>1</earBase:statementReferenceIndex>
+			<earBase:barCodeReference>1103007134</earBase:barCodeReference>
+		</earBase:modificationReference>
+		<earBase:vatIdentificationNumber>33333333</earBase:vatIdentificationNumber>
+		<earBase:statementMethod>BASE</earBase:statementMethod>
+		<earBase:statementFrequency>MONTHLY</earBase:statementFrequency>
+		<earBase:statementPeriodStart>2025-12-01</earBase:statementPeriodStart>
+		<earBase:statementPeriodEnd>2025-12-31</earBase:statementPeriodEnd>
+		<earBase:version>1</earBase:version>
+	</n1:statementInfo>
+	<n1:intraCommunitySupplyList>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>AT</n1:countryCode>
+			<n1:buyerVatIdentificationNumber>U14199000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>105</n1:valueOfSupplyOfGoodsWithoutVAT>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>AT</n1:countryCode>
+			<n1:buyerVatIdentificationNumber>U14231000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>710</n1:valueOfSupplyOfGoodsWithoutVAT>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>AT</n1:countryCode>
+			<n1:buyerVatIdentificationNumber>U14987000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>330</n1:valueOfSupplyOfGoodsWithoutVAT>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>AT</n1:countryCode>
+			<n1:buyerVatIdentificationNumber>U19122000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>190</n1:valueOfSupplyOfGoodsWithoutVAT>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>AT</n1:countryCode>
+			<n1:buyerVatIdentificationNumber>U19668000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>567</n1:valueOfSupplyOfGoodsWithoutVAT>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>AT</n1:countryCode>
+			<n1:buyerVatIdentificationNumber>U44943000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>223</n1:valueOfSupplyOfGoodsWithoutVAT>
+		</n1:intraCommunitySupplyItem>
+	</n1:intraCommunitySupplyList>
+</n1:statementData>

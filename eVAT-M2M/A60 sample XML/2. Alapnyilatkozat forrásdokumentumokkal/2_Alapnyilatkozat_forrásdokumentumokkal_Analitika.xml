@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<n1:statementData xmlns:earBase="http://schemas.nav.gov.hu/EAR/2.0/base" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:n1="http://schemas.nav.gov.hu/EAR/2.0/statement" xsi:schemaLocation="http://schemas.nav.gov.hu/EAR/2.0/statement">
+	<n1:statementInfo>
+		<earBase:vatIdentificationNumber>24196606</earBase:vatIdentificationNumber>
+		<earBase:statementMethod>BASE</earBase:statementMethod>
+		<earBase:statementFrequency>MONTHLY</earBase:statementFrequency>
+		<earBase:statementPeriodStart>2026-08-01</earBase:statementPeriodStart>
+		<earBase:statementPeriodEnd>2026-08-31</earBase:statementPeriodEnd>
+		<earBase:version>6</earBase:version>
+	</n1:statementInfo>
+	<n1:intraCommunitySupplyList>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>AT</n1:countryCode><!--Közösségen belüli értékesítés-->
+			<n1:buyerVatIdentificationNumber>U14900000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>26468</n1:valueOfSupplyOfGoodsWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>U1-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP02</n1:standardTaxCode>
+					<n1:taxBase>25000000</n1:taxBase>
+					<n1:taxBaseInInvoiceCurrency>68681.32</n1:taxBaseInInvoiceCurrency>
+					<n1:currency>EUR</n1:currency>
+				</n1:sourceDocumentItem>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>U1-002</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP02</n1:standardTaxCode>
+					<n1:taxBase>1468000</n1:taxBase>
+					<n1:taxBaseInInvoiceCurrency>4032.97</n1:taxBaseInInvoiceCurrency>
+					<n1:currency>EUR</n1:currency>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>AT</n1:countryCode><!--Közösségen belüli értékesítés-->
+			<n1:buyerVatIdentificationNumber>U63000000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>13350</n1:valueOfSupplyOfGoodsWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>U2-003</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP02</n1:standardTaxCode>
+					<n1:taxBase>13350150</n1:taxBase>
+					<n1:taxBaseInInvoiceCurrency>36676.24</n1:taxBaseInInvoiceCurrency>
+					<n1:currency>EUR</n1:currency>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>BG</n1:countryCode><!--Közösségen belüli értékesítés közvetett vámjogi képviselő-->
+			<n1:buyerVatIdentificationNumber>175000000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>5990</n1:valueOfSupplyOfGoodsWithoutVAT>
+			<n1:uniqueMarking>INDIRECT_CUSTOMS_REPRESENTATIVE</n1:uniqueMarking>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>BG-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP02 DP57</n1:standardTaxCode>
+					<n1:taxBase>5990000</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>CZ</n1:countryCode><!--Közösségen belüli értékesítés adóraktár-->
+			<n1:buyerVatIdentificationNumber>45000000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>4337</n1:valueOfSupplyOfGoodsWithoutVAT>
+			<n1:uniqueMarking>TAX_WAREHOUSE_OPERATOR</n1:uniqueMarking>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>CZ1-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP02 DP57</n1:standardTaxCode>
+					<n1:taxBase>4337000</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>CZ</n1:countryCode><!--Háromszögügylet közbenső vevő értékesít-->
+			<n1:buyerVatIdentificationNumber>14700000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>1257</n1:valueOfSupplyOfGoodsWithoutVAT>
+			<n1:uniqueMarking>INTERMEDIATE_BUYER</n1:uniqueMarking>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>CZ2-002</n1:sourceDocumentId>
+					<n1:standardTaxCode>DH89</n1:standardTaxCode>
+					<n1:taxBase>1257150</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>BE</n1:countryCode><!--Közösségen belüli értékesítés-->
+			<n1:buyerVatIdentificationNumber>0780000000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>2238</n1:valueOfSupplyOfGoodsWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>BE1-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP02</n1:standardTaxCode>
+					<n1:taxBase>2238150</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>BE</n1:countryCode><!--Közösségen belüli értékesítés-->
+			<n1:buyerVatIdentificationNumber>0870000000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>760</n1:valueOfSupplyOfGoodsWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>BE2-002</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP02</n1:standardTaxCode>
+					<n1:taxBase>759990</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunitySupplyItem>
+	</n1:intraCommunitySupplyList>
+	<n1:intraCommunityAcquisitionsOfGoodsList>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>BE</n1:countryCode><!--Háromszögügylet közbenső vevője beszerzi a terméket-->
+			<n1:customerVatIdentificationNumber>0770000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>1257</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+			<n1:uniqueMarkingForAcquisitionsOfGoods>INTERMEDIATE_BUYER</n1:uniqueMarkingForAcquisitionsOfGoods>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>BE3-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>DH88</n1:standardTaxCode>
+					<n1:taxBase>1257150</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>AT</n1:countryCode><!--Közösségen belüli beszerzés-->
+			<n1:customerVatIdentificationNumber>U44900000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>3158</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>AT3-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP14</n1:standardTaxCode>
+					<n1:taxBase>1500000</n1:taxBase>
+				</n1:sourceDocumentItem>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>AT3-002</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP14</n1:standardTaxCode>
+					<n1:taxBase>1500000</n1:taxBase>
+				</n1:sourceDocumentItem>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>AT3-003</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP14</n1:standardTaxCode>
+					<n1:taxBase>158000</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>BE</n1:countryCode><!--Közösségen belüli beszerzés-->
+			<n1:customerVatIdentificationNumber>0760000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>265</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>BE4-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP14</n1:standardTaxCode>
+					<n1:taxBase>265050</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>AT</n1:countryCode><!--Közösségen belüli beszerzés-->
+			<n1:customerVatIdentificationNumber>U19500000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>3228</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>AT5-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP14</n1:standardTaxCode>
+					<n1:taxBase>3228190</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>DE</n1:countryCode><!--Közösségen belüli beszerzés-->
+			<n1:customerVatIdentificationNumber>118000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>910</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>DE5-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP14</n1:standardTaxCode>
+					<n1:taxBase>910000</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>DE</n1:countryCode><!--Közösségen belüli beszerzés-->
+			<n1:customerVatIdentificationNumber>813000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>91</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>DE6-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP14</n1:standardTaxCode>
+					<n1:taxBase>90990</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>BE</n1:countryCode><!--Közösségen belüli beszerzés adószám nem ismert-->
+			<n1:customerVatIdentificationNumber>0</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>2785</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>BE65-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP14</n1:standardTaxCode>
+					<n1:taxBase>2785190</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+	</n1:intraCommunityAcquisitionsOfGoodsList>
+	<n1:intraCommunitySupplyOfServicesList>
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>PL</n1:countryCode><!--Közösségen belüli szolgáltatásnyújtás-->
+			<n1:customerVatIdentificationNumber>5220000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>245</n1:valueOfSupplyOfServicesWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>PL1-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>DH91 DH92</n1:standardTaxCode>
+					<n1:taxBase>190000</n1:taxBase>
+				</n1:sourceDocumentItem>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>PL1-002</n1:sourceDocumentId>
+					<n1:standardTaxCode>DH91 DH92</n1:standardTaxCode>
+					<n1:taxBase>55000</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunitySupplyOfServicesItem>
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>PL</n1:countryCode><!--Közösségen belüli szolgáltatásnyújtás-->
+			<n1:customerVatIdentificationNumber>6120000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>178</n1:valueOfSupplyOfServicesWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>PL2-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>DH91 DH92</n1:standardTaxCode>
+					<n1:taxBase>177990</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunitySupplyOfServicesItem>
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>PL</n1:countryCode><!--Közösségen belüli szolgáltatásnyújtás-->
+			<n1:customerVatIdentificationNumber>5920000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>379</n1:valueOfSupplyOfServicesWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>PL3-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>DH91 DH92</n1:standardTaxCode>
+					<n1:taxBase>379190</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunitySupplyOfServicesItem>
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>PL</n1:countryCode><!--Közösségen belüli szolgáltatásnyújtás-->
+			<n1:customerVatIdentificationNumber>5250000000</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>872</n1:valueOfSupplyOfServicesWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>PL4-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>DH91 DH92</n1:standardTaxCode>
+					<n1:taxBase>872300</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunitySupplyOfServicesItem>
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>NL</n1:countryCode><!--Közösségen belüli szolgáltatásnyújtás-->
+			<n1:customerVatIdentificationNumber>009000000B01</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>1135</n1:valueOfSupplyOfServicesWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>NL1-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>DH91 DH92</n1:standardTaxCode>
+					<n1:taxBase>1135000</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunitySupplyOfServicesItem>
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>NL</n1:countryCode><!--Közösségen belüli szolgáltatásnyújtás-->
+			<n1:customerVatIdentificationNumber>808000000B01</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>5630</n1:valueOfSupplyOfServicesWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>NL2-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>DH91 DH92</n1:standardTaxCode>
+					<n1:taxBase>5630290</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunitySupplyOfServicesItem>
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>NL</n1:countryCode><!--Közösségen belüli szolgáltatásnyújtás-->
+			<n1:customerVatIdentificationNumber>817000000B01</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>110</n1:valueOfSupplyOfServicesWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>NL3-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>DH91 DH92</n1:standardTaxCode>
+					<n1:taxBase>110000</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunitySupplyOfServicesItem>
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>NL</n1:countryCode><!--Közösségen belüli szolgáltatásnyújtás-->
+			<n1:customerVatIdentificationNumber>005000000B01</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>475</n1:valueOfSupplyOfServicesWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>NL4-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>DH91 DH92</n1:standardTaxCode>
+					<n1:taxBase>474990</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunitySupplyOfServicesItem>
+	</n1:intraCommunitySupplyOfServicesList>
+	<n1:intraCommunityAcquisitionsOfServicesList>
+		<n1:intraCommunityAcquisitionsOfServicesItem>
+			<n1:countryCode>RO</n1:countryCode><!--Közösségen belüli szolgáltatás igénybevétel-->
+			<n1:serviceProviderVatIdentificationNumber>19000000</n1:serviceProviderVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfServicesWithoutVAT>1308</n1:valueOfAcquisitionsOfServicesWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>RO1-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP18</n1:standardTaxCode>
+					<n1:taxBase>1308000</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunityAcquisitionsOfServicesItem>
+		<n1:intraCommunityAcquisitionsOfServicesItem>
+			<n1:countryCode>RO</n1:countryCode><!--Közösségen belüli szolgáltatás igénybevétel adószám nem ismert-->
+			<n1:serviceProviderVatIdentificationNumber>0</n1:serviceProviderVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfServicesWithoutVAT>795</n1:valueOfAcquisitionsOfServicesWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>RO2-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP18</n1:standardTaxCode>
+					<n1:taxBase>600000</n1:taxBase>
+				</n1:sourceDocumentItem>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>RO2-002</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP18</n1:standardTaxCode>
+					<n1:taxBase>195000</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunityAcquisitionsOfServicesItem>
+		<n1:intraCommunityAcquisitionsOfServicesItem>
+			<n1:countryCode>FR</n1:countryCode><!--Közösségen belüli szolgáltatás igénybevétel-->
+			<n1:serviceProviderVatIdentificationNumber>64400000000</n1:serviceProviderVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfServicesWithoutVAT>1978</n1:valueOfAcquisitionsOfServicesWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>FR1-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP18</n1:standardTaxCode>
+					<n1:taxBase>1978000</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunityAcquisitionsOfServicesItem>
+		<n1:intraCommunityAcquisitionsOfServicesItem>
+			<n1:countryCode>FR</n1:countryCode><!--Közösségen belüli szolgáltatás igénybevétel-->
+			<n1:serviceProviderVatIdentificationNumber>70400000000</n1:serviceProviderVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfServicesWithoutVAT>692</n1:valueOfAcquisitionsOfServicesWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>FR2-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP18</n1:standardTaxCode>
+					<n1:taxBase>692190</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunityAcquisitionsOfServicesItem>
+		<n1:intraCommunityAcquisitionsOfServicesItem>
+			<n1:countryCode>FR</n1:countryCode><!--Közösségen belüli szolgáltatás igénybevétel-->
+			<n1:serviceProviderVatIdentificationNumber>19400000000</n1:serviceProviderVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfServicesWithoutVAT>155</n1:valueOfAcquisitionsOfServicesWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>FR3-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP18</n1:standardTaxCode>
+					<n1:taxBase>154990</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunityAcquisitionsOfServicesItem>
+		<n1:intraCommunityAcquisitionsOfServicesItem>
+			<n1:countryCode>FR</n1:countryCode><!--Közösségen belüli szolgáltatás igénybevétel adószám nem ismert-->
+			<n1:serviceProviderVatIdentificationNumber>0</n1:serviceProviderVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfServicesWithoutVAT>255</n1:valueOfAcquisitionsOfServicesWithoutVAT>
+			<n1:sourceDocumentList>
+				<n1:sourceDocumentItem>
+					<n1:sourceDocumentId>FR4-001</n1:sourceDocumentId>
+					<n1:standardTaxCode>MP18</n1:standardTaxCode>
+					<n1:taxBase>255000</n1:taxBase>
+				</n1:sourceDocumentItem>
+			</n1:sourceDocumentList>
+		</n1:intraCommunityAcquisitionsOfServicesItem>
+	</n1:intraCommunityAcquisitionsOfServicesList>
+	<n1:movementOfCallOfStockList>
+		<n1:movementOfCallOfStockItem>
+			<n1:countryCode>SK</n1:countryCode><!--Vevői készletre történő kivitel-->
+			<n1:partnerCommunityTaxNumber>2020430000</n1:partnerCommunityTaxNumber>
+			<n1:transferCategory>NEW</n1:transferCategory>
+			<n1:transactionType>EXPORT_OF_CALL_OF_STOCK</n1:transactionType>
+			<n1:transferSourceDocumentList>
+				<n1:transferSourceDocumentItem>
+					<n1:sourceDocumentId>SK5-001</n1:sourceDocumentId>
+				</n1:transferSourceDocumentItem>
+			</n1:transferSourceDocumentList>
+		</n1:movementOfCallOfStockItem>
+		<n1:movementOfCallOfStockItem>
+			<n1:countryCode>SK</n1:countryCode><!--Vevői készletre történő kivitel-->
+			<n1:partnerCommunityTaxNumber>2020410000</n1:partnerCommunityTaxNumber>
+			<n1:transferCategory>NEW</n1:transferCategory>
+			<n1:transactionType>EXPORT_OF_CALL_OF_STOCK</n1:transactionType>
+			<n1:transferSourceDocumentList>
+				<n1:transferSourceDocumentItem>
+					<n1:sourceDocumentId>SK6-001</n1:sourceDocumentId>
+				</n1:transferSourceDocumentItem>
+			</n1:transferSourceDocumentList>
+		</n1:movementOfCallOfStockItem>
+		<n1:movementOfCallOfStockItem>
+			<n1:countryCode>SK</n1:countryCode><!--Vevői készletre történő kivitel-->
+			<n1:partnerCommunityTaxNumber>2020460000</n1:partnerCommunityTaxNumber>
+			<n1:transferCategory>NEW</n1:transferCategory>
+			<n1:transactionType>EXPORT_OF_CALL_OF_STOCK</n1:transactionType>
+			<n1:transferSourceDocumentList>
+				<n1:transferSourceDocumentItem>
+					<n1:sourceDocumentId>SK7-001</n1:sourceDocumentId>
+				</n1:transferSourceDocumentItem>
+			</n1:transferSourceDocumentList>
+		</n1:movementOfCallOfStockItem>
+	</n1:movementOfCallOfStockList>
+</n1:statementData>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<n1:statementData xmlns:earBase="http://schemas.nav.gov.hu/EAR/2.0/base" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:n1="http://schemas.nav.gov.hu/EAR/2.0/statement" xsi:schemaLocation="http://schemas.nav.gov.hu/EAR/2.0/statement">
+	<n1:statementInfo>
+		<earBase:vatIdentificationNumber>33333333</earBase:vatIdentificationNumber>
+		<earBase:statementMethod>BASE</earBase:statementMethod>
+		<earBase:statementFrequency>MONTHLY</earBase:statementFrequency>
+		<earBase:statementPeriodStart>2026-01-01</earBase:statementPeriodStart>
+		<earBase:statementPeriodEnd>2026-01-31</earBase:statementPeriodEnd>
+		<earBase:version>1</earBase:version>
+	</n1:statementInfo>
+	<n1:intraCommunitySupplyList> <!--Közösségi termékértékesítések listája-->
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>AT</n1:countryCode>
+			<n1:buyerVatIdentificationNumber>U14199000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>840</n1:valueOfSupplyOfGoodsWithoutVAT>
+		</n1:intraCommunitySupplyItem>
+		<n1:intraCommunitySupplyItem>
+			<n1:countryCode>BE</n1:countryCode>
+			<n1:buyerVatIdentificationNumber>0418950000</n1:buyerVatIdentificationNumber>
+			<n1:valueOfSupplyOfGoodsWithoutVAT>1935</n1:valueOfSupplyOfGoodsWithoutVAT>
+		</n1:intraCommunitySupplyItem>
+	</n1:intraCommunitySupplyList>
+	<n1:intraCommunityAcquisitionsOfGoodsList> <!--Közösségi termékbeszerzések listája-->
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>DE</n1:countryCode>
+			<n1:customerVatIdentificationNumber>114138000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>1150</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+		<n1:intraCommunityAcquisitionsOfGoodsItem>
+			<n1:countryCode>ES</n1:countryCode>
+			<n1:customerVatIdentificationNumber>A08460000</n1:customerVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfGoodsWithoutVAT>2370</n1:valueOfAcquisitionsOfGoodsWithoutVAT>
+		</n1:intraCommunityAcquisitionsOfGoodsItem>
+	</n1:intraCommunityAcquisitionsOfGoodsList>
+	<n1:intraCommunitySupplyOfServicesList>  <!--Közösségi szolgáltatásnyújtások listája-->
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>FR</n1:countryCode>
+			<n1:customerVatIdentificationNumber>19400290000</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>490</n1:valueOfSupplyOfServicesWithoutVAT>
+		</n1:intraCommunitySupplyOfServicesItem>
+		<n1:intraCommunitySupplyOfServicesItem>
+			<n1:countryCode>IT</n1:countryCode>
+			<n1:customerVatIdentificationNumber>00688400000</n1:customerVatIdentificationNumber>
+			<n1:valueOfSupplyOfServicesWithoutVAT>620</n1:valueOfSupplyOfServicesWithoutVAT>
+		</n1:intraCommunitySupplyOfServicesItem>
+	</n1:intraCommunitySupplyOfServicesList>
+	<n1:intraCommunityAcquisitionsOfServicesList> <!--Közösségen belüli szolgáltatás igénybevétel-->
+		<n1:intraCommunityAcquisitionsOfServicesItem>
+			<n1:countryCode>BE</n1:countryCode>
+			<n1:serviceProviderVatIdentificationNumber>0400760000</n1:serviceProviderVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfServicesWithoutVAT>190</n1:valueOfAcquisitionsOfServicesWithoutVAT>
+		</n1:intraCommunityAcquisitionsOfServicesItem>
+		<n1:intraCommunityAcquisitionsOfServicesItem>
+			<n1:countryCode>AT</n1:countryCode>
+			<n1:serviceProviderVatIdentificationNumber>U19560000</n1:serviceProviderVatIdentificationNumber>
+			<n1:valueOfAcquisitionsOfServicesWithoutVAT>235</n1:valueOfAcquisitionsOfServicesWithoutVAT>
+		</n1:intraCommunityAcquisitionsOfServicesItem>
+	</n1:intraCommunityAcquisitionsOfServicesList>
+	<n1:movementOfCallOfStockList>
+		<n1:movementOfCallOfStockItem> <!--Közösségi vevői készlet átmozgatás lista-->
+			<n1:countryCode>DE</n1:countryCode>
+			<n1:partnerCommunityTaxNumber>120330000</n1:partnerCommunityTaxNumber>
+			<n1:transferCategory>NEW</n1:transferCategory>
+			<n1:transactionType>EXPORT_OF_CALL_OF_STOCK</n1:transactionType>
+		</n1:movementOfCallOfStockItem>
+	</n1:movementOfCallOfStockList>
+</n1:statementData>
